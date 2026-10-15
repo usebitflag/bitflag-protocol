@@ -11,7 +11,7 @@ fixtures that both evaluators must pass. It contains no application runtime code
 Consumers: `bitflag-php`, `bitflag-js` and the `bitflag` application. Each pins a fixture release by checksum and
 never builds against this repository's floating `main`.
 
-Design context lives in the `bitflag` repository (`docs/evaluation-and-sdk-protocol.md`, `docs/milestones/M1-protocol-and-evaluator.md`).
+Design context lives in the `bitflag` repository (`docs/evaluation-and-sdk-protocol.md`).
 
 ## Project Structure
 
@@ -36,6 +36,6 @@ Detailed rules: `.claude/rules/spec-and-fixtures.md` and `.claude/rules/git-work
 
 ## Commands
 
-Available once the tooling lands (M0 step 2):
+Available once the tooling lands:
 
 - `npm run validate`: schemas compile, fixtures are valid, the manifest is current.

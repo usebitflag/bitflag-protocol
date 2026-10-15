@@ -11,7 +11,7 @@
 - Write behavior in `spec/` as testable statements. Anything an evaluator must do identically in PHP and
   JavaScript needs an exact algorithm and a fixture.
 - Bucketing is `bucket-sha256-v1`: SHA-256 over length-prefixed fields (`bitflag-bucket-v1`, salt, kind, bucketBy value),
-  first 8 digest bytes as an unsigned big-endian integer, modulo 100000 (decision R15).
+  first 8 digest bytes as an unsigned big-endian integer, modulo 100000.
 - Missing, null and wrong-type attribute handling is defined in the spec before it is implemented anywhere.
 
 ## Fixtures

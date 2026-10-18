@@ -15,7 +15,7 @@ Design context lives in the `bitflag` repository (`docs/evaluation-and-sdk-proto
 
 ## Project Structure
 
-```
+```text
 bitflag-protocol/
 ├── spec/         # Written specification, one numbered file per topic
 ├── schemas/v1/   # JSON Schema (2020-12): common, snapshot, result, events
@@ -36,6 +36,9 @@ Detailed rules: `.claude/rules/spec-and-fixtures.md` and `.claude/rules/git-work
 
 ## Commands
 
-Available once the tooling lands:
+Node 22 (see `.nvmrc`):
 
-- `npm run validate`: schemas compile, fixtures are valid, the manifest is current.
+- `npm ci` installs the tooling.
+- `npm run validate` compiles every schema and checks that the fixture manifest is current.
+- `npm run manifest` regenerates `fixtures/manifest.json` after any fixture change.
+- `npm run lint:md` lints the Markdown.

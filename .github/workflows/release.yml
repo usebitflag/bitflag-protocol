@@ -1,0 +1,16 @@
+name: release
+
+# Placeholder. The release workflow publishes the schema and fixture artifact with its checksum.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "The release workflow is not implemented yet."
+          exit 1

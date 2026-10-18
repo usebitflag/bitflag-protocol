@@ -1,0 +1,21 @@
+{
+  "name": "bitflag-protocol",
+  "version": "0.0.0",
+  "private": true,
+  "description": "BitFlag delivery schemas, specification and conformance fixtures",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "validate": "node tools/validate.mjs",
+    "manifest": "node tools/manifest.mjs",
+    "manifest:check": "node tools/manifest.mjs --check",
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "markdownlint-cli2": "^0.23.3"
+  }
+}

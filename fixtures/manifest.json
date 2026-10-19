@@ -1,0 +1,10 @@
+{
+  "algorithm": "sha256",
+  "checksum": "1d4010e570bf86e678054d6b2fbdaa1fbe384e471ee8e30fddf6168a6bf77e33",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "566439a39a2de0cca4063e3b4a16a4641463ac64f25469df7bac79bf4ddb1982"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "id": "groups/all-short-circuits",
+  "description": "An all group stops at the first member that does not match; later members are recorded as not evaluated.",
+  "spec": [
+    "03-evaluation.md#groups"
+  ],
+  "tags": [
+    "groups",
+    "trace"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "country",
+                  "op": "eq",
+                  "values": [
+                    "PH"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:177dcd3c4cc0c9e47a196a0defe507374e97b377eed2b8836f04136889349cf0"
+  },
+  "cases": [
+    {
+      "name": "first fails",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "country": "US",
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "country",
+              "outcome": "no_match"
+            },
+            {
+              "path": "/all/1",
+              "op": "eq",
+              "attribute": "plan",
+              "outcome": "not_evaluated"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "both evaluated",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "country": "PH",
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "country",
+              "outcome": "match"
+            },
+            {
+              "path": "/all/1",
+              "op": "eq",
+              "attribute": "plan",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "id": "context/not-an-object",
+  "description": "A context that is not an object is invalid.",
+  "spec": [
+    "01-context.md#validity"
+  ],
+  "tags": [
+    "context"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:8f2405cd66cb914ac9844dd9845a6630e8f76e4fe546b7df2f91d66b25a53760"
+  },
+  "cases": [
+    {
+      "name": "null",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": null,
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "string",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": "u_1",
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "array",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": [
+        {
+          "kind": "user"
+        }
+      ],
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "number",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": 7,
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

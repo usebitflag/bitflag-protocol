@@ -1,10 +1,10 @@
 {
   "algorithm": "sha256",
-  "checksum": "5a1489fdfa04028512a9baccd36686b073b62d1a65202836bcde36392bcdecb1",
+  "checksum": "683a42f790dcf9c680df00ccc74b2a5ebc61f491662d99244ce548133e92f87a",
   "files": [
     {
       "path": "README.md",
-      "sha256": "ebf3dcb5f0bd5e07accff377d19f132de9efc22a5b242b5c6beba22104fa2d6e"
+      "sha256": "c2165ace66e8554dc2acbd81e96c36303bd3ae5bef7da2dbcbe26fa6679787e0"
     },
     {
       "path": "bucketing/bucket-sha256-v1.json",
@@ -83,6 +83,70 @@
       "sha256": "988176342b43d016fc0356ba05daf06f5a9240556aef2a15a7c06aa6484d2d0b"
     },
     {
+      "path": "evaluation/context/array-and-string-limits.json",
+      "sha256": "6dde16a5d9fff295b1f00f0c7da23ae578b0ecce0793e4f03411b688b3280ff8"
+    },
+    {
+      "path": "evaluation/context/attribute-name-limits.json",
+      "sha256": "07510b7cd20c896b2a447304e6f3f67c735d3048de3c6e8e3398fc38780169b3"
+    },
+    {
+      "path": "evaluation/context/attribute-named-key-invalid.json",
+      "sha256": "6d9d2c21f88f6e9f85439a0af112f4c662f40a881d09a76619649d27eb2293ab"
+    },
+    {
+      "path": "evaluation/context/attribute-value-types.json",
+      "sha256": "c43e8cf3c5792062adf124b8b15cb38fd1f1e94298660050e121a9429307856b"
+    },
+    {
+      "path": "evaluation/context/attributes-not-an-object.json",
+      "sha256": "d8b46ae951b3765230c46ffbe3e9aff1d24dffb914186b3c18a98ff53e0a5216"
+    },
+    {
+      "path": "evaluation/context/invalid-checked-before-flag-lookup.json",
+      "sha256": "134c299260a6ced9242ce7a91d116189fd46914b611fdc87ce8a5df7210b35c0"
+    },
+    {
+      "path": "evaluation/context/key-absent-valid.json",
+      "sha256": "37aa094e3df57e369d7f9ecb6aee88788ab9d7d25cfdae6a38d553b50f857874"
+    },
+    {
+      "path": "evaluation/context/key-limits.json",
+      "sha256": "b739bcb5e0e06fe9ba3eb32d3ae2abb589641c77f3662d078d486dd65c21022d"
+    },
+    {
+      "path": "evaluation/context/kind-pattern.json",
+      "sha256": "075cbd1526a187fdd051c8ed74fb459f14280907a4bcb1847dad335e486ecdb0"
+    },
+    {
+      "path": "evaluation/context/missing-kind.json",
+      "sha256": "76d1acaa6fec5a1d3100f1ee8d0f1f5d81f6d83a58a063efbafa9031a5cf56b1"
+    },
+    {
+      "path": "evaluation/context/mixed-type-array-invalid.json",
+      "sha256": "441bbe1513a4789d2a691819a86d7455cf183e3f6d8b96eb9e4cee06992fc013"
+    },
+    {
+      "path": "evaluation/context/not-an-object.json",
+      "sha256": "fe82acf98564f0baa32defd27aee68a213b8a6a2b813364bd75474a80f65fbb7"
+    },
+    {
+      "path": "evaluation/context/numeric-key-invalid.json",
+      "sha256": "fe0e0e588be0b03571ea4c5c35843bddf30099599a2766d684489b421bf9f531"
+    },
+    {
+      "path": "evaluation/context/too-many-attributes.json",
+      "sha256": "b515c873c7b6d5a6fbd815b6ffcbd9fcf67dc0f136ed18866e881973c9a61363"
+    },
+    {
+      "path": "evaluation/context/type-is-not-kind.json",
+      "sha256": "e4a8447df64b3f488855a6ea93e9ccd18c99d7f9f2c619733ac3c2e89be80432"
+    },
+    {
+      "path": "evaluation/context/unknown-member-invalid.json",
+      "sha256": "1e42c03f55b7df4ce493b7696737f74b06b23524a2e99f023aabc7a457e97990"
+    },
+    {
       "path": "evaluation/fallback/archived-flag-absent.json",
       "sha256": "9da5e34ed497edec18aed7d2ea1ffcb5d9c1c4d7ce5ac9ac7c33f088de309288"
     },
@@ -97,6 +161,454 @@
     {
       "path": "evaluation/fallback/wrong-type-fallback-throws.json",
       "sha256": "7165284dd2936b4debc9fcd908cd874098bd07310fa19cf03c0a4e832b6b767f"
+    },
+    {
+      "path": "evaluation/groups/all-requires-every-member.json",
+      "sha256": "4191ec78f86079a8c027f3118bb5190790ef652d1be03212a4c1059a4ec734b6"
+    },
+    {
+      "path": "evaluation/groups/all-short-circuits.json",
+      "sha256": "d1f71573d7b4db314ba91bf26196bc5734b1c8301ca43fde7f21d82f5b0c402f"
+    },
+    {
+      "path": "evaluation/groups/any-requires-one-member.json",
+      "sha256": "2faead91e0f8abfd472b707f9078b5a2fa4898344b1834c5b17032eb03254de7"
+    },
+    {
+      "path": "evaluation/groups/any-short-circuits.json",
+      "sha256": "02d455cf9adc78a25909df81edc3e695b97d7d4af42b230cd550580a9388ff1a"
+    },
+    {
+      "path": "evaluation/groups/empty-all-matches.json",
+      "sha256": "8d9c374185f0a4f5be9eb301bbf3c34f10c45fe7588f46dad77b56f81c9da70a"
+    },
+    {
+      "path": "evaluation/groups/empty-any-blocks-all.json",
+      "sha256": "3c3fcaf747cb11531352a5c23ab8d08134b083c03b1dc32133fe6f6c00f18137"
+    },
+    {
+      "path": "evaluation/groups/empty-any-fails.json",
+      "sha256": "fc471d333d7608e08de31dd52a1b95e3ac16ac7670639dee84f7f87a4c491627"
+    },
+    {
+      "path": "evaluation/groups/empty-group-nested.json",
+      "sha256": "e71eb9834d4ce19b3a81f9810716e395e8eddb2c0cbf763d82bd8436c7551611"
+    },
+    {
+      "path": "evaluation/groups/nested-all-in-any.json",
+      "sha256": "0ce3533fecbe4536f1a123daa1a1bc201205cc13f4a50fb602c6f2360f009373"
+    },
+    {
+      "path": "evaluation/groups/nested-any-in-all.json",
+      "sha256": "ca8b6c9ad70ffc23e6a0a26b34df122ea671fa3e1220258bb64c0227c8e07abe"
+    },
+    {
+      "path": "evaluation/groups/nested-paths.json",
+      "sha256": "193664ccc9dc7d6740661b7d96f6d3c73e6ad41de65d60abfba5c5b199258fad"
+    },
+    {
+      "path": "evaluation/numbers/beyond-safe-integer-wrong-type.json",
+      "sha256": "5580566b95994d6478e350e00ad962f6f7ffc3b53ce8bc12ee21f3f9d5a7a4bf"
+    },
+    {
+      "path": "evaluation/numbers/fractions-are-binary64.json",
+      "sha256": "bb661d319c69497d052aa000d69e52ce4e5ff285679dad7dc025d2c8ce20a48d"
+    },
+    {
+      "path": "evaluation/numbers/max-safe-integer.json",
+      "sha256": "86da31ae3934c8c50024b1246c8a4f7a2cf2887dbd24ce2253a74004b33035ff"
+    },
+    {
+      "path": "evaluation/numbers/negative-zero.json",
+      "sha256": "245c34dc9c104836f9918501c6c642c109fb32bad861768491f5c2df18821807"
+    },
+    {
+      "path": "evaluation/operators/contains/array-any-element.json",
+      "sha256": "8b8231848c20d0863fa819ee767705c32728f7371b6e07f28f0a8408c9a123dd"
+    },
+    {
+      "path": "evaluation/operators/contains/case-sensitive-by-default.json",
+      "sha256": "fbd5232fd09ce16ef78197077df93ac9a6a4103ef5644b523fd26e21fcdf8026"
+    },
+    {
+      "path": "evaluation/operators/contains/ignore-case-applies-to-listed-values.json",
+      "sha256": "62fe4235ddb76cc56ef8746f54cb06b8b5b37a6667dbca9ff0b4595aa70a3a01"
+    },
+    {
+      "path": "evaluation/operators/contains/ignore-case-ascii-only.json",
+      "sha256": "83fc58aceccd9cc6611993fac02d2359eb499ffd71c1568ad1ef5375d4a2fac9"
+    },
+    {
+      "path": "evaluation/operators/contains/matches.json",
+      "sha256": "b2e4bb37f1af795a713ed8c80b2851f2fbc06d021cac6817a5f90575babf662d"
+    },
+    {
+      "path": "evaluation/operators/contains/missing-attribute.json",
+      "sha256": "5337a5405507398ae413ce663a52c063641121da46cd8201e492cec908fe9c4d"
+    },
+    {
+      "path": "evaluation/operators/contains/no-match.json",
+      "sha256": "b9af3d1cc06396a8a9dd1fc7e70ca4cfd9600bdd9e4680c14638d36bf80f89cd"
+    },
+    {
+      "path": "evaluation/operators/contains/null-attribute.json",
+      "sha256": "2ecdebbf93f27e84485aec20bf16abb9aed7202b2cba6fb7c492ec3961d6ab55"
+    },
+    {
+      "path": "evaluation/operators/contains/wrong-type.json",
+      "sha256": "08b9a67edca1a5d90574b4010c3e93794431db3da4a344cd5c85565fb2675857"
+    },
+    {
+      "path": "evaluation/operators/ends_with/array-any-element.json",
+      "sha256": "048d6d03d40ea09d7a3c09d68a8f3ece3424171efaf93c738957f1e2d0a77589"
+    },
+    {
+      "path": "evaluation/operators/ends_with/email-domain.json",
+      "sha256": "ccaacdee763cfdc1e830b357665762696d7b13f413057f3fdfa83e9cb2ce63bf"
+    },
+    {
+      "path": "evaluation/operators/ends_with/matches.json",
+      "sha256": "52a7112541cebff7d4cf859caf074fb0c767a596fabed885825ce43012305bd9"
+    },
+    {
+      "path": "evaluation/operators/ends_with/missing-attribute.json",
+      "sha256": "a24a9f5567bab1d65fd3d44ddf6d4502a0463a3efea9dc64a6a258c548ca4162"
+    },
+    {
+      "path": "evaluation/operators/ends_with/no-match.json",
+      "sha256": "59104eea853e1218f5a33c83d1af486c9dd759d116b94ddaac74831b403a41e9"
+    },
+    {
+      "path": "evaluation/operators/ends_with/null-attribute.json",
+      "sha256": "3760ce112f762edf49a7859413523e96dd7509a228e9ed23ecd5a4810f3deee1"
+    },
+    {
+      "path": "evaluation/operators/ends_with/wrong-type.json",
+      "sha256": "ffe1cd8aa456393c7e30c8c3eba8f5a0eccb6aa6fd6f41811ad1cc6a365d646e"
+    },
+    {
+      "path": "evaluation/operators/eq/array-any-element.json",
+      "sha256": "d9d93972a73f97ad5d262872e240176ae8706bfb88c2c5ed3dc5461c450e0bce"
+    },
+    {
+      "path": "evaluation/operators/eq/boolean.json",
+      "sha256": "f85b962453c68da934c1122c52bf51f628920488b6016de57357e000a709e8ac"
+    },
+    {
+      "path": "evaluation/operators/eq/context-kind-and-key.json",
+      "sha256": "9e0170a6abf291e8b7e38f70e064ac835adee89d5d6bf86b71b0057e50fc123b"
+    },
+    {
+      "path": "evaluation/operators/eq/context-kind.json",
+      "sha256": "21f9545aaec8880d4ff340db581697d4fd01cc2eb3296ac562f77609fa3d3597"
+    },
+    {
+      "path": "evaluation/operators/eq/ignore-case-is-ignored.json",
+      "sha256": "92ad60cd95e127b1b0d682e230ff3005e8e9d204898ecd61cc7bd70800b38d66"
+    },
+    {
+      "path": "evaluation/operators/eq/matches.json",
+      "sha256": "8958221f528df51280b5c507a59b3eddf8425117e500d4acac48adf7e7a284dc"
+    },
+    {
+      "path": "evaluation/operators/eq/missing-attribute.json",
+      "sha256": "c95a85a2a0f5f033bb926a7baf4391502f53e5b30b82c2ce0d1853ac7e93f941"
+    },
+    {
+      "path": "evaluation/operators/eq/no-match.json",
+      "sha256": "5716d5f580baac14e48cd60524910c4f54d7e2b2587392c57d95d763c4c9765a"
+    },
+    {
+      "path": "evaluation/operators/eq/null-attribute.json",
+      "sha256": "148d034945adacfc62bddfd2f626fba04c92b14775cc2d095392d7592f12b57f"
+    },
+    {
+      "path": "evaluation/operators/eq/number-int-vs-float.json",
+      "sha256": "73d71e256abf53639d5b7cf498eb54d17f4c84e38b7eb18fd1488f8ffabf84f8"
+    },
+    {
+      "path": "evaluation/operators/eq/number-string-attribute.json",
+      "sha256": "dc2eddc5f3ba4cadcf87a6d5b99653ad1894bb9ab0f104424f369231eee05d53"
+    },
+    {
+      "path": "evaluation/operators/eq/string-never-equals-number.json",
+      "sha256": "d1f717041908333289fc019bd455b6a22c39b7a295a584367d6ef7b86b872a6f"
+    },
+    {
+      "path": "evaluation/operators/eq/wrong-type.json",
+      "sha256": "3b7d6d21b1f8aa027671ab89fa51b41fbafd6d0c7e3c83e79477608dccde36a0"
+    },
+    {
+      "path": "evaluation/operators/exists/context-key.json",
+      "sha256": "a2bd98b8942d2dcc823f47c5177865d91c712f1111abf700f746b6379c3754f0"
+    },
+    {
+      "path": "evaluation/operators/exists/matches.json",
+      "sha256": "e9bd48c42d947910d9aa3a36ce5e409322824f9285dc6b6c45b45c7f5fee7a3c"
+    },
+    {
+      "path": "evaluation/operators/exists/missing-attribute.json",
+      "sha256": "88d003a14fd2c768a1df2208cb5fe8787668b3d774fb6165e78ea43803bb7ecc"
+    },
+    {
+      "path": "evaluation/operators/exists/null-counts-as-present.json",
+      "sha256": "d1af212dc8e343cb940a0f95f60a4dcbc51c8f2f4e1d2ea48c3b193990dcdbfc"
+    },
+    {
+      "path": "evaluation/operators/gt/array-any-element.json",
+      "sha256": "670631a7dfda7efa8b0a4c4db322cc40fb8bbebca202c0f1d65fcf9edecc4406"
+    },
+    {
+      "path": "evaluation/operators/gt/boundary.json",
+      "sha256": "9afab107c687e2813d83f237e68ed6b2374183b66387d506732f69c018330279"
+    },
+    {
+      "path": "evaluation/operators/gt/matches.json",
+      "sha256": "65b42f1504d95000b99526a36819ad29af4bb205a1252b201e62979a8887c388"
+    },
+    {
+      "path": "evaluation/operators/gt/missing-attribute.json",
+      "sha256": "88c0eb993d64899022146f1f765b98a00332278c908afcf0eb6b9a86f8fd3a0f"
+    },
+    {
+      "path": "evaluation/operators/gt/no-match.json",
+      "sha256": "a55185405582273ac39e606f27eb73b9294737a7166163702a080c1f7602108f"
+    },
+    {
+      "path": "evaluation/operators/gt/null-attribute.json",
+      "sha256": "fcc0ba6e55455fb189090a488f835b6c78435ca7f1f0ae18b6cb850dbf104954"
+    },
+    {
+      "path": "evaluation/operators/gt/wrong-type.json",
+      "sha256": "f7e653ab2193d2cc69ec769bf2dd81eca78d56112837fd526f5717789689a17a"
+    },
+    {
+      "path": "evaluation/operators/gte/array-any-element.json",
+      "sha256": "25e92638e546d31c56b272782bb8e2d20b682c98f54b5e0641f60c67cc9dcf0a"
+    },
+    {
+      "path": "evaluation/operators/gte/boundary.json",
+      "sha256": "cfc8b492fec3dd580b7ed5c16abeac6bdfcdcfebcf85a3cdf1fe09b8e43a47df"
+    },
+    {
+      "path": "evaluation/operators/gte/matches.json",
+      "sha256": "7e8f255aa20f2423a9bcfb842e1dde3a8eb0c82880a1b122e743cdc9a08fcc7b"
+    },
+    {
+      "path": "evaluation/operators/gte/missing-attribute.json",
+      "sha256": "15451b80ee226a34905f11daf41bbb9e9d3ffbd264e51d75632f3913d65dc437"
+    },
+    {
+      "path": "evaluation/operators/gte/negative-numbers.json",
+      "sha256": "e59a6e1e321e4e702cebc66ec05cf357396beabf9358b7b7baaf5d0fd4bfaacc"
+    },
+    {
+      "path": "evaluation/operators/gte/no-match.json",
+      "sha256": "c290d938e4ed29ab46803639ccb266a21f93cf794005371d9e9d5604b4f7f793"
+    },
+    {
+      "path": "evaluation/operators/gte/null-attribute.json",
+      "sha256": "5f9d52fd3a927e6170e2fb36a348a0728dad6b530e6f6484ab1a5e63ceec5bb7"
+    },
+    {
+      "path": "evaluation/operators/gte/string-numeral-no-match.json",
+      "sha256": "bb6d9b834e6dae2abe165e08a111e86b5fe8fb527a64b7869a4aaf1a5063bb3a"
+    },
+    {
+      "path": "evaluation/operators/gte/wrong-type.json",
+      "sha256": "6b10810f684477c33f0a5c633033ac88b0f2a34cd78b6db2048b67c3da8bad52"
+    },
+    {
+      "path": "evaluation/operators/in/array-any-element.json",
+      "sha256": "93fb00a4a18f1762efe4a0a27d2ce6af5476135364dd2a8101c53e59918a016f"
+    },
+    {
+      "path": "evaluation/operators/in/matches.json",
+      "sha256": "80fa999b3ffbb4ae721aa808f3baceb0b0f5320644e622cad6cbcca7d797a516"
+    },
+    {
+      "path": "evaluation/operators/in/missing-attribute.json",
+      "sha256": "2078c715e699a606b46eb85f1a0d3ef87ab949f467bf942b0d91da6af6b354c3"
+    },
+    {
+      "path": "evaluation/operators/in/no-match.json",
+      "sha256": "e7b1a159bad2d29fd7ee8f6cf83188b2285f7c86d8caaaa09b489648b168e209"
+    },
+    {
+      "path": "evaluation/operators/in/null-attribute.json",
+      "sha256": "7d2bfd1e3d0679752a96faacecdbec173b2e773fb6b4f02b8cb69f6b2767a4b8"
+    },
+    {
+      "path": "evaluation/operators/in/numbers.json",
+      "sha256": "617a7f56c2de85254845bcdb757aabaa1aeb80cf159701f9574d13e124a32446"
+    },
+    {
+      "path": "evaluation/operators/in/wrong-type.json",
+      "sha256": "8949d77c932eaa1ff2178bb10790156dde0bc72f95e0b1db904de9a41791e638"
+    },
+    {
+      "path": "evaluation/operators/lt/array-any-element.json",
+      "sha256": "e953005c4310ea15cec8d929d2af19d6a1d52921c4b07a2d8643ae489fe20508"
+    },
+    {
+      "path": "evaluation/operators/lt/boundary.json",
+      "sha256": "21760a343d5bdb05096f5eba2d0df8a838f9b4f5b18dd101de818dda3d4efc50"
+    },
+    {
+      "path": "evaluation/operators/lt/fractions.json",
+      "sha256": "fcfeb27732157ae51fc611bd4214da0ca79edb12e308dbbf5c1184c4c1f8cd35"
+    },
+    {
+      "path": "evaluation/operators/lt/matches.json",
+      "sha256": "16e3467e24c300d0e30ab07e33a20a2fbd517cf11ce7cac9aa1cbf56f2d9d405"
+    },
+    {
+      "path": "evaluation/operators/lt/missing-attribute.json",
+      "sha256": "19c11e934ed221c5af050eb34bc435c2d7c61e0ed703932d4f3a64bb31cb9651"
+    },
+    {
+      "path": "evaluation/operators/lt/no-match.json",
+      "sha256": "301b80c9e92768b0c3ec2ff6df1eb78f63fc06a5cdcd15befbec25359d0bfced"
+    },
+    {
+      "path": "evaluation/operators/lt/null-attribute.json",
+      "sha256": "d8695fc85be92e8b80846267a03aa3be6dd1ac387f4cbbf1b96db29b3be37688"
+    },
+    {
+      "path": "evaluation/operators/lt/wrong-type.json",
+      "sha256": "f86b4c9f64f533397e24925419ab021d9867cd55c7ab60c2473e779e10184349"
+    },
+    {
+      "path": "evaluation/operators/lte/array-any-element.json",
+      "sha256": "7bb0e66cef647916b1b6874ccd4241f00f3f102a7445779c8b3e4f15d02c4416"
+    },
+    {
+      "path": "evaluation/operators/lte/boundary.json",
+      "sha256": "d79c5272b5e7c78c6f6a3941dc2257bf4a6291a2f02ed08179b1dfc2de4c3f1a"
+    },
+    {
+      "path": "evaluation/operators/lte/matches.json",
+      "sha256": "7770ba2680e45838424618d2ee5b1f821856742af9c4aa092143bef843abe1cc"
+    },
+    {
+      "path": "evaluation/operators/lte/missing-attribute.json",
+      "sha256": "a44f552cd23a65a26a408945e34da6c539206e025078f5e7b2c71b8a3f3b515d"
+    },
+    {
+      "path": "evaluation/operators/lte/no-match.json",
+      "sha256": "4d7e5b108a691e29ca912f261bd5a0d8924c90d43970dd058c2c2c1a2403a6c4"
+    },
+    {
+      "path": "evaluation/operators/lte/null-attribute.json",
+      "sha256": "753b907985122ed2a0be1bdca000f5a8674b74f5bb27c37b3f37fa6b788294dc"
+    },
+    {
+      "path": "evaluation/operators/lte/wrong-type.json",
+      "sha256": "5275fcf5016fa27ecaa992eb9a6bcff88be39e8df2f03c01fa020bb5461fac38"
+    },
+    {
+      "path": "evaluation/operators/neq/array-no-element-equal.json",
+      "sha256": "32f4d8a5bae72fcdf946b7e1d30422ab75b1dd4137ae776e799cca9791da4bd7"
+    },
+    {
+      "path": "evaluation/operators/neq/matches.json",
+      "sha256": "cb1d5c4fce3a5041c757ba80b2d8a16d1b053a3936f0cfa8013bc0bbcac149f9"
+    },
+    {
+      "path": "evaluation/operators/neq/missing-attribute.json",
+      "sha256": "a496c70c58d2b74be9d131e78784ffed7ef38d7413f3c62cc5600321b74911d9"
+    },
+    {
+      "path": "evaluation/operators/neq/no-match.json",
+      "sha256": "6b9e3504cca37c5fdc938d3b5def66c57e08a185ffbb61ce89ae744d03fdb1ff"
+    },
+    {
+      "path": "evaluation/operators/neq/null-attribute.json",
+      "sha256": "7f4db784cc99b14907d489a1bd4c0cd59bb89c6755b3824831323facaeaab1db"
+    },
+    {
+      "path": "evaluation/operators/neq/number.json",
+      "sha256": "97ac0401d57ce2bc125af9e83cd458db86fec6c44720ccac6f0f1e2d64ed19c8"
+    },
+    {
+      "path": "evaluation/operators/neq/wrong-type.json",
+      "sha256": "2d89532484607203e2ad2b44a39c2a1879831894c44e314dcbdc6be6a3aca34d"
+    },
+    {
+      "path": "evaluation/operators/not_exists/context-key.json",
+      "sha256": "209e551152487984ad751a818affcb8dbaee4ead29080d697ce616e4741a7b92"
+    },
+    {
+      "path": "evaluation/operators/not_exists/matches.json",
+      "sha256": "1137b1694830d93cdaa6b2a80859e6e93ff26e0af948354a62d376db1b40da5d"
+    },
+    {
+      "path": "evaluation/operators/not_exists/no-match.json",
+      "sha256": "66e397dee4a2b0032d26cefec2b2ed84ec436e4dd6aa5fc0530d0cc2e1c1d8b4"
+    },
+    {
+      "path": "evaluation/operators/not_exists/null-counts-as-present.json",
+      "sha256": "c7c39bf82511969638c61b1a8d553194a22ff9972a0649af873ce0bcdaa7268c"
+    },
+    {
+      "path": "evaluation/operators/not_in/array-no-element-listed.json",
+      "sha256": "d27396e837880409bbe50e5e1d1f094b2704d3467e2fe9b9fd322472eef33934"
+    },
+    {
+      "path": "evaluation/operators/not_in/empty-array.json",
+      "sha256": "a089a2a72baa459f46fa8bac3ddefbd90ea44a82f59925cbae4fd5015cbbe79c"
+    },
+    {
+      "path": "evaluation/operators/not_in/matches.json",
+      "sha256": "2315cfbd2f1225bd8ca5778e574632dccd5a45f25a3d26e8546db46d65f4e58d"
+    },
+    {
+      "path": "evaluation/operators/not_in/missing-attribute.json",
+      "sha256": "ae3bf158844b7445f3d94f18d27c04be8d911e5774c458434fbaa7a81ff7f8e1"
+    },
+    {
+      "path": "evaluation/operators/not_in/no-match.json",
+      "sha256": "1b99ca258c4d2bae84e812257ac33af6735d344bd178d23cfe632a49dbd40b0d"
+    },
+    {
+      "path": "evaluation/operators/not_in/null-attribute.json",
+      "sha256": "b379584667d721d35752d6670a7062023c5649cb4558696b542b6cb90559e3a2"
+    },
+    {
+      "path": "evaluation/operators/not_in/wrong-type.json",
+      "sha256": "13c5d6cbab6715094a41764b452d1712532afe25dee54237264695a169a436e9"
+    },
+    {
+      "path": "evaluation/operators/starts_with/array-any-element.json",
+      "sha256": "d8863b1a6f5676ba78b4c75d9909f3187bc3a735edddbbb0bcf8d0f5304cb2aa"
+    },
+    {
+      "path": "evaluation/operators/starts_with/case-sensitive-by-default.json",
+      "sha256": "16ca4617a171239ef2e13a0e94d88733601d2716bff998c87d9149986a6208cc"
+    },
+    {
+      "path": "evaluation/operators/starts_with/ignore-case.json",
+      "sha256": "c16efbf751afe0919f46e8d6d30ead7de78c6c818bee939d7e256f814380a0a1"
+    },
+    {
+      "path": "evaluation/operators/starts_with/matches.json",
+      "sha256": "d6dfc53c1294e96a8991e47ce8ec0f38867679d9c077a27df96321fb56c5c022"
+    },
+    {
+      "path": "evaluation/operators/starts_with/missing-attribute.json",
+      "sha256": "72812fdef99099942f1c4235b5a5fe1b06b440fa4e4547bd15ae0de2acd822d6"
+    },
+    {
+      "path": "evaluation/operators/starts_with/no-match.json",
+      "sha256": "1f8bd78e0142afff578f5c5cdd4e50ab80bc98bdd109fce5ff3b3af202e28fc9"
+    },
+    {
+      "path": "evaluation/operators/starts_with/null-attribute.json",
+      "sha256": "7d7500e308466e88179843efaa504d85ff814e9d8673dd620aa6a458cf1644fd"
+    },
+    {
+      "path": "evaluation/operators/starts_with/wrong-type.json",
+      "sha256": "b65d2ce8a42f51ddffe0b6fef20a5f44a528968ce0b13bd9222b0a836238bbe3"
     },
     {
       "path": "evaluation/precedence/default-when-no-rule-matches.json",
@@ -117,6 +629,42 @@
     {
       "path": "evaluation/precedence/override-beats-rules.json",
       "sha256": "f47cb2a4345bd0f5e1d864ac90687d303ea420b9028c774843230d4d275642e0"
+    },
+    {
+      "path": "evaluation/strings-unicode/case-and-accents-differ.json",
+      "sha256": "865307c883afa317b97c14f92b54ec081b3cb09af7f6a503c194cc701541692f"
+    },
+    {
+      "path": "evaluation/strings-unicode/combining-mark-contains.json",
+      "sha256": "bb87cb339bb0b910a3a1c549de8406478684f0f508d6cb2026934b4f02dcf512"
+    },
+    {
+      "path": "evaluation/strings-unicode/emoji-key.json",
+      "sha256": "5835cb23880ce19c1265868f6ca8eefc82f1ace1900445eb58f00a5b41ecab67"
+    },
+    {
+      "path": "evaluation/strings-unicode/emoji-starts-with.json",
+      "sha256": "b9513cbef92652a898c66eda768e2dc1ae5444b496690689b15d63b62afa1e0d"
+    },
+    {
+      "path": "evaluation/strings-unicode/ends-with-multibyte.json",
+      "sha256": "d9f65d02af6f595cc94aa600d7ac3948c56a2e3f071adf592d16e16b9604207f"
+    },
+    {
+      "path": "evaluation/strings-unicode/nfc-vs-nfd-differ.json",
+      "sha256": "cc0915791cecfe5cd154c4429a033ea222b017a3bfdfda2afb5220904831c745"
+    },
+    {
+      "path": "evaluation/strings-unicode/nfd-listed-value.json",
+      "sha256": "3976154bf2fd48f18eb0c559d4ed67ff0234b8d7a820ac390167496aa2f7d1aa"
+    },
+    {
+      "path": "evaluation/strings-unicode/turkish-dotless-i-not-folded.json",
+      "sha256": "eaaff7db4ae2de2ba85b131308d24898eda6a7534bed62e5da803537c2b58d9a"
+    },
+    {
+      "path": "evaluation/strings-unicode/whitespace-is-significant.json",
+      "sha256": "c9f3056628659a4e7799d690088ecfbcb26fad8da0e1ce0c71680480bd4ba5c5"
     },
     {
       "path": "snapshots/basic-boolean.json",

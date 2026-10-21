@@ -61,7 +61,7 @@ An object with exactly one key, `all` or `any`, holding an array of at most 50 c
 - `attribute` is a context attribute name, or `kind` or `key`. It is required for every operator except `in_segment` and `not_in_segment`, where it must be absent.
 - `values` holds 1 to 1,000 scalar items. It is absent for `exists` and `not_exists`. Segment operators take 1 to 50 segment keys.
 - Single-value operators (`eq`, `neq`, the numeric comparisons, `semver_*`, `before`, `after`) take exactly one value.
-- `ignoreCase` is optional and applies to string operators.
+- `ignoreCase` is optional and affects only `starts_with`, `ends_with` and `contains`; it is ignored by every other operator.
 - The operators and their matching rules are in `04-operators.md`.
 
 ### Serve
@@ -88,7 +88,7 @@ Each weight is an integer from 0 to 100,000. The weights total at most 100,000. 
 
 Parsers reject a snapshot with `MALFORMED_SNAPSHOT`, a JSON Pointer `path` and a `code` when:
 
-- the JSON is invalid, nests deeper than 64 levels, exceeds 5 MB, or contains an integer literal outside ±(2^53 − 1);
+- the JSON is invalid, nests deeper than 64 levels, exceeds 5 MB, or contains a number whose value is an integer outside ±(2^53 − 1), however it is written;
 - a group nests deeper than 5 levels;
 - rollout weights total more than 100,000, or total less without a `remainderVariation`;
 - a string exceeds its limit in UTF-8 bytes, or is not valid UTF-8;

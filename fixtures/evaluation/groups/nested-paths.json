@@ -1,0 +1,133 @@
+{
+  "id": "groups/nested-paths",
+  "description": "Trace paths of nested conditions follow the group structure.",
+  "spec": [
+    "03-evaluation.md#groups"
+  ],
+  "tags": [
+    "groups",
+    "trace",
+    "nested"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "country",
+                  "op": "eq",
+                  "values": [
+                    "PH"
+                  ]
+                },
+                {
+                  "any": [
+                    {
+                      "attribute": "plan",
+                      "op": "eq",
+                      "values": [
+                        "pro"
+                      ]
+                    },
+                    {
+                      "attribute": "plan",
+                      "op": "eq",
+                      "values": [
+                        "team"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:d795b832465b1100a378b95b6c3b4adc1270b939995ef30ed33048da1f140c1a"
+  },
+  "cases": [
+    {
+      "name": "second plan matches",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "country": "PH",
+          "plan": "team"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "country",
+              "outcome": "match"
+            },
+            {
+              "path": "/all/1/any/0",
+              "op": "eq",
+              "attribute": "plan",
+              "outcome": "no_match"
+            },
+            {
+              "path": "/all/1/any/1",
+              "op": "eq",
+              "attribute": "plan",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

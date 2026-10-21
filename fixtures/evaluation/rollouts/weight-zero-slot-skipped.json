@@ -1,0 +1,142 @@
+{
+  "id": "rollouts/weight-zero-slot-skipped",
+  "description": "A slot of weight 0 covers no bucket and does not shift the others.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "remainder"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "string",
+        "enabled": true,
+        "variations": {
+          "a": "A",
+          "b": "B",
+          "c": "C",
+          "rest": "REST",
+          "off": "OFF"
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r3",
+                "slots": [
+                  {
+                    "variation": "a",
+                    "weight": 0
+                  },
+                  {
+                    "variation": "b",
+                    "weight": 50000
+                  }
+                ],
+                "remainderVariation": "rest"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:6ca530df905207b92b02b5b7599a16955b3c1635fb25e4cd0300c7feb750c610"
+  },
+  "cases": [
+    {
+      "name": "bucket 0 goes to the second slot",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_148473"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 49999 goes to the second slot",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_220198"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 49999
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 50000 is the remainder",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_36640"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "REST",
+        "variationKey": "rest",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 50000
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

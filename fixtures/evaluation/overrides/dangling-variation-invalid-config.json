@@ -1,0 +1,71 @@
+{
+  "id": "overrides/dangling-variation-invalid-config",
+  "description": "An override that names a variation the flag does not have is a configuration error: the caller fallback is returned, never a served value.",
+  "spec": [
+    "03-evaluation.md#overrides-and-time"
+  ],
+  "tags": [
+    "overrides",
+    "error:INVALID_CONFIG"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [
+          {
+            "kind": "user",
+            "key": "u_vip",
+            "variation": "ghost",
+            "expiresAt": null
+          }
+        ],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:e86b732cebbb2adb33c01488a59bbb21ce53d9f49ea7e39f5bdd2d98bac347a2"
+  },
+  "cases": [
+    {
+      "name": "subject with the dangling override",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_vip"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

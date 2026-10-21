@@ -1,6 +1,6 @@
 {
   "algorithm": "sha256",
-  "checksum": "9d17b5cd79a3f084284a6385fca2cd456da2c0810b8f4ef9a2bd3fdb55b153ce",
+  "checksum": "a83e3f2ca4e3ad878ea291de8c6d4aead73155fdb72666c3f829808fcf57b168",
   "files": [
     {
       "path": "README.md",
@@ -743,6 +743,54 @@
       "sha256": "b65d2ce8a42f51ddffe0b6fef20a5f44a528968ce0b13bd9222b0a836238bbe3"
     },
     {
+      "path": "evaluation/overrides/dangling-variation-invalid-config.json",
+      "sha256": "42245f1fe912f5ebe6d59f640062d2e6cc74569412bd918cf191e1d4d5e3f3e7"
+    },
+    {
+      "path": "evaluation/overrides/exact-kind-and-key.json",
+      "sha256": "30f46d3225b282885c2a3d6a8aff03a0a1b1b7b1e7aca501734e4b68c89e2297"
+    },
+    {
+      "path": "evaluation/overrides/expired-falls-through-to-rules.json",
+      "sha256": "b32890482485f3cb97d4744d782ca6ac247bf669d3a193ca05caca3eca7cd185"
+    },
+    {
+      "path": "evaluation/overrides/expires-at-boundary-is-expired.json",
+      "sha256": "5994c98fa054e6fa82aaa28164468d1d08a32348535147bf47b38a15f66b2cca"
+    },
+    {
+      "path": "evaluation/overrides/expiry-fraction-truncated.json",
+      "sha256": "e6f718d45c7a73a2c28b14e11dd20a07e7b86621f6764b56cc3dace7a3ebcb78"
+    },
+    {
+      "path": "evaluation/overrides/expiry-with-offset.json",
+      "sha256": "d6ba63ab2e241e19e21210aa1de79735d223e0116c311abf21a50af7405f6a5c"
+    },
+    {
+      "path": "evaluation/overrides/never-expires.json",
+      "sha256": "8aa8c8d62c027a712e51851f20d0799bafd5027cd3b31f4d835b060dd3b3b289"
+    },
+    {
+      "path": "evaluation/overrides/no-key-never-overridden.json",
+      "sha256": "bad2bf9bfc8cfd6da2467e27dcfe1b7dc364ca7008fb22efbadb4a31c9a6ec54"
+    },
+    {
+      "path": "evaluation/overrides/other-kind-ignored.json",
+      "sha256": "fd89620ca7b4ba98abda25bf495c59cddb7bfb9812a8ad743b1ddef41abae787"
+    },
+    {
+      "path": "evaluation/overrides/override-beats-rollout.json",
+      "sha256": "792c5ed61b5bc44aeb65fc0d82596c06a2f30e8555394c02c91d6444f4d28382"
+    },
+    {
+      "path": "evaluation/overrides/serves-the-override-variation.json",
+      "sha256": "c19980c45b09675fa244b0b3923767e7a39aab11c6e1827bf15652536bfb4b46"
+    },
+    {
+      "path": "evaluation/overrides/trace-names-the-expiry.json",
+      "sha256": "ac3d46281b7fa0b5ab9fd2f147250030bd8a4792da44d19869f0348b7cbb6ebd"
+    },
+    {
       "path": "evaluation/precedence/default-when-no-rule-matches.json",
       "sha256": "f79031da52565e635abe2aaad5d3c4d3375aeb607844865bf8fa8fc4e4addedb"
     },
@@ -761,6 +809,142 @@
     {
       "path": "evaluation/precedence/override-beats-rules.json",
       "sha256": "f47cb2a4345bd0f5e1d864ac90687d303ea420b9028c774843230d4d275642e0"
+    },
+    {
+      "path": "evaluation/rollouts/bucket-99999.json",
+      "sha256": "ba6eed79b344d7ec7df94f40c14c39b27f783f5e6f0089fba1147016407b5e6f"
+    },
+    {
+      "path": "evaluation/rollouts/bucket-by-attribute-uses-attribute-value-bytes.json",
+      "sha256": "ca351e6099de4ce772d38dbf399a4f5aecdbcebe4991b046bda4df71f4eaa635"
+    },
+    {
+      "path": "evaluation/rollouts/bucket-by-attribute.json",
+      "sha256": "c6ddd725e6777ad12925a2805622c25e79eab5de60f241c7be2d99edb514dd5b"
+    },
+    {
+      "path": "evaluation/rollouts/bucket-by-number-attribute-error.json",
+      "sha256": "52d383acdecc21002454665bca9d004d317bf22dee35efdbf8a1c405f12e38e4"
+    },
+    {
+      "path": "evaluation/rollouts/bucket-only-with-details.json",
+      "sha256": "ffa28dca1cc86599da059c52c281cdb8deed6bd505486cb3db7da9a2149cf9e5"
+    },
+    {
+      "path": "evaluation/rollouts/bucket-zero.json",
+      "sha256": "bb5b1352219a54a3cca981925fd19eb86c1ad48c79ff7243cf5af6a20ea22b40"
+    },
+    {
+      "path": "evaluation/rollouts/dangling-slot-variation-invalid-config.json",
+      "sha256": "6c8647990140663ba8fa9e1c4e81785011ae52019d999004b4b23e3866367909"
+    },
+    {
+      "path": "evaluation/rollouts/flag-and-revision-not-hashed.json",
+      "sha256": "caaa2972b25e23acb21a186ab7e44d06021e3dd513a9e56581bdef20d3e4a814"
+    },
+    {
+      "path": "evaluation/rollouts/hundred-percent.json",
+      "sha256": "810fcad9f33765f8fa55ba517ce0205bdc7c185f86b6dcbdc7871ed2d3dc23b1"
+    },
+    {
+      "path": "evaluation/rollouts/kind-is-hashed.json",
+      "sha256": "0a2ca2efdb5ac9794b4242ce50b94876d5f8c18951d2dbb7e49aa3825dbb7a4f"
+    },
+    {
+      "path": "evaluation/rollouts/missing-key-error.json",
+      "sha256": "a85de00d4b55af052b665b23c49384700a8303df7674bf6e31473ced33754917"
+    },
+    {
+      "path": "evaluation/rollouts/missing-key-only-when-reached.json",
+      "sha256": "ad017230e2034efa7a521851ccfd873dbbf5929329be95e9c3e95e60b0b66dea"
+    },
+    {
+      "path": "evaluation/rollouts/multivariate-reallocation.json",
+      "sha256": "bce8589af708b385e68862c36402120d81893ad7470c6193202ed6f5dd6206a5"
+    },
+    {
+      "path": "evaluation/rollouts/raise-only-adds-subjects.json",
+      "sha256": "8ad7adc469d859f5d8bc86352b0f26bb58901cdd0b928675fe6d48ae050fbfce"
+    },
+    {
+      "path": "evaluation/rollouts/remainder-does-not-fall-through.json",
+      "sha256": "43402efef1ff20a7fba05563dc7acdaafb5c6b3e39a55b92ec25042e7be6c18b"
+    },
+    {
+      "path": "evaluation/rollouts/remainder-variation.json",
+      "sha256": "98336ead91f3767f51d00e52cd0adcca2e2794c20866ac36514d2441c0f49d27"
+    },
+    {
+      "path": "evaluation/rollouts/salt-changes-assignment.json",
+      "sha256": "14457bd109fdc33c439a7b4be49d433f2fc404349bd708b330811515722dc09f"
+    },
+    {
+      "path": "evaluation/rollouts/slot-lower-edge-inclusive.json",
+      "sha256": "35c70e9fa96c8caa8bf6ef40995a02f1880f7bca4a17622f7123767fc37ec5a3"
+    },
+    {
+      "path": "evaluation/rollouts/slot-upper-edge-exclusive.json",
+      "sha256": "19c710c1d7d8feb166f57fc24b43e3bad32e947d737dd587358c6ecff18eac9c"
+    },
+    {
+      "path": "evaluation/rollouts/three-way-split.json",
+      "sha256": "3ba17d722023f47452a437c0a893cc1611429b943f387d308b1048bed20a58f6"
+    },
+    {
+      "path": "evaluation/rollouts/weight-zero-slot-skipped.json",
+      "sha256": "7755d4708ace75ab8dbbdfdf835faaa4118cdbde64ec160869ff0d5ad22aab54"
+    },
+    {
+      "path": "evaluation/rollouts/zero-percent.json",
+      "sha256": "07ca0ad934a37f4dbd1d2744699847cf0cc0ea575e389e9da4098e7bf9282678"
+    },
+    {
+      "path": "evaluation/segments/conditions-decide.json",
+      "sha256": "c8e7b2b1cc9fab668965415f627982721c0000da76acbe2da51b01f3264e193e"
+    },
+    {
+      "path": "evaluation/segments/empty-match-groups.json",
+      "sha256": "7f89f6bf5787284438049894fa52c04372a4e34529c34e7b556669d1a146a1c9"
+    },
+    {
+      "path": "evaluation/segments/exclude-beats-include.json",
+      "sha256": "2ab081850c9e0519e1a3bee9c210981f29175cf2675227da21471331be788d35"
+    },
+    {
+      "path": "evaluation/segments/in-segment-any-listed.json",
+      "sha256": "57e45fe57f481a7fdf13727aef33f4d0161680d35cd1fa3b23705a9975d8431b"
+    },
+    {
+      "path": "evaluation/segments/include-beats-conditions.json",
+      "sha256": "16bc46c70a2a0085a70963c01603f143229060e4644ceaccea0bd00ba2a0b070"
+    },
+    {
+      "path": "evaluation/segments/missing-segment-invalid-config.json",
+      "sha256": "8fd5f2ab1b27703c747554239ca960d864f2241eea1435c67a2178d6267bf09a"
+    },
+    {
+      "path": "evaluation/segments/no-key-skips-lists.json",
+      "sha256": "a75653e63754c8060f42003f7dae8dac12a097fdd2ba415041d1cc21d2372238"
+    },
+    {
+      "path": "evaluation/segments/not-in-segment-any-listed.json",
+      "sha256": "393e25fddc012b7b2656dd0638cd562da006567217545947ca0da95dc453829f"
+    },
+    {
+      "path": "evaluation/segments/not-in-segment.json",
+      "sha256": "b282b78565e753862204780d2dec5c4d2dc4669c98df1bb4e08a98d3c41db57b"
+    },
+    {
+      "path": "evaluation/segments/other-kind-ignored.json",
+      "sha256": "a81870fbbcb1b404a4358cc572fdce6f14ed85ede43158d9ab95cd20aabf43d9"
+    },
+    {
+      "path": "evaluation/segments/segment-in-group.json",
+      "sha256": "1abb5a3f2621dae14bd6b84d1122e3a4827075909f836a341e63e0203cd8aff8"
+    },
+    {
+      "path": "evaluation/segments/segment-with-operators.json",
+      "sha256": "1b0cab2593002d55ce30112363d50adf1ab7b345f9d1ae406d2755f6ecdcdddb"
     },
     {
       "path": "evaluation/semver/build-metadata-ignored.json",
@@ -1021,6 +1205,22 @@
     {
       "path": "snapshots/basic-boolean.json",
       "sha256": "6b56f7bc1a3bfbb8fec07bad3554f5f7b52e6f2136bdafd9773c52dae44ce3ea"
+    },
+    {
+      "path": "snapshots/rollout-20.json",
+      "sha256": "c7c04e7657714772db81249ca04e3361a3e6fcdfad0dbef8fe583daaf8cbd3d4"
+    },
+    {
+      "path": "snapshots/rollout-30-30-40.json",
+      "sha256": "5e10e0e9e1b96cbf983d0574af26545eed52a99b8f8fcde1f25f2ae4c67d82a2"
+    },
+    {
+      "path": "snapshots/rollout-50-50.json",
+      "sha256": "df6715b2f731c929e30429946e5e096d647bb40a96987ea89e0ff4c5b3de4a18"
+    },
+    {
+      "path": "snapshots/rollout-50.json",
+      "sha256": "b2a4756b54e22fb5b6cb6f015fb827639692c5c86d4e7399b2398b0b19990849"
     }
   ]
 }

@@ -1,0 +1,90 @@
+{
+  "id": "overrides/expiry-fraction-truncated",
+  "description": "expiresAt is truncated to milliseconds, not rounded: .0009 is .000.",
+  "spec": [
+    "03-evaluation.md#overrides-and-time"
+  ],
+  "tags": [
+    "overrides",
+    "fraction"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [
+          {
+            "kind": "user",
+            "key": "u_vip",
+            "variation": "on",
+            "expiresAt": "2026-10-06T08:00:00.0009Z"
+          }
+        ],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:bab599f2f8f633370810d654675826b60bab83100b84a1e12b16254c892a879c"
+  },
+  "cases": [
+    {
+      "name": "one millisecond before",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_vip"
+      },
+      "evaluatedAt": "2026-10-06T07:59:59.999Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "OVERRIDE",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "at the truncated instant",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_vip"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00.000Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

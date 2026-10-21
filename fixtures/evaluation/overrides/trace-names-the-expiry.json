@@ -1,0 +1,79 @@
+{
+  "id": "overrides/trace-names-the-expiry",
+  "description": "The trace of an override step carries the expiry of the override that applied.",
+  "spec": [
+    "03-evaluation.md#overrides-and-time"
+  ],
+  "tags": [
+    "overrides",
+    "trace"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [
+          {
+            "kind": "user",
+            "key": "u_vip",
+            "variation": "on",
+            "expiresAt": "2026-10-06T09:00:00Z"
+          }
+        ],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:9ae47d6d34eef0fff6d98e0f3f0e07dd558fac8ef42803c3c5012514906881c2"
+  },
+  "cases": [
+    {
+      "name": "active override",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_vip"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "OVERRIDE",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "trace": true
+      },
+      "expectTrace": [
+        {
+          "step": "override",
+          "overrideExpiresAt": "2026-10-06T09:00:00Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "id": "rollouts/multivariate-reallocation",
+  "description": "Changing the weights of several slots moves subjects between variations: a subject stays only while its bucket stays inside the same slot interval.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "reallocation"
+  ],
+  "snapshotRef": "snapshots/rollout-50-50.json",
+  "cases": [
+    {
+      "name": "k_0 (bucket 27678) at 50/50",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_0"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "A",
+        "variationKey": "a",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 27678
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_0 (bucket 27678) at 30/30/40",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_0"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "A",
+        "variationKey": "a",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 27678
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-30-30-40.json"
+    },
+    {
+      "name": "k_4 (bucket 42339) at 50/50",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_4"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "A",
+        "variationKey": "a",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 42339
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_4 (bucket 42339) at 30/30/40",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_4"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 42339
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-30-30-40.json"
+    },
+    {
+      "name": "k_1 (bucket 53438) at 50/50",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 53438
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_1 (bucket 53438) at 30/30/40",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 53438
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-30-30-40.json"
+    },
+    {
+      "name": "k_2 (bucket 90089) at 50/50",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_2"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 90089
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_2 (bucket 90089) at 30/30/40",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_2"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "C",
+        "variationKey": "c",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 90089
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-30-30-40.json"
+    }
+  ]
+}

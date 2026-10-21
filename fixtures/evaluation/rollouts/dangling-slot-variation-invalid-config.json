@@ -1,0 +1,144 @@
+{
+  "id": "rollouts/dangling-slot-variation-invalid-config",
+  "description": "A slot or a remainder that names a variation the flag does not have is a configuration error when it is the one selected: the caller fallback is returned.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "error:INVALID_CONFIG"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "slot": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r9",
+                "slots": [
+                  {
+                    "variation": "ghost",
+                    "weight": 50000
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      },
+      "rem": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r9",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 50000
+                  }
+                ],
+                "remainderVariation": "ghost"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:9bafd117a7507d9de4da06406816e4cefd90eca55bd8c94b9dcbf091046e2b36"
+  },
+  "cases": [
+    {
+      "name": "selected slot is dangling",
+      "flagKey": "slot",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "k_96459"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "selected remainder is dangling",
+      "flagKey": "rem",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "k_258166"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

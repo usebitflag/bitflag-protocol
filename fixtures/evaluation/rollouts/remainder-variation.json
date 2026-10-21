@@ -1,0 +1,142 @@
+{
+  "id": "rollouts/remainder-variation",
+  "description": "Buckets beyond the total weight get the remainder variation, which is a separate outcome from the caller fallback.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "remainder"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "string",
+        "enabled": true,
+        "variations": {
+          "a": "A",
+          "b": "B",
+          "c": "C",
+          "rest": "REST",
+          "off": "OFF"
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r2",
+                "slots": [
+                  {
+                    "variation": "a",
+                    "weight": 20000
+                  },
+                  {
+                    "variation": "b",
+                    "weight": 30000
+                  }
+                ],
+                "remainderVariation": "rest"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:c37c5a38141e29f9733ac1cb6b6533657b54d3166d61ea17307617620f4a27fc"
+  },
+  "cases": [
+    {
+      "name": "bucket just past the slots",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_43688"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "REST",
+        "variationKey": "rest",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 50001
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket in the middle of the remainder",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "REST",
+        "variationKey": "rest",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 62510
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "a slot bucket is not the remainder",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_14"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 28448
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

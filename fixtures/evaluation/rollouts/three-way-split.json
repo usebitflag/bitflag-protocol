@@ -1,0 +1,216 @@
+{
+  "id": "rollouts/three-way-split",
+  "description": "Several slots partition the buckets in order.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "string",
+        "enabled": true,
+        "variations": {
+          "a": "A",
+          "b": "B",
+          "c": "C",
+          "rest": "REST",
+          "off": "OFF"
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r3",
+                "slots": [
+                  {
+                    "variation": "a",
+                    "weight": 33333
+                  },
+                  {
+                    "variation": "b",
+                    "weight": 33333
+                  },
+                  {
+                    "variation": "c",
+                    "weight": 33334
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:3eaa80e481c281756332d126b3b7c223227903654b395000a164639dccd69ebe"
+  },
+  "cases": [
+    {
+      "name": "bucket 0",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_148473"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "A",
+        "variationKey": "a",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 33332",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_156179"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "A",
+        "variationKey": "a",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 33332
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 33333",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_118754"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 33333
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 66665",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_66473"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "B",
+        "variationKey": "b",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 66665
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 66666",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_38963"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "C",
+        "variationKey": "c",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 66666
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 99999",
+      "flagKey": "f",
+      "type": "string",
+      "fallback": "FALLBACK",
+      "context": {
+        "kind": "user",
+        "key": "k_288827"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "C",
+        "variationKey": "c",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 99999
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

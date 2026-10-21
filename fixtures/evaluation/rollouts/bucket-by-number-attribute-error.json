@@ -1,0 +1,252 @@
+{
+  "id": "rollouts/bucket-by-number-attribute-error",
+  "description": "The bucketing attribute must be a non-empty string: a number is never converted, and there is no default cohort. The caller fallback is returned with MISSING_SUBJECT_KEY.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "error:MISSING_SUBJECT_KEY"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "orgId",
+                "salt": "s_r6",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 40000
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:71ff4cb13ce1fbcf47009c57c7500bcd1772f253656e0714770a2a357678b3ad"
+  },
+  "cases": [
+    {
+      "name": "number",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "orgId": 12345
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "boolean",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "orgId": true
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "array of strings",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "orgId": [
+            "a",
+            "b"
+          ]
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "empty string",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "orgId": ""
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "null",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "orgId": null
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "attribute absent",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "other": "x"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "no attributes",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

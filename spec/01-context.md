@@ -38,7 +38,7 @@ The context has no members other than `kind`, `key` and `attributes`; any other 
 
 A context that violates any rule above is invalid. An evaluator returns `reason: "ERROR"` with `errorKind: "INVALID_CONTEXT"` and the caller's fallback; it does not repair, truncate or partially use the context.
 
-Byte limits count UTF-8 bytes, not characters or UTF-16 code units. The schema counts characters, which is never stricter than the byte limit, so a schema-valid context can still be invalid on its byte length. Parsers enforce the byte limits.
+A string that contains an unpaired surrogate has no UTF-8 form and makes the context invalid. Byte limits count UTF-8 bytes, not characters or UTF-16 code units. The schema counts characters, which is never stricter than the byte limit, so a schema-valid context can still be invalid on its byte length. Parsers enforce the byte limits.
 
 Numbers in a context are IEEE 754 binary64. A number whose value is an integer outside ±(2^53 − 1), however it is written, is not an invalid context; it is a value of the wrong type for every numeric operator (see `04-operators.md`). Callers that need larger integers or exact decimals send strings and compare them with string operators.
 

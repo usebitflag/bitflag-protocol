@@ -1,0 +1,262 @@
+{
+  "id": "segments/segment-cycle-invalid-config",
+  "description": "Segments that lead back to themselves are a configuration error, never an ordinary non-member.",
+  "spec": [
+    "03-evaluation.md#segments"
+  ],
+  "tags": [
+    "segments",
+    "error:INVALID_CONFIG"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "via-a": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "op": "in_segment",
+                  "values": [
+                    "a"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      },
+      "via-self": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "op": "in_segment",
+                  "values": [
+                    "self"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      },
+      "via-ok": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "op": "in_segment",
+                  "values": [
+                    "ok"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {
+      "a": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "b"
+              ]
+            }
+          ]
+        }
+      },
+      "b": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "a"
+              ]
+            }
+          ]
+        }
+      },
+      "self": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "self"
+              ]
+            }
+          ]
+        }
+      },
+      "ok": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "a"
+              ]
+            }
+          ]
+        },
+        "include": [
+          {
+            "kind": "user",
+            "key": "u_listed"
+          }
+        ]
+      }
+    },
+    "checksum": "sha256:e54d58d58c8e6e419fbdbd19e282da95db334a5b5e123cf6b6ca03c41ff985ca"
+  },
+  "cases": [
+    {
+      "name": "two segments",
+      "flagKey": "via-a",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "a segment that uses itself",
+      "flagKey": "via-self",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "a listed subject never reaches the cycle",
+      "flagKey": "via-ok",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_listed"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "anyone else does",
+      "flagKey": "via-ok",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

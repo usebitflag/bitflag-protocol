@@ -1,0 +1,212 @@
+{
+  "id": "trace/rule-steps",
+  "description": "Every enabled rule that is evaluated records a step: matched or not_matched, with its conditions. A disabled rule records a step without conditions. Rules after the deciding one are not evaluated.",
+  "spec": [
+    "03-evaluation.md#details-and-traces"
+  ],
+  "tags": [
+    "trace"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "disabled",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "free"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            },
+            "enabled": false
+          },
+          {
+            "id": "team",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "team"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          },
+          {
+            "id": "pro",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          },
+          {
+            "id": "never",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "off"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:e7b5365f75c98facbcc5efcc36f3c29547c22cd105b0aedbd8d01bfb4194564a"
+  },
+  "cases": [
+    {
+      "name": "third rule decides",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "reason": "RULE",
+        "ruleId": "pro"
+      },
+      "options": {
+        "trace": true
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "outcome": "disabled",
+          "ruleId": "disabled"
+        },
+        {
+          "step": "rule",
+          "outcome": "not_matched",
+          "ruleId": "team",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "plan",
+              "outcome": "no_match"
+            }
+          ]
+        },
+        {
+          "step": "rule",
+          "outcome": "matched",
+          "ruleId": "pro",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "plan",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "no rule matches",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "free"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "reason": "DEFAULT"
+      },
+      "options": {
+        "trace": true
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "outcome": "disabled",
+          "ruleId": "disabled"
+        },
+        {
+          "step": "rule",
+          "outcome": "not_matched",
+          "ruleId": "team"
+        },
+        {
+          "step": "rule",
+          "outcome": "not_matched",
+          "ruleId": "pro"
+        },
+        {
+          "step": "rule",
+          "outcome": "not_matched",
+          "ruleId": "never"
+        },
+        {
+          "step": "default",
+          "outcome": "served"
+        }
+      ]
+    }
+  ]
+}

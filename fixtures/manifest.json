@@ -1,6 +1,6 @@
 {
   "algorithm": "sha256",
-  "checksum": "683a42f790dcf9c680df00ccc74b2a5ebc61f491662d99244ce548133e92f87a",
+  "checksum": "9d17b5cd79a3f084284a6385fca2cd456da2c0810b8f4ef9a2bd3fdb55b153ce",
   "files": [
     {
       "path": "README.md",
@@ -145,6 +145,138 @@
     {
       "path": "evaluation/context/unknown-member-invalid.json",
       "sha256": "1e42c03f55b7df4ce493b7696737f74b06b23524a2e99f023aabc7a457e97990"
+    },
+    {
+      "path": "evaluation/dates/after/array-any-element.json",
+      "sha256": "79ca2d8676f082b66e59901b6f59213b3d51c50753496a4f9caee94c00f1ff18"
+    },
+    {
+      "path": "evaluation/dates/after/invalid-date.json",
+      "sha256": "571f8ce89025f9ecc3f0552dab8a5d6f8bbb4314d13c287f125248ad4bda58e9"
+    },
+    {
+      "path": "evaluation/dates/after/is-strict.json",
+      "sha256": "01e846203f73949dc59c7ff4d1059ae02a07f9b607cdb37488acdcd71a3a7470"
+    },
+    {
+      "path": "evaluation/dates/after/matches.json",
+      "sha256": "c59e61fdcb7269e29a5a7b61c3427d09a379aa46090f6caa401c950b2426d013"
+    },
+    {
+      "path": "evaluation/dates/after/missing-attribute.json",
+      "sha256": "6f1688f116deafdd48353aea295d9e9a5e87d2a01b85d06c9d2307fc705bea95"
+    },
+    {
+      "path": "evaluation/dates/after/no-match.json",
+      "sha256": "60114d3721e40a029403086bb4adb77e54d31f84d9ed2b732d3aaf2f4d9ae7b6"
+    },
+    {
+      "path": "evaluation/dates/after/null-attribute.json",
+      "sha256": "b4dc58a330adb9e33fb39cee681200b18bdff3f79e810c15012699a92b9fccef"
+    },
+    {
+      "path": "evaluation/dates/after/wrong-type.json",
+      "sha256": "2c03eb9d1b1a0e57e9a44ae5ed09c861dbe6a4ccf4d27e19ceb9abe374b9af48"
+    },
+    {
+      "path": "evaluation/dates/before-epoch-fraction.json",
+      "sha256": "7481c3d8ab394ddfae9de5965ba9a3f49d81bc3d872611bbb85d36e90b88eee9"
+    },
+    {
+      "path": "evaluation/dates/before/array-any-element.json",
+      "sha256": "3e4b02c22710ce7cbc5930c0e12575e07cb22bfaa6cd76c0af998e40335413f3"
+    },
+    {
+      "path": "evaluation/dates/before/invalid-date.json",
+      "sha256": "430bcb03da0bf49c946952feac3d53bda866082a6925578163a7af5ca34843bc"
+    },
+    {
+      "path": "evaluation/dates/before/is-strict.json",
+      "sha256": "d66fd803552224abc6a7f0bf989715b017dfc7d573d1caabbbc5a3c6b40b58aa"
+    },
+    {
+      "path": "evaluation/dates/before/matches.json",
+      "sha256": "7be0fa1cbf07243030fa1feb97329743598aa0b0d1e78c13899f3015b51c7de2"
+    },
+    {
+      "path": "evaluation/dates/before/missing-attribute.json",
+      "sha256": "85bfbd0ac712daba29583a6ee2b61f7e957cfd9d9f7d5e6e49b5c5519e3f9778"
+    },
+    {
+      "path": "evaluation/dates/before/no-match.json",
+      "sha256": "f95abed5e721d455029abbc6fb32b9fa95a8c9ee8becacda64bb057d692e2c2e"
+    },
+    {
+      "path": "evaluation/dates/before/null-attribute.json",
+      "sha256": "bb32965d38fa90219c974c01961d57e88a02b5f301b1956a17404e1d99d4b80d"
+    },
+    {
+      "path": "evaluation/dates/before/wrong-type.json",
+      "sha256": "73846d40fc7cd31ead248b78b73eb6e9024fbbeb014cad7bffa8d0ebebdbe966"
+    },
+    {
+      "path": "evaluation/dates/calendar-validity.json",
+      "sha256": "feae6048a3187f0da8d0861a4f46261e6dd3d2e929dc488621060a69b46e85c1"
+    },
+    {
+      "path": "evaluation/dates/case-and-separators-strict.json",
+      "sha256": "caf1fe9792f02a9b04ee2dbe14eb229864975dcdf9ada9f143599b91803d1f1f"
+    },
+    {
+      "path": "evaluation/dates/date-only-invalid.json",
+      "sha256": "3513f2fb0807d5ad60a1be47d8c4b879acf85244224d39a5b0748b4001e8252f"
+    },
+    {
+      "path": "evaluation/dates/fraction-lengths.json",
+      "sha256": "0e8468279f9fb9c2c8478d985dffcd458902a7f814d3255ae13fba0ed9fa2d5f"
+    },
+    {
+      "path": "evaluation/dates/fraction-truncated-to-ms.json",
+      "sha256": "0708749e397135a597b1c50e2cf8001b31e61d7c642cedd09c4c564cc9b18029"
+    },
+    {
+      "path": "evaluation/dates/leap-day-ordering.json",
+      "sha256": "cc6776cb5c3ddc61b4aff1b94b9de8cd63d2138f6aa3163db03d0d3dbc2f7a36"
+    },
+    {
+      "path": "evaluation/dates/leap-seconds-invalid.json",
+      "sha256": "b274c0ceda05a067d4257022bcf984d37b9dfd5f89baf2d7f9ac0c8e86dcfbe0"
+    },
+    {
+      "path": "evaluation/dates/leap-years.json",
+      "sha256": "4ede14dd7ab6cf2635dfeb8b82be746cf0cb62fdfa850623ba1f7fe152871391"
+    },
+    {
+      "path": "evaluation/dates/offset-in-listed-value.json",
+      "sha256": "4b6e837561c16a92c71911a0c40c6eded9e3dc1e94f8031a2dde0d47bb875066"
+    },
+    {
+      "path": "evaluation/dates/offset-normalized-to-utc.json",
+      "sha256": "f9a8644fc3dabbcdcc73ac96a334b4c66af86eaaf30c9e38551f5f5ffe6ac941"
+    },
+    {
+      "path": "evaluation/dates/offset-range.json",
+      "sha256": "3ec19a17183f015da5452c0a4e2505c88184b5429638604ab4ef5057845e1710"
+    },
+    {
+      "path": "evaluation/dates/surrounding-text-invalid.json",
+      "sha256": "bb55af257e2dc47c2c4a66c6f81e88a74571d6cfa0632e448af7324d972108e7"
+    },
+    {
+      "path": "evaluation/dates/time-field-ranges.json",
+      "sha256": "8ce06beb51cd7560333c0ec0680651b2dc86b40b3f03204f3b74d21cf2d93e19"
+    },
+    {
+      "path": "evaluation/dates/time-without-offset-invalid.json",
+      "sha256": "63c0e6df4a6e920e8458d74fc27b1607d583cd03d0b43bc840376da38a7b8f42"
+    },
+    {
+      "path": "evaluation/dates/year-boundaries.json",
+      "sha256": "6edbd92f4ea4a375b779277017aeb8208a7c399d0908f11267f885c66b39d8b2"
+    },
+    {
+      "path": "evaluation/dates/year-offsets-cross-boundaries.json",
+      "sha256": "97edbc479e1942b7c442f0681bacba0bc0219d4070dc561402c94ae516d633d3"
     },
     {
       "path": "evaluation/fallback/archived-flag-absent.json",
@@ -629,6 +761,226 @@
     {
       "path": "evaluation/precedence/override-beats-rules.json",
       "sha256": "f47cb2a4345bd0f5e1d864ac90687d303ea420b9028c774843230d4d275642e0"
+    },
+    {
+      "path": "evaluation/semver/build-metadata-ignored.json",
+      "sha256": "d1f52e4b087e54fb53761158b25d009bf7a0c72f94c9c98693cf36c067de0afe"
+    },
+    {
+      "path": "evaluation/semver/build-metadata-with-prerelease.json",
+      "sha256": "74f6efe901dd8857fcf56e34abae050a0df459a97c881c30906de86f13bafc7d"
+    },
+    {
+      "path": "evaluation/semver/empty-identifier-invalid.json",
+      "sha256": "c455f58bdc1a437965e4bc35522548458defb7243efe0a3caa3f03fabfe6d5eb"
+    },
+    {
+      "path": "evaluation/semver/eq/array-any-element.json",
+      "sha256": "c8d8a4a174a163d52a6719175bfa2e623b820ec63adfbf0778e6d795f2034fa1"
+    },
+    {
+      "path": "evaluation/semver/eq/invalid-version.json",
+      "sha256": "4abda8ccddbf1ad178737bdd434ab4dd8b38f1cd0e3f559c08fca507a999fe0f"
+    },
+    {
+      "path": "evaluation/semver/eq/matches.json",
+      "sha256": "58669215ccd140a08d9ebaa5c37321a92b2c7b3fd0248a7377be0cfe1ac18e10"
+    },
+    {
+      "path": "evaluation/semver/eq/missing-attribute.json",
+      "sha256": "7f8e8d6c744366431886e3f358c710fca5f2b21d305722313376807a8296317d"
+    },
+    {
+      "path": "evaluation/semver/eq/no-match.json",
+      "sha256": "caaac92dc297383152878389989f1cf95480f20eef56682926b44c22da010e33"
+    },
+    {
+      "path": "evaluation/semver/eq/null-attribute.json",
+      "sha256": "2289e345524f856c7e0c62fb4299110e85316a72d06f0585322851d9b6da29ef"
+    },
+    {
+      "path": "evaluation/semver/eq/wrong-type.json",
+      "sha256": "6529117a642106fd5a3b8cb34758b9ee71ecc486e99b08be6cfcf8a0b814ddce"
+    },
+    {
+      "path": "evaluation/semver/gt/array-any-element.json",
+      "sha256": "6a00ca35310be7b0a8bffdf6e09ee6408d1e2379bb9b49080c6f01271d3afa68"
+    },
+    {
+      "path": "evaluation/semver/gt/invalid-version.json",
+      "sha256": "0f86c0a955b918258a8cd9a598ea22c44a594746a93e33b5b064b2a9a6c1f44e"
+    },
+    {
+      "path": "evaluation/semver/gt/matches.json",
+      "sha256": "5f476917ce058a8386e5ea2ecb75d3d35703f857db8d766ce67a1fd2b038e290"
+    },
+    {
+      "path": "evaluation/semver/gt/missing-attribute.json",
+      "sha256": "9df46bc00156cd8e019b58671431ae4ee8499b795a84c42ba0b0df17e2425b7d"
+    },
+    {
+      "path": "evaluation/semver/gt/no-match.json",
+      "sha256": "3bd17bf219e5f6cbc863b7dcf5872db3f5fc5a0080a28a68f3df5d8ca21434c5"
+    },
+    {
+      "path": "evaluation/semver/gt/null-attribute.json",
+      "sha256": "29802cd4207e378066f1c085201ff9630951f2eb38f06801807168c1f55d3ed4"
+    },
+    {
+      "path": "evaluation/semver/gt/numeric-not-lexical.json",
+      "sha256": "6a8e6d912d66f524d3b5eb6f80827dcac3ef0652733200ef48c49bce9fb9c452"
+    },
+    {
+      "path": "evaluation/semver/gt/wrong-type.json",
+      "sha256": "d3f47c2358dedbfe3ca4ed452739c7e82621f29aca19223dd029449da357cc28"
+    },
+    {
+      "path": "evaluation/semver/gte/array-any-element.json",
+      "sha256": "8cc277f3696ed5188fe7abd767bc6d5c73e5e9a73ac9de2c356799dbfeb534a0"
+    },
+    {
+      "path": "evaluation/semver/gte/invalid-version.json",
+      "sha256": "099ae8b1f978858953ca668bdbff141018a673c13dbdb42df67a134d24a76227"
+    },
+    {
+      "path": "evaluation/semver/gte/matches.json",
+      "sha256": "0775678b4377228de3f963c196ac8cc26a3fd09fb1dbe06ebf823f7f96118b44"
+    },
+    {
+      "path": "evaluation/semver/gte/missing-attribute.json",
+      "sha256": "b6ccd9136422563ce191ace574916e685ea6de610b756cc3f81b63b900017aa8"
+    },
+    {
+      "path": "evaluation/semver/gte/no-match.json",
+      "sha256": "b20bc3eaa90bd870ed550a67f547554f9c6063401f375933406c8a1cc44917b2"
+    },
+    {
+      "path": "evaluation/semver/gte/null-attribute.json",
+      "sha256": "86399c637b9a294fef5454df255833bd8a97edddbcc6e8da63c6eea8e8d026e4"
+    },
+    {
+      "path": "evaluation/semver/gte/wrong-type.json",
+      "sha256": "ab498cf35671b15d98b40c3d32286b9e66701f88cecd6878730171b9c059ab6c"
+    },
+    {
+      "path": "evaluation/semver/illegal-characters-invalid.json",
+      "sha256": "95d7be8c5cd40c374153a2b150c8a995637cceceec912ee65bcf162309ab3a68"
+    },
+    {
+      "path": "evaluation/semver/large-parts.json",
+      "sha256": "3095bc116e954e6b2832227faa1d80f628c6de213a759ee6c7c458d01aaa42ca"
+    },
+    {
+      "path": "evaluation/semver/leading-zeros-invalid.json",
+      "sha256": "fd5f5bc67c2e4db79eb0e85636d75ac1638d7d2d9f20f9723862f7dbb5eed0fd"
+    },
+    {
+      "path": "evaluation/semver/lt/array-any-element.json",
+      "sha256": "fbcfdb6d543c72afa1911cc085d379755236f401a1a5a1f2c0d2bcb9d0864d3b"
+    },
+    {
+      "path": "evaluation/semver/lt/invalid-version.json",
+      "sha256": "636df784ab0d3c9a84312dcb1bb910c0709cca850c9e209b4fcbd2abde3d6922"
+    },
+    {
+      "path": "evaluation/semver/lt/matches.json",
+      "sha256": "2102335fa10a124b37f362bfc441154b0336a58cc9f80e960ec048d3c30833be"
+    },
+    {
+      "path": "evaluation/semver/lt/missing-attribute.json",
+      "sha256": "42dc5cfe9f8533655ad4b85d0b3853544574b6d3c58e58dab6bc0a60fb53c53d"
+    },
+    {
+      "path": "evaluation/semver/lt/no-match.json",
+      "sha256": "0ca193143cbf6fa6a773b40e010e900d2d0dc101ddf020b1cf912cdad3081c4e"
+    },
+    {
+      "path": "evaluation/semver/lt/null-attribute.json",
+      "sha256": "7b7d8344469f1ed12ad12ff4cb361e605c05bb7448193b5569ab61fc6f6f3317"
+    },
+    {
+      "path": "evaluation/semver/lt/wrong-type.json",
+      "sha256": "2745619da2f5860c7d30e2dee7e8ee787dc8eeef9c0e2565a9a1a97c8f7f62e8"
+    },
+    {
+      "path": "evaluation/semver/lte/array-any-element.json",
+      "sha256": "af63024746a67f83a76bb8390c7901c62025825ed4f4e93580050d513f74a62e"
+    },
+    {
+      "path": "evaluation/semver/lte/invalid-version.json",
+      "sha256": "13fbd8e17e05d88328face02d046dfecb2031661624229bca73aad867112ad00"
+    },
+    {
+      "path": "evaluation/semver/lte/matches.json",
+      "sha256": "483fdbb858a44e373d97aff12304ad5b0bf921dba4b07bc0837014250350b4b7"
+    },
+    {
+      "path": "evaluation/semver/lte/missing-attribute.json",
+      "sha256": "6538b585cb1c8425f2e7bbc3afac7a4d7d4b5a44ec5f50ee671f1a458ecc42e4"
+    },
+    {
+      "path": "evaluation/semver/lte/no-match.json",
+      "sha256": "47150ceee0b7d708ddd8ab60774292c8978326176a1684ad16de9ef2948891d5"
+    },
+    {
+      "path": "evaluation/semver/lte/null-attribute.json",
+      "sha256": "cecc6ddd8b86696d5ca059aa151b5a1a9232b42f45a2b87def1efd710be7aaf8"
+    },
+    {
+      "path": "evaluation/semver/lte/wrong-type.json",
+      "sha256": "bfd2b677eee69274927503a82ac3c4d0948130e56bac74dbee9577c967824b4c"
+    },
+    {
+      "path": "evaluation/semver/neq/array-any-element.json",
+      "sha256": "48789e25b5a3daa626ddbb6166281f0e518702fb0a514394063c45c2357f4976"
+    },
+    {
+      "path": "evaluation/semver/neq/invalid-version.json",
+      "sha256": "f0b51a734d60967581cd689235968480e2a88b125da7a39c7b42742b2d380ac3"
+    },
+    {
+      "path": "evaluation/semver/neq/matches.json",
+      "sha256": "a6628824cc271ea395462cfa180bb00e9075dca513ffbcfb91c3c9409819043d"
+    },
+    {
+      "path": "evaluation/semver/neq/missing-attribute.json",
+      "sha256": "b474f82018b09604c8cf6b23e784a484c94ecad6c4feb9adecce84764555de8f"
+    },
+    {
+      "path": "evaluation/semver/neq/no-match.json",
+      "sha256": "3b28967c0ad5fafed80fb607f4151ca9e06762268b7ee95568760614aff9854f"
+    },
+    {
+      "path": "evaluation/semver/neq/null-attribute.json",
+      "sha256": "7aac5e0e6916e074c7f5826b810862d501718e2794d6d53dad934074ff41786a"
+    },
+    {
+      "path": "evaluation/semver/neq/wrong-type.json",
+      "sha256": "4846c69bd2f2c5a90ab3c0cfb67c9f5ac026d6e2d751373e4a71a373799435d5"
+    },
+    {
+      "path": "evaluation/semver/prerelease-ascii-order.json",
+      "sha256": "44b85e0a0545da28da151896ca0bf254fa9b0b5db7b98283cd6adc7b2b6be5fb"
+    },
+    {
+      "path": "evaluation/semver/prerelease-identifier-types.json",
+      "sha256": "d134a50510949dcf531aabd63bdf79a6aece29d583be085923423c42cb474052"
+    },
+    {
+      "path": "evaluation/semver/prerelease-precedence.json",
+      "sha256": "3983ee3a7a5bbe76596a5d4a41f672f6f7025f0303adcd81af9b713fc6ef0ce3"
+    },
+    {
+      "path": "evaluation/semver/two-part-version-invalid.json",
+      "sha256": "5cc45850865ac9ce4c136e5b1ee754c8f67d30b8d3906b9300c7f6ed784e3967"
+    },
+    {
+      "path": "evaluation/semver/v-prefix-invalid.json",
+      "sha256": "9cb0574396d86e360539dff015f5e7ae20f66af789075016144bdc1777a31440"
+    },
+    {
+      "path": "evaluation/semver/zero-versions.json",
+      "sha256": "d793d46c06e317a115600f014d1d4cebb8c2bed548217062a9da92fbc484d8ea"
     },
     {
       "path": "evaluation/strings-unicode/case-and-accents-differ.json",

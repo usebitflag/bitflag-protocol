@@ -42,5 +42,6 @@ Node 22 (see `.nvmrc`):
 - `npm run validate` compiles every schema, validates every fixture, and checks that snapshot checksums and the fixture manifest are current.
 - `npm run checksum` rewrites the checksums of fixture snapshots after an edit.
 - `npm run bucket` regenerates the bucket vectors; `validate` fails when they are not current or wrong.
+- `npm run canonical` regenerates the canonical JSON vectors; `validate` fails when they are not current.
 - `npm run manifest` regenerates `fixtures/manifest.json` after any fixture change.
 - `npm run lint:md` lints the Markdown.

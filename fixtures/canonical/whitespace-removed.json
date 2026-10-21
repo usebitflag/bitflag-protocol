@@ -1,0 +1,7 @@
+{
+  "input": { "a" :	[ 1 ,
+ 2 ] ,
+  "b" : { } },
+  "canonical": "{\"a\":[1,2],\"b\":{}}",
+  "checksum": "sha256:8c547cce7ccb1b89359479c0b71a0a4b62acfc54a2b2780fd34aaeb75f9e44b7"
+}

@@ -1,0 +1,5 @@
+{
+  "input": {"a": -0, "b": -0.0, "c": [-0, -0e5], "d": 0},
+  "canonical": "{\"a\":0,\"b\":0,\"c\":[0,0],\"d\":0}",
+  "checksum": "sha256:f6546671f334cdbbe0b6e21baedf7471c7d69844d11145ecaa10755dac92b4ac"
+}

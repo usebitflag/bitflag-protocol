@@ -1,0 +1,5 @@
+{
+  "input": {"checksum": "sha256:0000", "a": 1},
+  "canonical": "{\"a\":1,\"checksum\":\"sha256:0000\"}",
+  "checksum": "sha256:a3cdd72cc993bf9d085ec1a6362f587ba84626d92e31eaec147ff76a738bdfa5"
+}

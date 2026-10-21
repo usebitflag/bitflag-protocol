@@ -93,6 +93,9 @@ if (existsSync(vectorsFile)) check('bucket-vectors', readJson(vectorsFile), rela
 const bucketing = spawnSync(process.execPath, [join(root, 'tools/bucket.mjs'), '--check'], { stdio: 'inherit' });
 if (bucketing.status !== 0) failed = true;
 
+const canonical = spawnSync(process.execPath, [join(root, 'tools/canonical.mjs'), '--check'], { stdio: 'inherit' });
+if (canonical.status !== 0) failed = true;
+
 const checksums = spawnSync(process.execPath, [join(root, 'tools/checksum.mjs'), '--check'], { stdio: 'inherit' });
 if (checksums.status !== 0) failed = true;
 

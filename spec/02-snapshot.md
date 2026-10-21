@@ -88,11 +88,11 @@ Each weight is an integer from 0 to 100,000. The weights total at most 100,000. 
 
 Parsers reject a snapshot with `MALFORMED_SNAPSHOT`, a JSON Pointer `path` and a `code` when:
 
-- the JSON is invalid (including an escape that stands for an unpaired surrogate), nests deeper than 64 levels, exceeds 5 MiB, or contains a number whose value is an integer outside ±(2^53 − 1), however it is written;
+- the JSON is invalid (including an escape that stands for an unpaired surrogate), nests deeper than 64 levels, exceeds 5 MiB, or contains a number whose value is an integer outside ±(2^53 − 1), however it is written, or one too large for binary64;
 - a group nests deeper than 5 levels;
 - rollout weights total more than 100,000, or total less without a `remainderVariation`;
 - a string exceeds its limit in UTF-8 bytes, or is not valid UTF-8;
-- a date or SemVer literal in a condition is invalid;
+- a date or SemVer literal in a condition is invalid (a SemVer is at most 256 bytes);
 - `(kind, key)` repeats within one flag's overrides;
 - the checksum does not match (`CHECKSUM_MISMATCH`).
 

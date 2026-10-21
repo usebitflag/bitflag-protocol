@@ -1,0 +1,20 @@
+{
+  "id": "snapshot/negative-infinity-number-variation",
+  "kind": "snapshot",
+  "description": "The same for -1e999.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject",
+    "numbers"
+  ],
+  "snapshotRaw": "{\"protocolVersion\":1,\"algorithmVersion\":\"bucket-sha256-v1\",\"environment\":{\"id\":\"env_1\",\"key\":\"production\"},\"revision\":42,\"generation\":1,\"projection\":\"server\",\"publishedAt\":\"2026-10-06T07:00:00Z\",\"requiredCapabilities\":[],\"flags\":{\"n\":{\"type\":\"number\",\"enabled\":true,\"variations\":{\"big\":-1e999,\"off\":0},\"offVariation\":\"off\",\"defaultVariation\":\"off\",\"prerequisites\":[],\"overrides\":[],\"rules\":[]}},\"segments\":{},\"checksum\":\"sha256:f90ff930e2d0c9e1ff9e758a58d1b53acdf886b32c0602d412d2a64457136d1c\"}",
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "/flags/n/variations/big",
+    "code": "UNSAFE_NUMBER"
+  }
+}

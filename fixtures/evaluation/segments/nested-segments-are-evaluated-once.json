@@ -1,0 +1,6239 @@
+{
+  "id": "segments/nested-segments-are-evaluated-once",
+  "description": "25 segments, each referring 20 times to the next. Evaluating a segment once per call is linear; evaluating it at every reference takes 20^25 steps. One chain never matches (any of false), the other always does (all of true).",
+  "spec": [
+    "03-evaluation.md#segments"
+  ],
+  "tags": [
+    "segments",
+    "performance"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "chain-any": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "op": "in_segment",
+                  "values": [
+                    "any-0"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      },
+      "chain-all": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "op": "in_segment",
+                  "values": [
+                    "all-0"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {
+      "any-0": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-1"
+              ]
+            }
+          ]
+        }
+      },
+      "all-0": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-1"
+              ]
+            }
+          ]
+        }
+      },
+      "any-1": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-2"
+              ]
+            }
+          ]
+        }
+      },
+      "all-1": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-2"
+              ]
+            }
+          ]
+        }
+      },
+      "any-2": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-3"
+              ]
+            }
+          ]
+        }
+      },
+      "all-2": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-3"
+              ]
+            }
+          ]
+        }
+      },
+      "any-3": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-4"
+              ]
+            }
+          ]
+        }
+      },
+      "all-3": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-4"
+              ]
+            }
+          ]
+        }
+      },
+      "any-4": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-5"
+              ]
+            }
+          ]
+        }
+      },
+      "all-4": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-5"
+              ]
+            }
+          ]
+        }
+      },
+      "any-5": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-6"
+              ]
+            }
+          ]
+        }
+      },
+      "all-5": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-6"
+              ]
+            }
+          ]
+        }
+      },
+      "any-6": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-7"
+              ]
+            }
+          ]
+        }
+      },
+      "all-6": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-7"
+              ]
+            }
+          ]
+        }
+      },
+      "any-7": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-8"
+              ]
+            }
+          ]
+        }
+      },
+      "all-7": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-8"
+              ]
+            }
+          ]
+        }
+      },
+      "any-8": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-9"
+              ]
+            }
+          ]
+        }
+      },
+      "all-8": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-9"
+              ]
+            }
+          ]
+        }
+      },
+      "any-9": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-10"
+              ]
+            }
+          ]
+        }
+      },
+      "all-9": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-10"
+              ]
+            }
+          ]
+        }
+      },
+      "any-10": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-11"
+              ]
+            }
+          ]
+        }
+      },
+      "all-10": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-11"
+              ]
+            }
+          ]
+        }
+      },
+      "any-11": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-12"
+              ]
+            }
+          ]
+        }
+      },
+      "all-11": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-12"
+              ]
+            }
+          ]
+        }
+      },
+      "any-12": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-13"
+              ]
+            }
+          ]
+        }
+      },
+      "all-12": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-13"
+              ]
+            }
+          ]
+        }
+      },
+      "any-13": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-14"
+              ]
+            }
+          ]
+        }
+      },
+      "all-13": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-14"
+              ]
+            }
+          ]
+        }
+      },
+      "any-14": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-15"
+              ]
+            }
+          ]
+        }
+      },
+      "all-14": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-15"
+              ]
+            }
+          ]
+        }
+      },
+      "any-15": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-16"
+              ]
+            }
+          ]
+        }
+      },
+      "all-15": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-16"
+              ]
+            }
+          ]
+        }
+      },
+      "any-16": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-17"
+              ]
+            }
+          ]
+        }
+      },
+      "all-16": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-17"
+              ]
+            }
+          ]
+        }
+      },
+      "any-17": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-18"
+              ]
+            }
+          ]
+        }
+      },
+      "all-17": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-18"
+              ]
+            }
+          ]
+        }
+      },
+      "any-18": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-19"
+              ]
+            }
+          ]
+        }
+      },
+      "all-18": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-19"
+              ]
+            }
+          ]
+        }
+      },
+      "any-19": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-20"
+              ]
+            }
+          ]
+        }
+      },
+      "all-19": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-20"
+              ]
+            }
+          ]
+        }
+      },
+      "any-20": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-21"
+              ]
+            }
+          ]
+        }
+      },
+      "all-20": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-21"
+              ]
+            }
+          ]
+        }
+      },
+      "any-21": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-22"
+              ]
+            }
+          ]
+        }
+      },
+      "all-21": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-22"
+              ]
+            }
+          ]
+        }
+      },
+      "any-22": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-23"
+              ]
+            }
+          ]
+        }
+      },
+      "all-22": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-23"
+              ]
+            }
+          ]
+        }
+      },
+      "any-23": {
+        "version": 1,
+        "match": {
+          "any": [
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "any-24"
+              ]
+            }
+          ]
+        }
+      },
+      "all-23": {
+        "version": 1,
+        "match": {
+          "all": [
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            },
+            {
+              "op": "in_segment",
+              "values": [
+                "all-24"
+              ]
+            }
+          ]
+        }
+      },
+      "any-24": {
+        "version": 1,
+        "match": {
+          "any": []
+        }
+      },
+      "all-24": {
+        "version": 1,
+        "match": {
+          "all": []
+        }
+      }
+    },
+    "checksum": "sha256:afcb807e0b349721bb442883ebc0ac1d8d5a9b9788828adf0adb61a7d335ed34"
+  },
+  "cases": [
+    {
+      "name": "any-chain, nobody is a member",
+      "flagKey": "chain-any",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "all-chain, everybody is a member",
+      "flagKey": "chain-all",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

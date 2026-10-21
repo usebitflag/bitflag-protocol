@@ -24,3 +24,5 @@ All notable changes to the protocol are recorded here.
 - Segments may use other segments; a cycle is `INVALID_CONFIG` (new fixtures `segments/segment-uses-segment` and `segments/segment-cycle-invalid-config`, validation issue `SEGMENT_CYCLE`).
 - Limits stated exactly: 5 MiB, 32 KiB, nesting counted with the top-level object as level 1; an unpaired surrogate is invalid in JSON text and in a context.
 - A `cross-language` workflow that runs the released evaluators over the fixtures of a checkout and compares their reports.
+- Fixes found by an audit: `1e999` and other non-finite number literals are `UNSAFE_NUMBER` (snapshot) or an invalid context (evaluation); a SemVer string longer than 256 bytes is invalid; a segment shared by many segments is evaluated once per evaluation; a rollout reached through a prerequisite adds no step to the trace of the evaluated flag. New fixtures cover each, and `expectTraceSteps` checks the exact list of trace steps.
+- Differential fuzzing: `tools/fuzz/generate.mjs` and `tools/fuzz/compare.mjs`, the output format in `spec/10-conformance.md`, and fuzz steps (fixed and weekly seeds) in the `cross-language` workflow.

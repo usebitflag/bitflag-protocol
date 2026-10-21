@@ -87,6 +87,30 @@ for (const file of fixtureFiles) {
 }
 console.log(`${snapshotFiles.length} snapshot(s) and ${fixtureFiles.length} fixture(s) checked.`);
 
+// Examples: documents under examples/<topic>/valid must satisfy their schema, those under invalid must not.
+// The schema comes from the file name: batch-*.json is a telemetry batch, ack-*.json an acknowledgement.
+const exampleSchemas = { batch: 'telemetry-batch', ack: 'telemetry-ack' };
+const examplesDir = join(root, 'examples', 'telemetry');
+let exampleCount = 0;
+for (const kind of ['valid', 'invalid']) {
+  const dir = join(examplesDir, kind);
+  if (!existsSync(dir)) continue;
+  for (const file of listFiles(dir, '.json')) {
+    exampleCount += 1;
+    const label = relative(root, file);
+    const schemaId = exampleSchemas[file.split(sep).pop().split('-')[0]];
+    if (!schemaId) {
+      fail(`${label}: the name must start with batch- or ack-.`);
+      continue;
+    }
+    const fn = validate(schemaId);
+    const ok = fn(readJson(file));
+    if (kind === 'valid' && !ok) fail(`${label} should be valid:\n${ajv.errorsText(fn.errors, { separator: '\n  ', dataVar: '' })}`);
+    if (kind === 'invalid' && ok) fail(`${label} should be invalid but satisfies ${schemaId}.`);
+  }
+}
+console.log(`${exampleCount} example(s) checked.`);
+
 const vectorsFile = join(fixturesDir, 'bucketing', 'bucket-sha256-v1.json');
 if (existsSync(vectorsFile)) check('bucket-vectors', readJson(vectorsFile), relative(root, vectorsFile));
 

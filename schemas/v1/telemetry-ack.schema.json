@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bitflag:protocol:v1:telemetry-ack",
+  "title": "BitFlag protocol v1: telemetry acknowledgement",
+  "description": "The server's answer to a telemetry batch, sorting each event ID into accepted, retryable and rejected.",
+  "type": "object",
+  "properties": {
+    "accepted": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+    "retryable": { "type": "array", "items": { "$ref": "#/$defs/outcome" } },
+    "rejected": { "type": "array", "items": { "$ref": "#/$defs/outcome" } }
+  },
+  "required": ["accepted", "retryable", "rejected"],
+  "additionalProperties": false,
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,64}$" },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$" }
+      },
+      "required": ["id", "code"],
+      "additionalProperties": false
+    }
+  }
+}

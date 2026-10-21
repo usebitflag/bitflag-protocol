@@ -1,0 +1,10 @@
+{
+  "accepted": [],
+  "retryable": [
+    {
+      "id": "c",
+      "code": "rate_limited"
+    }
+  ],
+  "rejected": []
+}

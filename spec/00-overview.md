@@ -25,6 +25,7 @@ This repository defines the contract between the BitFlag service and everything 
 | `07-canonical-json-and-checksum.md` | Canonical JSON (RFC 8785), the snapshot checksum and the canonical vectors. |
 | `08-capabilities-and-versioning.md` | Protocol and algorithm versions, capabilities and what rejects a snapshot. |
 | `09-telemetry.md` | The telemetry batch, event types and acknowledgement. |
+| `10-conformance.md` | The release artifact, pinning, what runners compare and the conformance report. |
 
 ## Status
 

@@ -19,3 +19,4 @@ All notable changes to the protocol are recorded here.
 - `spec/06-results-and-errors.md` (reasons, error kinds, snapshot rejection codes and paths, validation issues) and `spec/08-capabilities-and-versioning.md`.
 - Decided in `spec/03-evaluation.md`: dangling variation, segment and prerequisite references are detected lazily, only when evaluation selects or evaluates them. The capability check applies to every flag an evaluation visits, including prerequisites, before the enabled check. Prerequisite depth is at most ten links.
 - Telemetry: `spec/09-telemetry.md`, `telemetry-batch.schema.json`, `telemetry-ack.schema.json` and example batches and acknowledgements that `npm run validate` checks.
+- Conformance: `spec/10-conformance.md`, a reproducible release archive (`tools/pack.mjs`), the release workflow, a CI job that builds the archive twice and compares them, and `tools/compare-reports.mjs` for comparing evaluators.

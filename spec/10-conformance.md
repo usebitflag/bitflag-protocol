@@ -84,4 +84,4 @@ To compare evaluators, a runner can write a report. The format is JSON:
 
 A report lists the **actual** outcome of every case, not only the compared fields. Two reports agree when, for every case, `value`, `variationKey`, `reason`, `ruleId`, `prerequisiteKey`, `errorKind`, `revision`, `generation`, `bucket`, `experimentId` and `allocationId` are equal, and for every snapshot fixture `accepted`, `errorKind`, `path` and `code` are equal. `tools/compare-reports.mjs` compares any number of reports.
 
-The cross-language check runs each evaluator over one pinned release, writes its report and compares them. It gates every release after `alpha.1`.
+The cross-language check (the `cross-language` workflow, started by hand with the evaluator releases to test) runs each evaluator over one checkout of the fixtures, writes its report and compares them. It is run before every release after `alpha.1`.

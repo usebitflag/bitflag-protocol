@@ -1,0 +1,171 @@
+{
+  "id": "prerequisites/chain-of-three",
+  "description": "Prerequisites chain: each flag needs the one before it. A broken link makes the dependent flag unmet, reported with its direct prerequisite.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "prerequisites"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "a": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      },
+      "b": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "a",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      },
+      "c": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "b",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:f982b7b28f51acd81c94a614aa0554727daa829d65a9f26896d2aa7b2363264d"
+  },
+  "cases": [
+    {
+      "name": "whole chain met",
+      "flagKey": "c",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "root unmet breaks the chain",
+      "flagKey": "c",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "free"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "PREREQUISITE",
+        "ruleId": null,
+        "prerequisiteKey": "b",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "middle flag directly",
+      "flagKey": "b",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "free"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "PREREQUISITE",
+        "ruleId": null,
+        "prerequisiteKey": "a",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

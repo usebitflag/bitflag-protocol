@@ -1,0 +1,67 @@
+{
+  "id": "snapshot/unknown-algorithm-version",
+  "kind": "snapshot",
+  "description": "An algorithmVersion the evaluator does not implement rejects the whole snapshot as UNSUPPORTED_CAPABILITY, because every rollout would bucket differently.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject",
+    "capabilities"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v2",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:d2f9dc9bfb35c51db816cab0ca672f044c44622ac996c806b69e3b0625c64160"
+  },
+  "expect": {
+    "accept": false,
+    "errorKind": "UNSUPPORTED_CAPABILITY",
+    "path": "/algorithmVersion",
+    "code": "UNSUPPORTED_ALGORITHM"
+  }
+}

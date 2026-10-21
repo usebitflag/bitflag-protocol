@@ -1,0 +1,170 @@
+{
+  "id": "prerequisites/any-listed-variation",
+  "description": "A prerequisite is met when its flag serves any of the listed variations.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "prerequisites"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "p": {
+        "type": "string",
+        "enabled": true,
+        "variations": {
+          "x": "X",
+          "y": "Y",
+          "z": "Z",
+          "off": "OFF"
+        },
+        "offVariation": "off",
+        "defaultVariation": "z",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "v",
+                  "op": "eq",
+                  "values": [
+                    "x"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "x"
+            }
+          },
+          {
+            "id": "r2",
+            "match": {
+              "all": [
+                {
+                  "attribute": "v",
+                  "op": "eq",
+                  "values": [
+                    "y"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "y"
+            }
+          }
+        ]
+      },
+      "child": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "p",
+            "variations": [
+              "x",
+              "y"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:4ad36ef61c68b06965b2097e7ce7870621aed9ed868989efe5e4cc4c5ad22382"
+  },
+  "cases": [
+    {
+      "name": "serves x",
+      "flagKey": "child",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "x"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "serves y",
+      "flagKey": "child",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "y"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "serves z",
+      "flagKey": "child",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "z"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "PREREQUISITE",
+        "ruleId": null,
+        "prerequisiteKey": "p",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

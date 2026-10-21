@@ -1,0 +1,19 @@
+{
+  "id": "snapshot/not-an-object",
+  "kind": "snapshot",
+  "description": "The top level must be an object.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject"
+  ],
+  "snapshotRaw": "[]",
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "",
+    "code": "INVALID_TYPE"
+  }
+}

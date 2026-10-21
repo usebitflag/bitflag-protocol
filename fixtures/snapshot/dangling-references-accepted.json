@@ -1,0 +1,70 @@
+{
+  "id": "snapshot/dangling-references-accepted",
+  "kind": "snapshot",
+  "description": "Dangling references are validation issues, not parse errors: a snapshot with a missing segment, prerequisite and variation still loads.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "accept",
+    "validation"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "ghost",
+        "prerequisites": [
+          {
+            "flagKey": "ghost",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "op": "in_segment",
+                  "values": [
+                    "ghost"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:d3dae75898776026284c5aabf3fa6fdd9c124c119ce2d1813335055930f2c443"
+  },
+  "expect": {
+    "accept": true
+  }
+}

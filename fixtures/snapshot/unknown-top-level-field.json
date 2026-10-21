@@ -1,0 +1,67 @@
+{
+  "id": "snapshot/unknown-top-level-field",
+  "kind": "snapshot",
+  "description": "Unknown members are rejected, not ignored.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:33c81be3659e1d0e6178cdfe6ec6d884e51b4e1fdb68c02f54f5e28c98d4dd83",
+    "extra": 1
+  },
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "/extra",
+    "code": "UNKNOWN_FIELD"
+  }
+}

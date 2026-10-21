@@ -1,0 +1,185 @@
+{
+  "id": "snapshot/prerequisites-at-limit",
+  "kind": "snapshot",
+  "description": "A flag may list 20 prerequisites; whether they exist is a validation matter, not a parse error.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "accept",
+    "limits"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [
+          {
+            "flagKey": "p0",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p1",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p2",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p3",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p4",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p5",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p6",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p7",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p8",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p9",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p10",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p11",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p12",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p13",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p14",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p15",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p16",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p17",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p18",
+            "variations": [
+              "on"
+            ]
+          },
+          {
+            "flagKey": "p19",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:03d07a486811d5b00c4e446611cc44e784c6f7faeea1c0a86442368142b82bd7"
+  },
+  "expect": {
+    "accept": true
+  }
+}

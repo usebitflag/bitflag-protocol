@@ -1,0 +1,66 @@
+{
+  "id": "snapshot/variation-type-mismatch",
+  "kind": "snapshot",
+  "description": "Every variation value matches the flag type.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": "yes",
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:01a44845d3224921da2ff1766b2a5fda664c76ac2f43e5a7b4c92ebaeaf02505"
+  },
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "/flags/f/variations/on",
+    "code": "INVALID_TYPE"
+  }
+}

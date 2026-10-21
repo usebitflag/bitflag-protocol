@@ -1,0 +1,104 @@
+{
+  "id": "prerequisites/variation-not-in-prerequisite",
+  "description": "Listing a variation the prerequisite flag does not have is not an error: it can never be served, so the prerequisite is unmet.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "prerequisites"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "p": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      },
+      "child": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "p",
+            "variations": [
+              "ghost"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:22c1b17145b001148a9dfaeb979c88aeed18f66c19846aaf7d32c036510a3d38"
+  },
+  "cases": [
+    {
+      "name": "unmet",
+      "flagKey": "child",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "PREREQUISITE",
+        "ruleId": null,
+        "prerequisiteKey": "p",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

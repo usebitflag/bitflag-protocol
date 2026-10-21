@@ -1,0 +1,66 @@
+{
+  "id": "snapshot/invalid-published-at",
+  "kind": "snapshot",
+  "description": "publishedAt is an RFC 3339 instant, not a date.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:d1201fe60ee8e435d14b4abb86fc11bae8eb2fdb7480d36d566aebf8299b08db"
+  },
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "/publishedAt",
+    "code": "INVALID_VALUE"
+  }
+}

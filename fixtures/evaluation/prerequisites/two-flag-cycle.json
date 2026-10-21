@@ -1,0 +1,112 @@
+{
+  "id": "prerequisites/two-flag-cycle",
+  "description": "A cycle that reached an evaluator is an error from either flag, and the caller fallback is returned rather than a served value.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "prerequisites",
+    "error:INVALID_CONFIG"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "a": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "b",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      },
+      "b": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "a",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:92323da50db518c083fa842fae5e2ca2dda9db22bd00971000c780e8fd14d817"
+  },
+  "cases": [
+    {
+      "name": "evaluate a",
+      "flagKey": "a",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "evaluate b",
+      "flagKey": "b",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

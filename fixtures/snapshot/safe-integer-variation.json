@@ -1,0 +1,47 @@
+{
+  "id": "snapshot/safe-integer-variation",
+  "kind": "snapshot",
+  "description": "Integers up to 2^53 - 1 in magnitude are valid number variations.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "accept",
+    "numbers"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "n": {
+        "type": "number",
+        "enabled": true,
+        "variations": {
+          "max": 9007199254740991,
+          "min": -9007199254740991,
+          "frac": 0.1
+        },
+        "offVariation": "min",
+        "defaultVariation": "max",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:f0bf15a36781947e9fcb8bf7bf170683a0356e9da8dbbfd60183db471f09da7a"
+  },
+  "expect": {
+    "accept": true
+  }
+}

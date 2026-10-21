@@ -1,0 +1,68 @@
+{
+  "id": "capabilities/type-mismatch-comes-first",
+  "description": "The type check comes before the capability check: asking for the wrong type returns TYPE_MISMATCH even when the flag is unsupported.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "capabilities",
+    "error:TYPE_MISMATCH"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "future.v9"
+    ],
+    "flags": {
+      "future": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "future.v9"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:5e25024f0e7d2d1cabe461202544204323c6e9598a0660a0da6b1b0e3bee1a80"
+  },
+  "cases": [
+    {
+      "name": "wrong type requested",
+      "flagKey": "future",
+      "type": "string",
+      "fallback": "x",
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": "x",
+        "variationKey": null,
+        "reason": "FALLBACK",
+        "ruleId": null,
+        "errorKind": "TYPE_MISMATCH",
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

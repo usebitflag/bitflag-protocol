@@ -1,0 +1,135 @@
+{
+  "id": "capabilities/other-flags-still-evaluate",
+  "description": "One flag with an unsupported capability does not stop the other flags of the snapshot from evaluating.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "capabilities",
+    "error:UNSUPPORTED_CAPABILITY"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "future.v9"
+    ],
+    "flags": {
+      "future": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "future.v9"
+        ]
+      },
+      "plain": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": []
+      },
+      "later": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:ee620320f64e655604a5993d4c83a7741eddb8d5cf24e093ae47af7ecba23e9d"
+  },
+  "cases": [
+    {
+      "name": "unsupported flag",
+      "flagKey": "future",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "UNSUPPORTED_CAPABILITY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "plain flag",
+      "flagKey": "plain",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "another flag",
+      "flagKey": "later",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

@@ -12,10 +12,10 @@ evaluate(snapshot, flagKey, requestedType, fallback, context, at, options):
   ctx = normalize(context)                            invalid -> ERROR / INVALID_CONTEXT
   flag = snapshot.flags[flagKey]                      absent  -> FALLBACK / FLAG_NOT_FOUND
   flag.type == requestedType                          else    -> FALLBACK / TYPE_MISMATCH
-  flag.requires ⊆ supported                           else    -> ERROR / UNSUPPORTED_CAPABILITY
   return evaluateFlag(flag, ctx, at, visiting = [flagKey])
 
 evaluateFlag(flag, ctx, at, visiting):
+  flag.requires ⊆ supported                           else    -> ERROR / UNSUPPORTED_CAPABILITY
   if !flag.enabled                                    -> OFF (offVariation)
   for p in flag.prerequisites (in order):
      if p.flagKey in visiting or |visiting| > 10      -> ERROR / INVALID_CONFIG
@@ -37,9 +37,10 @@ evaluateFlag(flag, ctx, at, visiting):
 Precedence, highest first: unusable input, absent or mistyped flag, disabled flag, unmet prerequisite, exact override, first matching enabled rule, default.
 
 - A prerequisite is checked before overrides: an unmet prerequisite serves the off variation even for a subject that has an override.
-- Prerequisite depth is counted from the evaluated flag and is at most 10. A cycle (including a flag that requires itself), a missing referenced flag and a depth overflow are `INVALID_CONFIG`. Each prerequisite flag is evaluated once per top-level call.
+- Prerequisite depth is the number of prerequisite links between the evaluated flag and the deepest flag it reaches, and is at most 10: a chain of 11 flags evaluates, a chain of 12 is `INVALID_CONFIG`. A cycle (including a flag that requires itself), a missing referenced flag and a depth overflow are `INVALID_CONFIG`. Each prerequisite flag is evaluated once per top-level call.
 - A prerequisite that ends in `ERROR` makes the parent `ERROR` with the same `errorKind`. A broken graph is never read as an unmet prerequisite.
 - A variation key that does not exist in `variations` (for `offVariation`, `defaultVariation`, an override, a slot or a remainder) is `ERROR / INVALID_CONFIG`. Invalid configuration never returns a truthy value by accident.
+- Dangling references are detected **lazily**: the error is returned only when evaluation selects the dangling variation or evaluates the dangling segment or prerequisite. A reference that evaluation never reaches does not affect the result. Examples: a rule after the one that decided; a condition skipped by short-circuiting; an override that is expired or belongs to another subject; a slot or remainder the subject's bucket does not fall into; a disabled rule; anything on a disabled flag other than its `offVariation`. The snapshot validator reports every dangling reference regardless, so publication rejects them first.
 - A reference to a segment that is absent from the snapshot is `ERROR / INVALID_CONFIG`.
 
 ## Typed reads and fallbacks
@@ -68,7 +69,7 @@ Precedence, highest first: unusable input, absent or mistyped flag, disabled fla
 
 ## Capabilities
 
-- A flag whose `requires` names a capability the evaluator does not support evaluates to `ERROR / UNSUPPORTED_CAPABILITY`. Other flags in the same snapshot still evaluate.
+- A flag whose `requires` names a capability the evaluator does not support evaluates to `ERROR / UNSUPPORTED_CAPABILITY`. Other flags in the same snapshot still evaluate. The check applies to every flag the evaluation visits, so a flag that has such a prerequisite also evaluates to `ERROR / UNSUPPORTED_CAPABILITY`.
 - Capabilities in version 1: `operators.v1`, `semver.v1`, `dates.v1`, `segments.v1`, `prerequisites.v1`, `rollouts.v1`, `experiments.v1`. Their meaning, and what rejects a whole snapshot, is in `08-capabilities-and-versioning.md`.
 
 ## Results
@@ -82,7 +83,7 @@ The result schema is [`result.schema.json`](../schemas/v1/result.schema.json).
 | `variationKey` | `null` when the fallback was returned. |
 | `reason` | `OFF`, `PREREQUISITE`, `OVERRIDE`, `RULE`, `DEFAULT`, `FALLBACK`, `ERROR`. |
 | `ruleId` | Set exactly for `RULE`. |
-| `prerequisiteKey` | The failing prerequisite; set exactly for `PREREQUISITE`. |
+| `prerequisiteKey` | The first prerequisite, in order, that is not met; set exactly for `PREREQUISITE`. |
 | `revision`, `generation` | From the snapshot; `null` only when no snapshot was usable. |
 | `bucket` | The bucket 0 to 99,999. Set only when a rollout decided and the caller asked for details. |
 | `experimentId`, `allocationId` | Copied from the deciding rollout when it has them. |

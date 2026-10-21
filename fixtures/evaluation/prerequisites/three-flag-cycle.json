@@ -1,0 +1,144 @@
+{
+  "id": "prerequisites/three-flag-cycle",
+  "description": "A longer cycle is an error too.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "prerequisites",
+    "error:INVALID_CONFIG"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "a": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "b",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      },
+      "b": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "c",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      },
+      "c": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "a",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      },
+      "ok": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:7b733d626b559b2f324e430b21ea107477924409ce66cbd92aaf512d108bf03c"
+  },
+  "cases": [
+    {
+      "name": "evaluate a",
+      "flagKey": "a",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONFIG",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "a flag outside the cycle still evaluates",
+      "flagKey": "ok",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

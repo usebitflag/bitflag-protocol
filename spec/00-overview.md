@@ -20,9 +20,9 @@ This repository defines the contract between the BitFlag service and everything 
 | `03-evaluation.md` | Evaluation order, fallbacks, groups, segments, overrides and results. |
 | `04-operators.md` | Operators, missing/null/wrong-type handling, string, number, SemVer and date rules. |
 | `05-bucketing.md` | The `bucket-sha256-v1` algorithm, slots and the known-answer vectors. |
+| `06-results-and-errors.md` | Reasons, error kinds, snapshot rejection codes and validation issues. |
 | `07-canonical-json-and-checksum.md` | Canonical JSON (RFC 8785), the snapshot checksum and the canonical vectors. |
-
-Further files (operators, bucketing, results and errors, canonical JSON and checksum, capabilities, telemetry, conformance) are added as their fixtures land.
+| `08-capabilities-and-versioning.md` | Protocol and algorithm versions, capabilities and what rejects a snapshot. |
 
 ## Status
 

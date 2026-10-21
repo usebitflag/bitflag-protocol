@@ -1,0 +1,70 @@
+{
+  "id": "snapshot/public-projection",
+  "kind": "snapshot",
+  "description": "A public snapshot with no overrides and no segment lists is valid.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "accept"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "public",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {
+      "beta": {
+        "version": 1,
+        "match": {
+          "all": []
+        }
+      }
+    },
+    "checksum": "sha256:9c5ee68245c8d9dd293d9e2bf9425fa66917d8a91b622b4dc757399e1fa99955"
+  },
+  "expect": {
+    "accept": true
+  }
+}

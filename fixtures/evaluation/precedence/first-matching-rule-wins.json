@@ -1,0 +1,61 @@
+{
+  "id": "precedence/first-matching-rule-wins",
+  "description": "Rules are checked top to bottom and the first match decides.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "precedence",
+    "reason:RULE"
+  ],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    {
+      "name": "both rules match; the first wins",
+      "flagKey": "checkout",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "country": "PH",
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "rule_ph",
+        "errorKind": null
+      }
+    },
+    {
+      "name": "only the second rule matches",
+      "flagKey": "checkout",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_2",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "rule_pro",
+        "errorKind": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "fallback/archived-flag-absent",
+  "description": "An archived flag is absent from the snapshot, so reads return the caller fallback. This differs from a disabled flag, which serves the off variation.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "fallback",
+    "reason:FALLBACK",
+    "error:FLAG_NOT_FOUND"
+  ],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    {
+      "name": "archived flag",
+      "flagKey": "archived-flag",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": true,
+        "variationKey": null,
+        "reason": "FALLBACK",
+        "errorKind": "FLAG_NOT_FOUND"
+      }
+    },
+    {
+      "name": "disabled flag, for contrast",
+      "flagKey": "killed",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": false,
+        "variationKey": "off",
+        "reason": "OFF",
+        "ruleId": null,
+        "errorKind": null
+      }
+    }
+  ]
+}

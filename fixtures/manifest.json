@@ -1,10 +1,50 @@
 {
   "algorithm": "sha256",
-  "checksum": "1d4010e570bf86e678054d6b2fbdaa1fbe384e471ee8e30fddf6168a6bf77e33",
+  "checksum": "b9cd73ad28628e8a71acdd5235f827fee2e8f3c13cea5e662acd03fe819efb1f",
   "files": [
     {
       "path": "README.md",
-      "sha256": "566439a39a2de0cca4063e3b4a16a4641463ac64f25469df7bac79bf4ddb1982"
+      "sha256": "388bbad542952ebd704f07ea3e586941636d8de867ab11ef865ff0cf10309100"
+    },
+    {
+      "path": "evaluation/fallback/archived-flag-absent.json",
+      "sha256": "9da5e34ed497edec18aed7d2ea1ffcb5d9c1c4d7ce5ac9ac7c33f088de309288"
+    },
+    {
+      "path": "evaluation/fallback/flag-not-found.json",
+      "sha256": "a85a965bd9904b1a26c7a10368cc490b863de1abc8d28cf5315886b51356343d"
+    },
+    {
+      "path": "evaluation/fallback/type-mismatch-string-requested.json",
+      "sha256": "f33d37b0c856bd4d1b6048ae7789f2c75045b7bbf14cb2a79ba4d984df3689f6"
+    },
+    {
+      "path": "evaluation/fallback/wrong-type-fallback-throws.json",
+      "sha256": "7165284dd2936b4debc9fcd908cd874098bd07310fa19cf03c0a4e832b6b767f"
+    },
+    {
+      "path": "evaluation/precedence/default-when-no-rule-matches.json",
+      "sha256": "f79031da52565e635abe2aaad5d3c4d3375aeb607844865bf8fa8fc4e4addedb"
+    },
+    {
+      "path": "evaluation/precedence/disabled-rule-skipped.json",
+      "sha256": "49261a883edaf93d1138c5df5bcd1797ef1cd3a2b592616dad43058e96850a10"
+    },
+    {
+      "path": "evaluation/precedence/first-matching-rule-wins.json",
+      "sha256": "49a32ce8f9509b85c4357bc676bd09bcd18978a7bf3f40a8d09e3144091fe7cc"
+    },
+    {
+      "path": "evaluation/precedence/off-serves-off-variation.json",
+      "sha256": "6eea8e492f43d45fd4b8e22fbaf97050557036811ab6d69e8751dc6b57ff95c7"
+    },
+    {
+      "path": "evaluation/precedence/override-beats-rules.json",
+      "sha256": "f47cb2a4345bd0f5e1d864ac90687d303ea420b9028c774843230d4d275642e0"
+    },
+    {
+      "path": "snapshots/basic-boolean.json",
+      "sha256": "6b56f7bc1a3bfbb8fec07bad3554f5f7b52e6f2136bdafd9773c52dae44ce3ea"
     }
   ]
 }

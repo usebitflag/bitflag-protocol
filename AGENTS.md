@@ -39,6 +39,7 @@ Detailed rules: `.claude/rules/spec-and-fixtures.md` and `.claude/rules/git-work
 Node 22 (see `.nvmrc`):
 
 - `npm ci` installs the tooling.
-- `npm run validate` compiles every schema and checks that the fixture manifest is current.
+- `npm run validate` compiles every schema, validates every fixture, and checks that snapshot checksums and the fixture manifest are current.
+- `npm run checksum` rewrites the checksums of fixture snapshots after an edit.
 - `npm run manifest` regenerates `fixtures/manifest.json` after any fixture change.
 - `npm run lint:md` lints the Markdown.

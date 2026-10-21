@@ -1,0 +1,35 @@
+{
+  "id": "fallback/flag-not-found",
+  "description": "A flag missing from the snapshot returns the caller fallback, not an off variation.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "fallback",
+    "reason:FALLBACK",
+    "error:FLAG_NOT_FOUND"
+  ],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    {
+      "name": "unknown key",
+      "flagKey": "missing-flag",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": true,
+        "variationKey": null,
+        "reason": "FALLBACK",
+        "ruleId": null,
+        "errorKind": "FLAG_NOT_FOUND"
+      }
+    }
+  ]
+}

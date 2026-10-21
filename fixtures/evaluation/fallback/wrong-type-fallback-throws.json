@@ -1,0 +1,42 @@
+{
+  "id": "fallback/wrong-type-fallback-throws",
+  "description": "A caller fallback whose type differs from the requested type is a programming error, raised rather than returned.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "fallback",
+    "throws"
+  ],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    {
+      "name": "string fallback for a boolean read",
+      "flagKey": "checkout",
+      "type": "boolean",
+      "fallback": "yes",
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "throws": "FALLBACK_TYPE_ERROR"
+      }
+    },
+    {
+      "name": "wrong type, flag not found",
+      "flagKey": "missing-flag",
+      "type": "number",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "throws": "FALLBACK_TYPE_ERROR"
+      }
+    }
+  ]
+}

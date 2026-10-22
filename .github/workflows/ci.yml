@@ -21,6 +21,21 @@ jobs:
       - name: Compile schemas and check the fixture manifest
         run: npm run validate
 
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: The release archive builds and is reproducible
+        run: |
+          node tools/pack.mjs 0.0.0-ci dist-a
+          node tools/pack.mjs 0.0.0-ci dist-b
+          cmp dist-a/bitflag-protocol-0.0.0-ci.tar.gz dist-b/bitflag-protocol-0.0.0-ci.tar.gz
+          (cd dist-a && sha256sum -c SHA256SUMS)
+          tar -tzf dist-a/bitflag-protocol-0.0.0-ci.tar.gz | grep -q '/fixtures/manifest.json$'
+
   docs:
     runs-on: ubuntu-latest
     steps:

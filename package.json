@@ -13,6 +13,8 @@
     "bucket": "node tools/bucket.mjs --write",
     "canonical": "node tools/canonical.mjs --write",
     "checksum": "node tools/checksum.mjs --write",
+    "pack": "node tools/pack.mjs",
+    "compare": "node tools/compare-reports.mjs",
     "manifest:check": "node tools/manifest.mjs --check",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""
   },

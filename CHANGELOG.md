@@ -23,3 +23,4 @@ All notable changes to the protocol are recorded here.
 - Trace shape fixed in `spec/03-evaluation.md`: the steps, their outcomes and extra fields, including `prerequisitePath`, `overrideExpiresAt`, the rollout `bucket` and `slot`, and conditions skipped inside a skipped group. New `trace/*` fixtures check them.
 - Segments may use other segments; a cycle is `INVALID_CONFIG` (new fixtures `segments/segment-uses-segment` and `segments/segment-cycle-invalid-config`, validation issue `SEGMENT_CYCLE`).
 - Limits stated exactly: 5 MiB, 32 KiB, nesting counted with the top-level object as level 1; an unpaired surrogate is invalid in JSON text and in a context.
+- A `cross-language` workflow that runs the released evaluators over the fixtures of a checkout and compares their reports.

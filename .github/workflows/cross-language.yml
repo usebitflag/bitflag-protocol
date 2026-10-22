@@ -1,0 +1,69 @@
+name: cross-language
+
+# Runs every fixture of this checkout through the released evaluators and fails when they differ in value,
+# variation, reason, error kind, rule, prerequisite, bucket, experiment fields, revision or generation.
+#
+# Run it by hand before cutting a release after v0.1.0-alpha.1, giving the evaluator releases to compare:
+#   gh workflow run cross-language -f php=v0.1.0-alpha.1 -f js=v0.1.0-alpha.1
+# The first prerelease has no evaluator releases yet; the evaluators pin it instead and run their own conformance
+# suites against it.
+on:
+  workflow_dispatch:
+    inputs:
+      php:
+        description: Tag of usebitflag/bitflag-php to test
+        required: true
+      js:
+        description: Tag of usebitflag/bitflag-js to test
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: protocol
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: protocol/.nvmrc
+      - name: Extract this checkout as a release
+        run: |
+          node protocol/tools/pack.mjs 0.0.0-local dist
+          mkdir release
+          tar -xzf dist/bitflag-protocol-0.0.0-local.tar.gz -C release --strip-components=1
+
+      - uses: actions/checkout@v7
+        with:
+          repository: usebitflag/bitflag-php
+          ref: ${{ inputs.php }}
+          path: php
+          token: ${{ secrets.EVALUATOR_READ_TOKEN }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          coverage: none
+          tools: composer:v2
+      - name: bitflag-php report
+        working-directory: php
+        run: |
+          composer install --prefer-dist --no-interaction --no-progress
+          BITFLAG_PROTOCOL_DIR="$GITHUB_WORKSPACE/release" php scripts/conformance-report.php "$GITHUB_WORKSPACE/report-php.json"
+
+      - uses: actions/checkout@v7
+        with:
+          repository: usebitflag/bitflag-js
+          ref: ${{ inputs.js }}
+          path: js
+          token: ${{ secrets.EVALUATOR_READ_TOKEN }}
+      - name: bitflag-js report
+        working-directory: js
+        run: |
+          npm ci
+          BITFLAG_PROTOCOL_DIR="$GITHUB_WORKSPACE/release" CONFORMANCE_REPORT="$GITHUB_WORKSPACE/report-js.json" npx vitest run tests/conformance
+
+      - name: Compare the reports
+        run: node protocol/tools/compare-reports.mjs report-php.json report-js.json

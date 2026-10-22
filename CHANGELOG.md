@@ -18,3 +18,4 @@ All notable changes to the protocol are recorded here.
 - Prerequisite, capability and experiment fixtures; `invalid-config` fixtures for lazy detection of dangling references; 62 snapshot-level fixtures (accepted and rejected snapshots, limits at and over the boundary, checksum, projection and safe-number rules).
 - `spec/06-results-and-errors.md` (reasons, error kinds, snapshot rejection codes and paths, validation issues) and `spec/08-capabilities-and-versioning.md`.
 - Decided in `spec/03-evaluation.md`: dangling variation, segment and prerequisite references are detected lazily, only when evaluation selects or evaluates them. The capability check applies to every flag an evaluation visits, including prerequisites, before the enabled check. Prerequisite depth is at most ten links.
+- Telemetry: `spec/09-telemetry.md`, `telemetry-batch.schema.json`, `telemetry-ack.schema.json` and example batches and acknowledgements that `npm run validate` checks.

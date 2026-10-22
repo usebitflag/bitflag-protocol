@@ -1,0 +1,18 @@
+{
+  "accepted": [
+    "a",
+    "b"
+  ],
+  "retryable": [
+    {
+      "id": "c",
+      "code": "RATE_LIMITED"
+    }
+  ],
+  "rejected": [
+    {
+      "id": "d",
+      "code": "UNKNOWN_FLAG"
+    }
+  ]
+}

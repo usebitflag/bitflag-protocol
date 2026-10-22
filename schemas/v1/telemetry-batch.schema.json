@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bitflag:protocol:v1:telemetry-batch",
+  "title": "BitFlag protocol v1: telemetry batch",
+  "description": "A batch of events an SDK sends. At most 500 events and 256 KB per batch; event IDs are unique per SDK instance (neither can be expressed here, see the specification). Evaluation summaries never carry subject data.",
+  "type": "object",
+  "properties": {
+    "batchId": { "$ref": "#/$defs/id" },
+    "sentAt": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+    "sdk": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9_.-]{0,63}$" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "protocolVersion": { "const": 1 }
+      },
+      "required": ["name", "version", "protocolVersion"],
+      "additionalProperties": false
+    },
+    "events": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/event" }
+    }
+  },
+  "required": ["batchId", "sentAt", "sdk", "events"],
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "description": "An identifier of 1 to 64 characters, for example a ULID.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,64}$"
+    },
+    "revision": { "type": "integer", "minimum": 0 },
+    "generation": { "type": "integer", "minimum": 1 },
+    "event": {
+      "oneOf": [
+        { "$ref": "#/$defs/evaluationSummary" },
+        { "$ref": "#/$defs/exposure" },
+        { "$ref": "#/$defs/conversion" },
+        { "$ref": "#/$defs/sdkStatus" }
+      ]
+    },
+    "evaluationSummary": {
+      "description": "Counts of identical evaluation outcomes over a window. Carries no subject data.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "evaluation_summary" },
+        "windowStart": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+        "windowEnd": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+        "flagKey": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/flagKey" },
+        "variationKey": {
+          "oneOf": [{ "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" }, { "type": "null" }]
+        },
+        "reason": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/reason" },
+        "errorKind": {
+          "oneOf": [{ "$ref": "urn:bitflag:protocol:v1:common#/$defs/errorKind" }, { "type": "null" }]
+        },
+        "revision": { "oneOf": [{ "$ref": "#/$defs/revision" }, { "type": "null" }] },
+        "generation": { "oneOf": [{ "$ref": "#/$defs/generation" }, { "type": "null" }] },
+        "count": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["id", "type", "windowStart", "windowEnd", "flagKey", "variationKey", "reason", "errorKind", "revision", "generation", "count"],
+      "additionalProperties": false
+    },
+    "exposure": {
+      "description": "The application used a flag value for a subject, usually for an experiment.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "exposure" },
+        "occurredAt": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+        "flagKey": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/flagKey" },
+        "variationKey": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+        "revision": { "$ref": "#/$defs/revision" },
+        "experimentId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "allocationId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "subject": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/subjectRef" }
+      },
+      "required": ["id", "type", "occurredAt", "flagKey", "variationKey", "revision", "experimentId", "allocationId", "subject"],
+      "additionalProperties": false
+    },
+    "conversion": {
+      "description": "A named outcome for a subject, optionally with a numeric value.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "conversion" },
+        "occurredAt": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+        "event": { "type": "string", "pattern": "^[a-z][a-z0-9_.-]{0,127}$" },
+        "subject": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/subjectRef" },
+        "value": { "type": "number" }
+      },
+      "required": ["id", "type", "occurredAt", "event", "subject"],
+      "additionalProperties": false
+    },
+    "sdkStatus": {
+      "description": "A heartbeat describing the SDK's snapshot and its recent errors.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "sdk_status" },
+        "occurredAt": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+        "revision": { "oneOf": [{ "$ref": "#/$defs/revision" }, { "type": "null" }] },
+        "generation": { "oneOf": [{ "$ref": "#/$defs/generation" }, { "type": "null" }] },
+        "snapshotAgeMs": { "oneOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }] },
+        "errorCounts": {
+          "type": "object",
+          "propertyNames": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/errorKind" },
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "required": ["id", "type", "occurredAt", "revision", "generation", "snapshotAgeMs", "errorCounts"],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "batchId": "01J9ZQ0000000000000000BATC",
+  "sentAt": "2026-10-06T08:52:11Z",
+  "sdk": {
+    "name": "bitflag-php",
+    "version": "0.1.0",
+    "protocolVersion": 2
+  },
+  "events": []
+}

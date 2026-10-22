@@ -8,6 +8,7 @@ This repository defines the contract between the BitFlag service and everything 
 | --- | --- |
 | `spec/` | The written specification. One numbered file per topic. |
 | `schemas/v1/` | JSON Schemas (draft 2020-12) for snapshots, results and events. |
+| `examples/` | Example documents that CI checks against the schemas. |
 | `fixtures/` | Known-answer conformance fixtures and their checksummed manifest. |
 | `tools/` | Node tooling that compiles the schemas, validates fixtures and maintains checksums and the manifest. |
 
@@ -23,6 +24,7 @@ This repository defines the contract between the BitFlag service and everything 
 | `06-results-and-errors.md` | Reasons, error kinds, snapshot rejection codes and validation issues. |
 | `07-canonical-json-and-checksum.md` | Canonical JSON (RFC 8785), the snapshot checksum and the canonical vectors. |
 | `08-capabilities-and-versioning.md` | Protocol and algorithm versions, capabilities and what rejects a snapshot. |
+| `09-telemetry.md` | The telemetry batch, event types and acknowledgement. |
 
 ## Status
 

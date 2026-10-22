@@ -1,0 +1,19 @@
+{
+  "id": "snapshot/empty-input",
+  "kind": "snapshot",
+  "description": "An empty text is not a snapshot.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject"
+  ],
+  "snapshotRaw": "",
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "",
+    "code": "INVALID_JSON"
+  }
+}

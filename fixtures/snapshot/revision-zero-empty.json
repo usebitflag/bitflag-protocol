@@ -1,0 +1,31 @@
+{
+  "id": "snapshot/revision-zero-empty",
+  "kind": "snapshot",
+  "description": "Revision 0 is the synthetic snapshot of a never-published environment and is empty.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "accept"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 0,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {},
+    "segments": {},
+    "checksum": "sha256:5477e8aaad6f667b3b096c226982357097c889f76fae54b70a25648b292c391c"
+  },
+  "expect": {
+    "accept": true
+  }
+}

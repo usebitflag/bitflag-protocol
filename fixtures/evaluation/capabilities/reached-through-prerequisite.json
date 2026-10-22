@@ -1,0 +1,94 @@
+{
+  "id": "capabilities/reached-through-prerequisite",
+  "description": "A flag that reaches an unsupported capability through a prerequisite is itself UNSUPPORTED_CAPABILITY.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "capabilities",
+    "error:UNSUPPORTED_CAPABILITY",
+    "prerequisites"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "future.v9",
+      "prerequisites.v1"
+    ],
+    "flags": {
+      "future": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "future.v9"
+        ]
+      },
+      "child": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "future",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "prerequisites.v1"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:bc079c4b6fb74607887a7d2098281e9da74dadde81ea931aba7e9a105ba975ea"
+  },
+  "cases": [
+    {
+      "name": "via prerequisite",
+      "flagKey": "child",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "UNSUPPORTED_CAPABILITY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

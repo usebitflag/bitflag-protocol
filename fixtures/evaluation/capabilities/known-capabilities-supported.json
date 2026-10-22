@@ -1,0 +1,79 @@
+{
+  "id": "capabilities/known-capabilities-supported",
+  "description": "Every capability of version 1 is supported.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "capabilities"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "dates.v1",
+      "experiments.v1",
+      "operators.v1",
+      "prerequisites.v1",
+      "rollouts.v1",
+      "segments.v1",
+      "semver.v1"
+    ],
+    "flags": {
+      "all": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "operators.v1",
+          "semver.v1",
+          "dates.v1",
+          "segments.v1",
+          "prerequisites.v1",
+          "rollouts.v1",
+          "experiments.v1"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:134dea36bcf3ed0b946eddd4732c2ecd200f367043731b32eeac95adf22d41a8"
+  },
+  "cases": [
+    {
+      "name": "all seven",
+      "flagKey": "all",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

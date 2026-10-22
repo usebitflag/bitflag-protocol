@@ -1,0 +1,94 @@
+{
+  "id": "invalid-config/disabled-flag-ignores-the-rest",
+  "description": "A disabled flag serves its off variation and looks at nothing else: not its prerequisites, overrides, rules, segments or default variation.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "invalid-config",
+    "lazy"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": false,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "ghost",
+        "prerequisites": [
+          {
+            "flagKey": "ghost",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [
+          {
+            "kind": "user",
+            "key": "u_1",
+            "variation": "ghost",
+            "expiresAt": null
+          }
+        ],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "op": "in_segment",
+                  "values": [
+                    "ghost"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "ghost"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:139ae551a8f45318f8cde852c95585abb3ccf9292d8d547480b336fa2ba7579c"
+  },
+  "cases": [
+    {
+      "name": "disabled",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "OFF",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

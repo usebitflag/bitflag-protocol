@@ -1,0 +1,146 @@
+{
+  "id": "experiments/earlier-rule-decides",
+  "description": "A rule before the experiment rule decides without experiment fields; the experiment rule is only reached by subjects the earlier rules do not match.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "experiments"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "experiments.v1",
+      "rollouts.v1"
+    ],
+    "flags": {
+      "exp": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "internal",
+                  "op": "eq",
+                  "values": [
+                    true
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          },
+          {
+            "id": "r2",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_x1",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 30000
+                  }
+                ],
+                "remainderVariation": "off",
+                "experimentId": "exp_7",
+                "allocationId": "alc_3"
+              }
+            }
+          }
+        ],
+        "requires": [
+          "experiments.v1",
+          "rollouts.v1"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:d9c705163adb951da64d925be553937cc2868b7d8e6bc5d64478bc0316aacf75"
+  },
+  "cases": [
+    {
+      "name": "internal user",
+      "flagKey": "exp",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_977",
+        "attributes": {
+          "internal": true
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "experimentId": null,
+        "allocationId": null,
+        "bucket": null
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "other user",
+      "flagKey": "exp",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_977",
+        "attributes": {
+          "internal": false
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r2",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "experimentId": "exp_7",
+        "allocationId": "alc_3",
+        "bucket": 70000
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

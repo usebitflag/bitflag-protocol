@@ -1,0 +1,417 @@
+{
+  "id": "snapshot/group-members-over-limit",
+  "kind": "snapshot",
+  "description": "More than 50 members in a group are rejected.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject",
+    "limits"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p0"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p1"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p2"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p3"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p4"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p5"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p6"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p7"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p8"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p9"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p10"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p11"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p12"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p13"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p14"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p15"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p16"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p17"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p18"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p19"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p20"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p21"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p22"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p23"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p24"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p25"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p26"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p27"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p28"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p29"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p30"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p31"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p32"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p33"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p34"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p35"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p36"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p37"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p38"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p39"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p40"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p41"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p42"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p43"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p44"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p45"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p46"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p47"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p48"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p49"
+                  ]
+                },
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "p50"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:dd0ac1d85361148c5beb96f3a041e24132bdfaa094515e59b83ce2eb853f2477"
+  },
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "/flags/f/rules/0/match/all",
+    "code": "LIMIT_EXCEEDED"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "snapshot/minimal-valid",
+  "kind": "snapshot",
+  "description": "The smallest valid snapshot has no flags and no segments.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "accept"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {},
+    "segments": {},
+    "checksum": "sha256:ee8ba43c470d9938f6cd160f17bd1970eb1d68c53bf8c068e156c7ee6dc7eb5f"
+  },
+  "expect": {
+    "accept": true
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "id": "capabilities/unknown-flag-capability",
+  "description": "A flag that requires a capability the evaluator does not support returns UNSUPPORTED_CAPABILITY and the caller fallback.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "capabilities",
+    "error:UNSUPPORTED_CAPABILITY"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "future.v9"
+    ],
+    "flags": {
+      "future": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "future.v9"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:5e25024f0e7d2d1cabe461202544204323c6e9598a0660a0da6b1b0e3bee1a80"
+  },
+  "cases": [
+    {
+      "name": "unsupported",
+      "flagKey": "future",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "UNSUPPORTED_CAPABILITY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

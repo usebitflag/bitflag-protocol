@@ -1,0 +1,75 @@
+{
+  "id": "snapshot/missing-remainder",
+  "kind": "snapshot",
+  "description": "When the weights total less than 100,000 a remainder variation is required.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 20000
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:48de15324f950dca70d372881c0c7f9b477d2bca7d043b870177cab73c7a49b1"
+  },
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "/flags/f/rules/0/serve/rollout",
+    "code": "MISSING_REMAINDER"
+  }
+}

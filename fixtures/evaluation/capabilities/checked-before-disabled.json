@@ -1,0 +1,69 @@
+{
+  "id": "capabilities/checked-before-disabled",
+  "description": "The capability check comes before the enabled check: a disabled flag that requires an unsupported capability is an error, not OFF.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "capabilities",
+    "error:UNSUPPORTED_CAPABILITY"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "future.v9"
+    ],
+    "flags": {
+      "future": {
+        "type": "boolean",
+        "enabled": false,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "future.v9"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:06c30a920e4bc00231b8582ac87d3ff33eff19b3cf185ebe1a5dc9c43efd6b52"
+  },
+  "cases": [
+    {
+      "name": "disabled and unsupported",
+      "flagKey": "future",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "UNSUPPORTED_CAPABILITY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

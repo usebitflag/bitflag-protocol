@@ -1,0 +1,120 @@
+{
+  "id": "experiments/ids-without-details",
+  "description": "The experiment fields are part of the result, not of the details: they are present when details are not requested, while the bucket is not.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "experiments"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "experiments.v1",
+      "rollouts.v1"
+    ],
+    "flags": {
+      "exp": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_x1",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 30000
+                  }
+                ],
+                "remainderVariation": "off",
+                "experimentId": "exp_7",
+                "allocationId": "alc_3"
+              }
+            }
+          }
+        ],
+        "requires": [
+          "experiments.v1",
+          "rollouts.v1"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:b305de6fcc0446ddcdbbc8bb392a18db62d3d9b256a7ebd1a48e7c2defabd62e"
+  },
+  "cases": [
+    {
+      "name": "no options",
+      "flagKey": "exp",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_64209"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "experimentId": "exp_7",
+        "allocationId": "alc_3",
+        "bucket": null
+      }
+    },
+    {
+      "name": "details",
+      "flagKey": "exp",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_64209"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "experimentId": "exp_7",
+        "allocationId": "alc_3",
+        "bucket": 100
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

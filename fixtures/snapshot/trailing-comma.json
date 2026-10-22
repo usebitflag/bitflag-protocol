@@ -1,0 +1,19 @@
+{
+  "id": "snapshot/trailing-comma",
+  "kind": "snapshot",
+  "description": "A trailing comma is not JSON.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject"
+  ],
+  "snapshotRaw": "{\"protocolVersion\": 1,}",
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "",
+    "code": "INVALID_JSON"
+  }
+}

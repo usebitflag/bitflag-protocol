@@ -1,0 +1,74 @@
+{
+  "id": "snapshot/multibyte-salt-at-limit",
+  "kind": "snapshot",
+  "description": "The salt limit counts bytes: 64 two-byte characters are 128 bytes.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "accept",
+    "limits",
+    "unicode"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 100000
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:7c09938fffc0fea6432ba1c1c4c0ca58975993bbfda2f4b728e5de86799d26d1"
+  },
+  "expect": {
+    "accept": true
+  }
+}

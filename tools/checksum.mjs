@@ -2,9 +2,10 @@
 //   node tools/checksum.mjs --check   fail if a fixture snapshot carries a stale checksum
 //   node tools/checksum.mjs --write   rewrite the checksum of every fixture snapshot
 // Checked: fixtures/snapshots/*.json and the inline snapshot of evaluation fixtures.
-// Snapshot-level fixtures are skipped because they may carry a deliberately wrong checksum.
+// Snapshot-level fixtures (fixtures/snapshot) with an inline snapshot are maintained too, except those tagged
+// "checksum-mismatch", which carry a deliberately wrong checksum.
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { canonicalize } from './lib/canonical.mjs';
@@ -24,6 +25,12 @@ function* maintained() {
   for (const file of listFiles(join(fixturesDir, 'evaluation'), '.json')) {
     const document = JSON.parse(readFileSync(file, 'utf8'));
     if (document.snapshot) yield [file, document, document.snapshot];
+  }
+  const snapshotFixtures = join(fixturesDir, 'snapshot');
+  if (!existsSync(snapshotFixtures)) return;
+  for (const file of listFiles(snapshotFixtures, '.json')) {
+    const document = JSON.parse(readFileSync(file, 'utf8'));
+    if (document.snapshot && !document.tags?.includes('checksum-mismatch')) yield [file, document, document.snapshot];
   }
 }
 

@@ -1,0 +1,68 @@
+{
+  "id": "capabilities/invalid-context-comes-first",
+  "description": "An invalid context is reported before the capability check.",
+  "spec": [
+    "08-capabilities-and-versioning.md#capabilities"
+  ],
+  "tags": [
+    "capabilities",
+    "error:INVALID_CONTEXT"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [
+      "future.v9"
+    ],
+    "flags": {
+      "future": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [],
+        "requires": [
+          "future.v9"
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:5e25024f0e7d2d1cabe461202544204323c6e9598a0660a0da6b1b0e3bee1a80"
+  },
+  "cases": [
+    {
+      "name": "invalid context",
+      "flagKey": "future",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

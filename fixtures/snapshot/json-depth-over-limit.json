@@ -1,0 +1,20 @@
+{
+  "id": "snapshot/json-depth-over-limit",
+  "kind": "snapshot",
+  "description": "JSON nested deeper than 64 levels is rejected before anything else.",
+  "spec": [
+    "02-snapshot.md"
+  ],
+  "tags": [
+    "snapshot",
+    "reject",
+    "limits"
+  ],
+  "snapshotRaw": "{\"protocolVersion\":1,\"algorithmVersion\":\"bucket-sha256-v1\",\"environment\":{\"id\":\"env_1\",\"key\":\"production\"},\"revision\":42,\"generation\":1,\"projection\":\"server\",\"publishedAt\":\"2026-10-06T07:00:00Z\",\"requiredCapabilities\":[],\"flags\":{\"j\":{\"type\":\"json\",\"enabled\":true,\"variations\":{\"v\":[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]],\"off\":null},\"offVariation\":\"off\",\"defaultVariation\":\"v\",\"prerequisites\":[],\"overrides\":[],\"rules\":[]}},\"segments\":{},\"checksum\":\"sha256:975ce28c5d8580f8c5de86dfecfc3f908c4dbf8ba393195c1fee400f49d67e46\"}",
+  "expect": {
+    "accept": false,
+    "errorKind": "MALFORMED_SNAPSHOT",
+    "path": "",
+    "code": "TOO_DEEP"
+  }
+}

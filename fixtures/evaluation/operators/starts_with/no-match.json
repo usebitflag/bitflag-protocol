@@ -1,0 +1,181 @@
+{
+  "id": "operators/starts_with/no-match",
+  "description": "A string without a listed value does not match; matching is case-sensitive by default.",
+  "spec": [
+    "04-operators.md#missing-null-and-wrong-type"
+  ],
+  "tags": [
+    "operator:starts_with"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "v",
+                  "op": "starts_with",
+                  "values": [
+                    "ph-",
+                    "sg-"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:cab4ec4d84f86261b8149b691e3f1b805c1893cc347cf3b1e5348c5383e38dfb"
+  },
+  "cases": [
+    {
+      "name": "no listed value",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "us-1234"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "starts_with",
+              "attribute": "v",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "different case",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "PH-1234"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "starts_with",
+              "attribute": "v",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "empty string",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": ""
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "starts_with",
+              "attribute": "v",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

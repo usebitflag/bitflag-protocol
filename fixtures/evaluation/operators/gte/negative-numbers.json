@@ -1,0 +1,181 @@
+{
+  "id": "operators/gte/negative-numbers",
+  "description": "Negative numbers order as numbers.",
+  "spec": [
+    "04-operators.md#missing-null-and-wrong-type"
+  ],
+  "tags": [
+    "operator:gte",
+    "number"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "v",
+                  "op": "gte",
+                  "values": [
+                    -5
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:ed4937fcf12e5ec9cf7e8d9eafc49ceb05ca265f72f0c77c26c0260a6fd71a3e"
+  },
+  "cases": [
+    {
+      "name": "greater",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": -4.5
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "gte",
+              "attribute": "v",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "equal",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": -5
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "gte",
+              "attribute": "v",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "less",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": -5.5
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "gte",
+              "attribute": "v",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,412 @@
+{
+  "id": "context/array-and-string-limits",
+  "description": "Arrays have at most 100 items and strings at most 1,024 UTF-8 bytes.",
+  "spec": [
+    "01-context.md#validity"
+  ],
+  "tags": [
+    "context"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:8f2405cd66cb914ac9844dd9845a6630e8f76e4fe546b7df2f91d66b25a53760"
+  },
+  "cases": [
+    {
+      "name": "100 items",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": [
+            "i0",
+            "i1",
+            "i2",
+            "i3",
+            "i4",
+            "i5",
+            "i6",
+            "i7",
+            "i8",
+            "i9",
+            "i10",
+            "i11",
+            "i12",
+            "i13",
+            "i14",
+            "i15",
+            "i16",
+            "i17",
+            "i18",
+            "i19",
+            "i20",
+            "i21",
+            "i22",
+            "i23",
+            "i24",
+            "i25",
+            "i26",
+            "i27",
+            "i28",
+            "i29",
+            "i30",
+            "i31",
+            "i32",
+            "i33",
+            "i34",
+            "i35",
+            "i36",
+            "i37",
+            "i38",
+            "i39",
+            "i40",
+            "i41",
+            "i42",
+            "i43",
+            "i44",
+            "i45",
+            "i46",
+            "i47",
+            "i48",
+            "i49",
+            "i50",
+            "i51",
+            "i52",
+            "i53",
+            "i54",
+            "i55",
+            "i56",
+            "i57",
+            "i58",
+            "i59",
+            "i60",
+            "i61",
+            "i62",
+            "i63",
+            "i64",
+            "i65",
+            "i66",
+            "i67",
+            "i68",
+            "i69",
+            "i70",
+            "i71",
+            "i72",
+            "i73",
+            "i74",
+            "i75",
+            "i76",
+            "i77",
+            "i78",
+            "i79",
+            "i80",
+            "i81",
+            "i82",
+            "i83",
+            "i84",
+            "i85",
+            "i86",
+            "i87",
+            "i88",
+            "i89",
+            "i90",
+            "i91",
+            "i92",
+            "i93",
+            "i94",
+            "i95",
+            "i96",
+            "i97",
+            "i98",
+            "i99"
+          ]
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "101 items",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": [
+            "i0",
+            "i1",
+            "i2",
+            "i3",
+            "i4",
+            "i5",
+            "i6",
+            "i7",
+            "i8",
+            "i9",
+            "i10",
+            "i11",
+            "i12",
+            "i13",
+            "i14",
+            "i15",
+            "i16",
+            "i17",
+            "i18",
+            "i19",
+            "i20",
+            "i21",
+            "i22",
+            "i23",
+            "i24",
+            "i25",
+            "i26",
+            "i27",
+            "i28",
+            "i29",
+            "i30",
+            "i31",
+            "i32",
+            "i33",
+            "i34",
+            "i35",
+            "i36",
+            "i37",
+            "i38",
+            "i39",
+            "i40",
+            "i41",
+            "i42",
+            "i43",
+            "i44",
+            "i45",
+            "i46",
+            "i47",
+            "i48",
+            "i49",
+            "i50",
+            "i51",
+            "i52",
+            "i53",
+            "i54",
+            "i55",
+            "i56",
+            "i57",
+            "i58",
+            "i59",
+            "i60",
+            "i61",
+            "i62",
+            "i63",
+            "i64",
+            "i65",
+            "i66",
+            "i67",
+            "i68",
+            "i69",
+            "i70",
+            "i71",
+            "i72",
+            "i73",
+            "i74",
+            "i75",
+            "i76",
+            "i77",
+            "i78",
+            "i79",
+            "i80",
+            "i81",
+            "i82",
+            "i83",
+            "i84",
+            "i85",
+            "i86",
+            "i87",
+            "i88",
+            "i89",
+            "i90",
+            "i91",
+            "i92",
+            "i93",
+            "i94",
+            "i95",
+            "i96",
+            "i97",
+            "i98",
+            "i99",
+            "i100"
+          ]
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "string of 1,024 bytes",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "string of 1,025 bytes",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "512 two-byte characters (1,024 bytes)",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "513 two-byte characters (1,026 bytes)",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "ééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "array item over 1,024 bytes",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": [
+            "sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+          ]
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

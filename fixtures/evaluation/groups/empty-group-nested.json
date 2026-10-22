@@ -1,0 +1,110 @@
+{
+  "id": "groups/empty-group-nested",
+  "description": "Empty groups nested in a group: an empty all adds nothing, an empty any blocks an all.",
+  "spec": [
+    "03-evaluation.md#groups"
+  ],
+  "tags": [
+    "groups",
+    "nested"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "country",
+                  "op": "eq",
+                  "values": [
+                    "PH"
+                  ]
+                },
+                {
+                  "all": []
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:4a78a46e2bfacf79a7d3fa2e38ad5896eaae38bc549cb8892bc42c97354b9ad4"
+  },
+  "cases": [
+    {
+      "name": "PH",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "country": "PH"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "US",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "country": "US"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

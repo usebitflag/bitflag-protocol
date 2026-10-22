@@ -1,0 +1,180 @@
+{
+  "id": "numbers/fractions-are-binary64",
+  "description": "Numbers are IEEE 754 binary64 values: 0.1 + 0.2 is not 0.3.",
+  "spec": [
+    "02-snapshot.md#rules-the-schema-does-not-express"
+  ],
+  "tags": [
+    "numbers"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "v",
+                  "op": "eq",
+                  "values": [
+                    0.3
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:aa3d20214d786f2114bd853b752b9ab9f7a931bb7abb728514a6187543c1f164"
+  },
+  "cases": [
+    {
+      "name": "0.3",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": 0.3
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "v",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "0.30000000000000004",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": 0.30000000000000004
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "v",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3e-1",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": 0.3
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "eq",
+              "attribute": "v",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

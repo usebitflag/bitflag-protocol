@@ -20,7 +20,7 @@ Status of the rules below: **proposed** for the `0.x` prereleases. Changing one 
 | `key` | Optional string of 1 to 256 UTF-8 bytes. A number is invalid and is never coerced to a string. |
 | `attributes` | Optional object with at most 100 entries. |
 
-An evaluation has exactly one context with exactly one kind. Multi-kind contexts are not part of version 1.
+The context has no members other than `kind`, `key` and `attributes`; any other member, for example `type`, makes it invalid. An evaluation has exactly one context with exactly one kind. Multi-kind contexts are not part of version 1.
 
 ## Attributes
 
@@ -40,7 +40,7 @@ A context that violates any rule above is invalid. An evaluator returns `reason:
 
 Byte limits count UTF-8 bytes, not characters or UTF-16 code units. The schema counts characters, which is never stricter than the byte limit, so a schema-valid context can still be invalid on its byte length. Parsers enforce the byte limits.
 
-Numbers in a context are IEEE 754 binary64. An integer literal outside ±(2^53 − 1) is not an invalid context; it is a value of the wrong type for every numeric operator. Callers that need larger integers or exact decimals send strings and compare them with string operators.
+Numbers in a context are IEEE 754 binary64. A number whose value is an integer outside ±(2^53 − 1), however it is written, is not an invalid context; it is a value of the wrong type for every numeric operator (see `04-operators.md`). Callers that need larger integers or exact decimals send strings and compare them with string operators.
 
 ## Subject identity
 

@@ -1,0 +1,131 @@
+{
+  "id": "operators/not_exists/context-key",
+  "description": "A context without a key matches not_exists on key.",
+  "spec": [
+    "04-operators.md#missing-null-and-wrong-type"
+  ],
+  "tags": [
+    "operator:not_exists",
+    "context"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "key",
+                  "op": "not_exists"
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:9f68bd6a919dc8ef7d70c52a1e83f6b3bf347e8670eae6f224fedaa0a0c736ba"
+  },
+  "cases": [
+    {
+      "name": "with key",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "not_exists",
+              "attribute": "key",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "without key",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "not_exists",
+              "attribute": "key",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

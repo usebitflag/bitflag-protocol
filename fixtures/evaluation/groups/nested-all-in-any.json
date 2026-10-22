@@ -1,0 +1,171 @@
+{
+  "id": "groups/nested-all-in-any",
+  "description": "An all group nested in an any group.",
+  "spec": [
+    "03-evaluation.md#groups"
+  ],
+  "tags": [
+    "groups",
+    "nested"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "any": [
+                {
+                  "attribute": "country",
+                  "op": "eq",
+                  "values": [
+                    "PH"
+                  ]
+                },
+                {
+                  "all": [
+                    {
+                      "attribute": "plan",
+                      "op": "eq",
+                      "values": [
+                        "pro"
+                      ]
+                    },
+                    {
+                      "attribute": "beta",
+                      "op": "eq",
+                      "values": [
+                        true
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:dc25f0beed5c4d0a61ecda987f6c24ee9218050a1cc32f3e74b94b35b9b631d9"
+  },
+  "cases": [
+    {
+      "name": "PH only",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "country": "PH"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "pro and beta",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "pro",
+          "beta": true
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "pro without beta",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "pro",
+          "beta": false
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "neither",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {}
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

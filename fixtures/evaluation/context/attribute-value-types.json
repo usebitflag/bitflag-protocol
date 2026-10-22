@@ -1,0 +1,184 @@
+{
+  "id": "context/attribute-value-types",
+  "description": "Attribute values are strings, finite numbers, booleans, null or arrays of one scalar type. Objects are not valid values.",
+  "spec": [
+    "01-context.md#validity"
+  ],
+  "tags": [
+    "context"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": []
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:8f2405cd66cb914ac9844dd9845a6630e8f76e4fe546b7df2f91d66b25a53760"
+  },
+  "cases": [
+    {
+      "name": "string",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "s"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "number",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": 1.5
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "boolean",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": false
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "null",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": null
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "object",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": {
+            "a": 1
+          }
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    },
+    {
+      "name": "empty object",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": {}
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "INVALID_CONTEXT",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      }
+    }
+  ]
+}

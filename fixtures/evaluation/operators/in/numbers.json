@@ -1,0 +1,223 @@
+{
+  "id": "operators/in/numbers",
+  "description": "Numeric lists compare numerically and never coerce strings.",
+  "spec": [
+    "04-operators.md#missing-null-and-wrong-type"
+  ],
+  "tags": [
+    "operator:in",
+    "number"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "v",
+                  "op": "in",
+                  "values": [
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:3d82765fca73cbf016390acc9240688a43f330d02c0c80800621f7b093de631e"
+  },
+  "cases": [
+    {
+      "name": "listed",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": 2
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "in",
+              "attribute": "v",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "decimal point",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": 2
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "in",
+              "attribute": "v",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "not listed",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": 4
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "in",
+              "attribute": "v",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "string numeral",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "v": "2"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "in",
+              "attribute": "v",
+              "outcome": "wrong_type"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

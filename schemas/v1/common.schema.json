@@ -2,6 +2,94 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:bitflag:protocol:v1:common",
   "title": "BitFlag protocol v1: shared definitions",
-  "description": "Definitions referenced by the other v1 schemas through $ref.",
-  "$defs": {}
+  "description": "Definitions referenced by the other v1 schemas through $ref. Length limits count characters here; the specification states the byte limits, which the parsers enforce.",
+  "$defs": {
+    "flagKey": {
+      "description": "Key of a flag.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,99}$"
+    },
+    "variationKey": {
+      "description": "Key of a variation within one flag.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$"
+    },
+    "segmentKey": {
+      "description": "Key of a segment.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,99}$"
+    },
+    "contextKind": {
+      "description": "Category of an evaluation subject, for example user or organization.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+    },
+    "subjectKey": {
+      "description": "Stable identifier of a subject: a string of 1 to 256 UTF-8 bytes. Never a number.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "attributeName": {
+      "description": "Name of a context attribute: 1 to 128 UTF-8 bytes, case-sensitive.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "subjectRef": {
+      "description": "A subject named by kind and key.",
+      "type": "object",
+      "properties": {
+        "kind": { "$ref": "#/$defs/contextKind" },
+        "key": { "$ref": "#/$defs/subjectKey" }
+      },
+      "required": ["kind", "key"],
+      "additionalProperties": false
+    },
+    "rfc3339": {
+      "description": "An RFC 3339 instant with an offset. Uppercase T and Z, seconds 00 to 59, a fraction of 1 to 9 digits. Calendar validity of the day is checked by the parsers.",
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?(Z|[+-]([01][0-9]|2[0-3]):[0-5][0-9])$"
+    },
+    "rfc3339Utc": {
+      "description": "An RFC 3339 instant in UTC (offset Z).",
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]{1,9})?Z$"
+    },
+    "sha256Checksum": {
+      "description": "sha256: followed by 64 lowercase hexadecimal characters.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "weight": {
+      "description": "Share of the 100,000 buckets: an integer from 0 to 100000.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100000
+    },
+    "capability": {
+      "description": "Name of a protocol capability, for example segments.v1.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)*\\.v[1-9][0-9]*$"
+    },
+    "reason": {
+      "description": "Why an evaluation returned its value.",
+      "enum": ["OFF", "PREREQUISITE", "OVERRIDE", "RULE", "DEFAULT", "FALLBACK", "ERROR"]
+    },
+    "errorKind": {
+      "description": "Machine-readable cause of a FALLBACK or ERROR result.",
+      "enum": [
+        "FLAG_NOT_FOUND",
+        "TYPE_MISMATCH",
+        "MISSING_SUBJECT_KEY",
+        "INVALID_CONFIG",
+        "INVALID_CONTEXT",
+        "UNSUPPORTED_CAPABILITY",
+        "MALFORMED_SNAPSHOT",
+        "SNAPSHOT_TOO_OLD",
+        "CLIENT_NOT_READY",
+        "AUTHORIZATION_REJECTED"
+      ]
+    }
+  }
 }

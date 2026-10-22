@@ -1,0 +1,402 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bitflag:protocol:v1:snapshot",
+  "title": "BitFlag protocol v1: snapshot",
+  "description": "The complete, immutable configuration of one environment at one revision. Cross-field rules that JSON Schema cannot express (weight totals, group depth, references, the capability union, the checksum) are stated in the specification and enforced by the parsers and validators.",
+  "type": "object",
+  "properties": {
+    "protocolVersion": { "const": 1 },
+    "algorithmVersion": { "const": "bucket-sha256-v1" },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "pattern": "^env_[A-Za-z0-9]{1,60}$" },
+        "key": { "type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$" }
+      },
+      "required": ["id", "key"],
+      "additionalProperties": false
+    },
+    "revision": { "type": "integer", "minimum": 0 },
+    "generation": { "type": "integer", "minimum": 1 },
+    "projection": { "enum": ["server", "public"] },
+    "publishedAt": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+    "requiredCapabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/capability" }
+    },
+    "flags": {
+      "type": "object",
+      "propertyNames": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/flagKey" },
+      "additionalProperties": { "$ref": "#/$defs/flag" }
+    },
+    "segments": {
+      "type": "object",
+      "propertyNames": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/segmentKey" },
+      "additionalProperties": { "$ref": "#/$defs/segment" }
+    },
+    "checksum": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/sha256Checksum" }
+  },
+  "required": [
+    "protocolVersion",
+    "algorithmVersion",
+    "environment",
+    "revision",
+    "generation",
+    "projection",
+    "publishedAt",
+    "requiredCapabilities",
+    "flags",
+    "segments",
+    "checksum"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "description": "Revision 0 is the synthetic snapshot of a never-published environment.",
+      "if": { "properties": { "revision": { "const": 0 } }, "required": ["revision"] },
+      "then": { "properties": { "flags": { "type": "object", "maxProperties": 0 } } }
+    },
+    {
+      "description": "The public projection carries no overrides and no segment include or exclude lists.",
+      "if": { "properties": { "projection": { "const": "public" } }, "required": ["projection"] },
+      "then": {
+        "properties": {
+          "flags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": { "overrides": { "type": "array", "maxItems": 0 } }
+            }
+          },
+          "segments": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": { "include": false, "exclude": false }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "flag": {
+      "type": "object",
+      "properties": {
+        "type": { "enum": ["boolean", "string", "number", "json"] },
+        "enabled": { "type": "boolean" },
+        "variations": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" }
+        },
+        "offVariation": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+        "defaultVariation": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+        "requires": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/capability" }
+        },
+        "prerequisites": {
+          "type": "array",
+          "maxItems": 20,
+          "items": { "$ref": "#/$defs/prerequisite" }
+        },
+        "overrides": {
+          "type": "array",
+          "maxItems": 500,
+          "items": { "$ref": "#/$defs/override" }
+        },
+        "rules": {
+          "type": "array",
+          "maxItems": 200,
+          "items": { "$ref": "#/$defs/rule" }
+        }
+      },
+      "required": [
+        "type",
+        "enabled",
+        "variations",
+        "offVariation",
+        "defaultVariation",
+        "prerequisites",
+        "overrides",
+        "rules"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "boolean" } }, "required": ["type"] },
+          "then": { "properties": { "variations": { "type": "object", "additionalProperties": { "type": "boolean" } } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "string" } }, "required": ["type"] },
+          "then": { "properties": { "variations": { "type": "object", "additionalProperties": { "type": "string" } } } }
+        },
+        {
+          "if": { "properties": { "type": { "const": "number" } }, "required": ["type"] },
+          "then": { "properties": { "variations": { "type": "object", "additionalProperties": { "type": "number" } } } }
+        }
+      ]
+    },
+    "prerequisite": {
+      "type": "object",
+      "properties": {
+        "flagKey": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/flagKey" },
+        "variations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" }
+        }
+      },
+      "required": ["flagKey", "variations"],
+      "additionalProperties": false
+    },
+    "override": {
+      "type": "object",
+      "properties": {
+        "kind": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/contextKind" },
+        "key": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/subjectKey" },
+        "variation": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+        "expiresAt": {
+          "oneOf": [
+            { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": ["kind", "key", "variation", "expiresAt"],
+      "additionalProperties": false
+    },
+    "rule": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "enabled": { "type": "boolean" },
+        "match": { "$ref": "#/$defs/group" },
+        "serve": { "$ref": "#/$defs/serve" }
+      },
+      "required": ["id", "match", "serve"],
+      "additionalProperties": false
+    },
+    "group": {
+      "description": "Exactly one of all or any. Nesting depth is at most 5 (enforced by the parsers).",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": { "all": { "$ref": "#/$defs/members" } },
+          "required": ["all"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": { "any": { "$ref": "#/$defs/members" } },
+          "required": ["any"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "members": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "oneOf": [{ "$ref": "#/$defs/condition" }, { "$ref": "#/$defs/group" }]
+      }
+    },
+    "scalar": {
+      "anyOf": [{ "type": "string" }, { "type": "number" }, { "type": "boolean" }]
+    },
+    "condition": {
+      "type": "object",
+      "properties": {
+        "attribute": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/attributeName" },
+        "op": {
+          "enum": [
+            "eq",
+            "neq",
+            "in",
+            "not_in",
+            "starts_with",
+            "ends_with",
+            "contains",
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "exists",
+            "not_exists",
+            "semver_eq",
+            "semver_neq",
+            "semver_gt",
+            "semver_gte",
+            "semver_lt",
+            "semver_lte",
+            "before",
+            "after",
+            "in_segment",
+            "not_in_segment"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1000,
+          "items": { "$ref": "#/$defs/scalar" }
+        },
+        "ignoreCase": { "type": "boolean" }
+      },
+      "required": ["op"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "description": "Existence operators name an attribute and take no values.",
+          "if": { "properties": { "op": { "enum": ["exists", "not_exists"] } }, "required": ["op"] },
+          "then": { "required": ["attribute"], "properties": { "attribute": {}, "values": false } }
+        },
+        {
+          "description": "Segment operators take 1 to 50 segment keys and no attribute.",
+          "if": { "properties": { "op": { "enum": ["in_segment", "not_in_segment"] } }, "required": ["op"] },
+          "then": {
+            "required": ["values"],
+            "properties": {
+              "attribute": false,
+              "values": {
+                "type": "array",
+                "maxItems": 50,
+                "items": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/segmentKey" }
+              }
+            }
+          }
+        },
+        {
+          "description": "Every other operator names an attribute and takes values.",
+          "if": {
+            "properties": {
+              "op": { "not": { "enum": ["exists", "not_exists", "in_segment", "not_in_segment"] } }
+            },
+            "required": ["op"]
+          },
+          "then": { "required": ["attribute", "values"], "properties": { "attribute": {}, "values": {} } }
+        },
+        {
+          "description": "Single-value operators.",
+          "if": {
+            "properties": {
+              "op": {
+                "enum": [
+                  "eq",
+                  "neq",
+                  "gt",
+                  "gte",
+                  "lt",
+                  "lte",
+                  "semver_eq",
+                  "semver_neq",
+                  "semver_gt",
+                  "semver_gte",
+                  "semver_lt",
+                  "semver_lte",
+                  "before",
+                  "after"
+                ]
+              }
+            },
+            "required": ["op"]
+          },
+          "then": { "properties": { "values": { "type": "array", "minItems": 1, "maxItems": 1 } } }
+        },
+        {
+          "description": "Numeric comparisons take a number.",
+          "if": { "properties": { "op": { "enum": ["gt", "gte", "lt", "lte"] } }, "required": ["op"] },
+          "then": { "properties": { "values": { "type": "array", "items": { "type": "number" } } } }
+        },
+        {
+          "description": "String operators take strings.",
+          "if": {
+            "properties": {
+              "op": {
+                "enum": [
+                  "starts_with",
+                  "ends_with",
+                  "contains",
+                  "semver_eq",
+                  "semver_neq",
+                  "semver_gt",
+                  "semver_gte",
+                  "semver_lt",
+                  "semver_lte",
+                  "before",
+                  "after"
+                ]
+              }
+            },
+            "required": ["op"]
+          },
+          "then": { "properties": { "values": { "type": "array", "items": { "type": "string" } } } }
+        }
+      ]
+    },
+    "serve": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": { "variation": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" } },
+          "required": ["variation"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": { "rollout": { "$ref": "#/$defs/rollout" } },
+          "required": ["rollout"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "rollout": {
+      "description": "Weights total at most 100000; remainderVariation is required when they total less (enforced by the parsers).",
+      "type": "object",
+      "properties": {
+        "bucketBy": {
+          "description": "key, or the name of a context attribute.",
+          "$ref": "urn:bitflag:protocol:v1:common#/$defs/attributeName"
+        },
+        "salt": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "slots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "variation": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+              "weight": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/weight" }
+            },
+            "required": ["variation", "weight"],
+            "additionalProperties": false
+          }
+        },
+        "remainderVariation": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+        "allocationId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "experimentId": { "type": "string", "minLength": 1, "maxLength": 64 }
+      },
+      "required": ["bucketBy", "salt", "slots"],
+      "dependentRequired": {
+        "allocationId": ["experimentId"],
+        "experimentId": ["allocationId"]
+      },
+      "additionalProperties": false
+    },
+    "segment": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "integer", "minimum": 1 },
+        "match": { "$ref": "#/$defs/group" },
+        "include": { "type": "array", "items": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/subjectRef" } },
+        "exclude": { "type": "array", "items": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/subjectRef" } }
+      },
+      "required": ["version", "match"],
+      "additionalProperties": false
+    }
+  }
+}

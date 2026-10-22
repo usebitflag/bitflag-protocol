@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bitflag:protocol:v1:result",
+  "title": "BitFlag protocol v1: evaluation result",
+  "description": "The outcome of evaluating one flag for one context.",
+  "type": "object",
+  "properties": {
+    "flagKey": { "type": "string", "minLength": 1 },
+    "value": {
+      "description": "The served value, or the caller's fallback for FALLBACK and ERROR."
+    },
+    "variationKey": {
+      "oneOf": [
+        { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+        { "type": "null" }
+      ]
+    },
+    "reason": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/reason" },
+    "ruleId": {
+      "oneOf": [{ "type": "string", "minLength": 1, "maxLength": 64 }, { "type": "null" }]
+    },
+    "prerequisiteKey": {
+      "oneOf": [{ "$ref": "urn:bitflag:protocol:v1:common#/$defs/flagKey" }, { "type": "null" }]
+    },
+    "revision": { "oneOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }] },
+    "generation": { "oneOf": [{ "type": "integer", "minimum": 1 }, { "type": "null" }] },
+    "bucket": { "oneOf": [{ "type": "integer", "minimum": 0, "maximum": 99999 }, { "type": "null" }] },
+    "experimentId": {
+      "oneOf": [{ "type": "string", "minLength": 1, "maxLength": 64 }, { "type": "null" }]
+    },
+    "allocationId": {
+      "oneOf": [{ "type": "string", "minLength": 1, "maxLength": 64 }, { "type": "null" }]
+    },
+    "errorKind": {
+      "oneOf": [{ "$ref": "urn:bitflag:protocol:v1:common#/$defs/errorKind" }, { "type": "null" }]
+    },
+    "evaluatedAt": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc" },
+    "trace": { "$ref": "#/$defs/trace" }
+  },
+  "required": [
+    "flagKey",
+    "value",
+    "variationKey",
+    "reason",
+    "ruleId",
+    "prerequisiteKey",
+    "revision",
+    "generation",
+    "bucket",
+    "experimentId",
+    "allocationId",
+    "errorKind",
+    "evaluatedAt"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "description": "FALLBACK and ERROR return the caller's value and no variation; every other reason names a variation.",
+      "if": { "properties": { "reason": { "enum": ["FALLBACK", "ERROR"] } }, "required": ["reason"] },
+      "then": {
+        "properties": { "variationKey": { "type": "null" }, "errorKind": { "type": "string" } }
+      },
+      "else": {
+        "properties": { "variationKey": { "type": "string" }, "errorKind": { "type": "null" } }
+      }
+    },
+    {
+      "description": "ruleId is set exactly for RULE.",
+      "if": { "properties": { "reason": { "const": "RULE" } }, "required": ["reason"] },
+      "then": { "properties": { "ruleId": { "type": "string" } } },
+      "else": { "properties": { "ruleId": { "type": "null" } } }
+    },
+    {
+      "description": "prerequisiteKey is set exactly for PREREQUISITE.",
+      "if": { "properties": { "reason": { "const": "PREREQUISITE" } }, "required": ["reason"] },
+      "then": { "properties": { "prerequisiteKey": { "type": "string" } } },
+      "else": { "properties": { "prerequisiteKey": { "type": "null" } } }
+    },
+    {
+      "description": "FALLBACK and ERROR results carry no bucket.",
+      "if": { "properties": { "reason": { "enum": ["FALLBACK", "ERROR"] } }, "required": ["reason"] },
+      "then": { "properties": { "bucket": { "type": "null" } } }
+    }
+  ],
+  "$defs": {
+    "trace": {
+      "description": "Why the result came out as it did. Names attributes and outcomes, never context values. Returned only to trusted callers on request.",
+      "type": "object",
+      "properties": {
+        "steps": { "type": "array", "items": { "$ref": "#/$defs/traceStep" } }
+      },
+      "required": ["steps"],
+      "additionalProperties": false
+    },
+    "traceStep": {
+      "type": "object",
+      "properties": {
+        "step": { "enum": ["capability", "off", "prerequisite", "override", "rule", "default"] },
+        "outcome": { "type": "string", "minLength": 1 },
+        "ruleId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "prerequisitePath": {
+          "type": "array",
+          "items": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/flagKey" }
+        },
+        "conditions": { "type": "array", "items": { "$ref": "#/$defs/traceCondition" } },
+        "bucket": { "type": "integer", "minimum": 0, "maximum": 99999 },
+        "slot": {
+          "type": "object",
+          "properties": {
+            "variation": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/variationKey" },
+            "start": { "type": "integer", "minimum": 0, "maximum": 100000 },
+            "end": { "type": "integer", "minimum": 0, "maximum": 100000 }
+          },
+          "required": ["variation", "start", "end"],
+          "additionalProperties": false
+        },
+        "overrideExpiresAt": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339" }
+      },
+      "required": ["step", "outcome"],
+      "additionalProperties": false
+    },
+    "traceCondition": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "JSON Pointer to the condition, relative to the rule's match group.",
+          "type": "string"
+        },
+        "op": { "type": "string", "minLength": 1 },
+        "attribute": { "type": "string", "minLength": 1 },
+        "segment": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/segmentKey" },
+        "outcome": {
+          "enum": ["match", "no_match", "missing", "null", "wrong_type", "invalid_value", "not_evaluated"]
+        }
+      },
+      "required": ["path", "op", "outcome"],
+      "additionalProperties": false
+    }
+  }
+}

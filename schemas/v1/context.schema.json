@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bitflag:protocol:v1:context",
+  "title": "BitFlag protocol v1: evaluation context",
+  "description": "The subject an evaluation is about. One kind per evaluation.",
+  "type": "object",
+  "properties": {
+    "kind": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/contextKind" },
+    "key": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/subjectKey" },
+    "attributes": {
+      "type": "object",
+      "maxProperties": 100,
+      "propertyNames": {
+        "allOf": [
+          { "$ref": "urn:bitflag:protocol:v1:common#/$defs/attributeName" },
+          { "not": { "enum": ["kind", "key"] } }
+        ]
+      },
+      "additionalProperties": { "$ref": "#/$defs/attributeValue" }
+    }
+  },
+  "required": ["kind"],
+  "additionalProperties": false,
+  "$defs": {
+    "attributeValue": {
+      "description": "A string, a finite number, a boolean, null, or an array of at most 100 items of one scalar type.",
+      "anyOf": [
+        { "type": "string", "maxLength": 1024 },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" },
+        { "type": "array", "maxItems": 100, "items": { "type": "string", "maxLength": 1024 } },
+        { "type": "array", "maxItems": 100, "items": { "type": "number" } },
+        { "type": "array", "maxItems": 100, "items": { "type": "boolean" } }
+      ]
+    }
+  }
+}

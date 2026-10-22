@@ -1,6 +1,6 @@
 {
   "algorithm": "sha256",
-  "checksum": "62922d9893ebb3ffb8c42d8efb88d86f674e18d8849d5a2fcd99c7d47c094b21",
+  "checksum": "a9cf5893a57618c372d7eea09a017c519bef100bbbdd6142f57c69c65608f5fa",
   "files": [
     {
       "path": "README.md",
@@ -1107,8 +1107,16 @@
       "sha256": "a81870fbbcb1b404a4358cc572fdce6f14ed85ede43158d9ab95cd20aabf43d9"
     },
     {
+      "path": "evaluation/segments/segment-cycle-invalid-config.json",
+      "sha256": "2b6b421b2f1ae2308219170cec2c5ccb7ab959e492b072794a3ad5d91e3a0e74"
+    },
+    {
       "path": "evaluation/segments/segment-in-group.json",
       "sha256": "1abb5a3f2621dae14bd6b84d1122e3a4827075909f836a341e63e0203cd8aff8"
+    },
+    {
+      "path": "evaluation/segments/segment-uses-segment.json",
+      "sha256": "5808da54614548d53ccf22652c0846b3a42982e30a7536e9a7b06947ca455470"
     },
     {
       "path": "evaluation/segments/segment-with-operators.json",
@@ -1369,6 +1377,30 @@
     {
       "path": "evaluation/strings-unicode/whitespace-is-significant.json",
       "sha256": "c9f3056628659a4e7799d690088ecfbcb26fad8da0e1ce0c71680480bd4ba5c5"
+    },
+    {
+      "path": "evaluation/trace/capability-and-off-steps.json",
+      "sha256": "b9d0da1a07bec909c4cbd9d608fd7c803ea03aff2e422e2c6a859e8eb2b69f73"
+    },
+    {
+      "path": "evaluation/trace/conditions-name-attributes-not-values.json",
+      "sha256": "d1abc5eb709722f415bd3c743616a1ff7eee3c8bfc8d6d734b506111ef307073"
+    },
+    {
+      "path": "evaluation/trace/override-steps.json",
+      "sha256": "99b50b69a39f3cf5665ec52095771ec90d69efc5f8365a46e9c4b6a2bd32ba5b"
+    },
+    {
+      "path": "evaluation/trace/prerequisite-steps.json",
+      "sha256": "e1fa280341ebd366fe94b16bdc2526cc33a85abe2fef68128252f8fe55be4a3e"
+    },
+    {
+      "path": "evaluation/trace/rollout-bucket-and-slot.json",
+      "sha256": "017d09c18cc4a0416b0db856d53b5c1e565190a055f605e97d7d08a571910b65"
+    },
+    {
+      "path": "evaluation/trace/rule-steps.json",
+      "sha256": "26351a49a39e8a8c140f9fbe74430366776208b938bdf0c17cbbaa448cb2acd0"
     },
     {
       "path": "snapshot/checksum-mismatch.json",

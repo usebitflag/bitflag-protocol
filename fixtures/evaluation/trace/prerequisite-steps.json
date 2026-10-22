@@ -1,0 +1,194 @@
+{
+  "id": "trace/prerequisite-steps",
+  "description": "Each prerequisite checked gets a step with the path from the evaluated flag, and the outcome met or unmet. The steps of the prerequisite flags themselves are not part of the trace.",
+  "spec": [
+    "03-evaluation.md#details-and-traces"
+  ],
+  "tags": [
+    "trace"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "a": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "b",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      },
+      "b": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "on",
+        "prerequisites": [
+          {
+            "flagKey": "c",
+            "variations": [
+              "on"
+            ]
+          }
+        ],
+        "overrides": [],
+        "rules": []
+      },
+      "c": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "plan",
+                  "op": "eq",
+                  "values": [
+                    "pro"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:78d675d744aef8ee9efbc435b6332da54bc57d96e6d2b439729f6edc0ff15032"
+  },
+  "cases": [
+    {
+      "name": "chain met",
+      "flagKey": "a",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "reason": "DEFAULT",
+        "variationKey": "on"
+      },
+      "options": {
+        "trace": true
+      },
+      "expectTrace": [
+        {
+          "step": "prerequisite",
+          "outcome": "met",
+          "prerequisitePath": [
+            "b"
+          ]
+        },
+        {
+          "step": "default",
+          "outcome": "served"
+        }
+      ]
+    },
+    {
+      "name": "chain broken at the end",
+      "flagKey": "a",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "free"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "reason": "PREREQUISITE",
+        "prerequisiteKey": "b"
+      },
+      "options": {
+        "trace": true
+      },
+      "expectTrace": [
+        {
+          "step": "prerequisite",
+          "outcome": "unmet",
+          "prerequisitePath": [
+            "b"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "the middle flag directly",
+      "flagKey": "b",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "plan": "free"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "reason": "PREREQUISITE",
+        "prerequisiteKey": "c"
+      },
+      "options": {
+        "trace": true
+      },
+      "expectTrace": [
+        {
+          "step": "prerequisite",
+          "outcome": "unmet",
+          "prerequisitePath": [
+            "c"
+          ]
+        }
+      ]
+    }
+  ]
+}

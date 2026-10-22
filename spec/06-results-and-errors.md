@@ -48,9 +48,9 @@ Codes:
 
 | Code | When | `path` points to |
 | --- | --- | --- |
-| `INVALID_JSON` | The text is not valid JSON. | `""` |
+| `INVALID_JSON` | The text is not valid JSON, or a string holds an escape for an unpaired surrogate. | `""` |
 | `TOO_DEEP` | JSON nesting exceeds 64 levels. | `""` |
-| `TOO_LARGE` | The text exceeds 5 MB. | `""` |
+| `TOO_LARGE` | The text exceeds 5 MiB. | `""` |
 | `INVALID_TYPE` | A value has the wrong JSON type. | The value |
 | `MISSING_FIELD` | A required member is absent. | The object that lacks it |
 | `UNKNOWN_FIELD` | An object has a member the schema does not define. | The unknown member |
@@ -70,4 +70,4 @@ When one snapshot has several problems, parsers report the first one in document
 
 ## Validation issues
 
-The snapshot validator reports problems that do not stop a snapshot from loading. The issue codes are `DANGLING_VARIATION`, `DANGLING_SEGMENT`, `DANGLING_PREREQUISITE`, `PREREQUISITE_CYCLE`, `PREREQUISITE_DEPTH`, `CAPABILITY_UNION_MISMATCH` and `DUPLICATE_SALT`. Publication treats any issue as blocking; evaluation reports `INVALID_CONFIG` only for those that it reaches.
+The snapshot validator reports problems that do not stop a snapshot from loading. The issue codes are `DANGLING_VARIATION`, `DANGLING_SEGMENT`, `DANGLING_PREREQUISITE`, `PREREQUISITE_CYCLE`, `PREREQUISITE_DEPTH`, `SEGMENT_CYCLE`, `CAPABILITY_UNION_MISMATCH` and `DUPLICATE_SALT`. A prerequisite that lists a variation its flag does not have is reported as `DANGLING_VARIATION`; two rollouts may share a salt only when they share an `allocationId`. Publication treats any issue as blocking; evaluation reports `INVALID_CONFIG` only for those that it reaches.

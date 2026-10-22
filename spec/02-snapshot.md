@@ -88,7 +88,7 @@ Each weight is an integer from 0 to 100,000. The weights total at most 100,000. 
 
 Parsers reject a snapshot with `MALFORMED_SNAPSHOT`, a JSON Pointer `path` and a `code` when:
 
-- the JSON is invalid, nests deeper than 64 levels, exceeds 5 MB, or contains a number whose value is an integer outside ±(2^53 − 1), however it is written;
+- the JSON is invalid (including an escape that stands for an unpaired surrogate), nests deeper than 64 levels, exceeds 5 MiB, or contains a number whose value is an integer outside ±(2^53 − 1), however it is written;
 - a group nests deeper than 5 levels;
 - rollout weights total more than 100,000, or total less without a `remainderVariation`;
 - a string exceeds its limit in UTF-8 bytes, or is not valid UTF-8;
@@ -106,8 +106,8 @@ Producers must not emit duplicate object keys. Consumers are not required to det
 
 | Limit | Value |
 | --- | --- |
-| Snapshot size | 5 MB |
-| JSON depth | 64 |
+| Snapshot size | 5 MiB (5,242,880 bytes) |
+| JSON depth | 64 levels of arrays and objects, the top-level object being level 1 |
 | Rules per flag | 200 |
 | Overrides per flag | 500 |
 | Prerequisites per flag | 20 |
@@ -115,7 +115,7 @@ Producers must not emit duplicate object keys. Consumers are not required to det
 | Group nesting depth | 5 |
 | Values per condition | 1,000 |
 | Segment keys per segment condition | 50 |
-| `json` variation value | 32 KB canonical |
+| `json` variation value | 32 KiB (32,768 bytes) canonical |
 | Rollout salt | 128 bytes |
 
 Changing a limit is a protocol change with fixtures.

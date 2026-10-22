@@ -60,6 +60,7 @@ Precedence, highest first: unusable input, absent or mistyped flag, disabled fla
 - A segment contains a subject when, in this order: the subject is in `exclude` (not a member); else the subject is in `include` (member); else the segment's `match` group is true.
 - Include and exclude compare `(kind, key)` exactly. A context without a `key` never matches either list.
 - Segment membership is always computable, so `not_in_segment` is the plain negation of `in_segment`.
+- A segment's conditions may use `in_segment` and `not_in_segment` to refer to other segments. A segment that leads back to itself, directly or through others, is `ERROR / INVALID_CONFIG` when evaluation reaches the cycle.
 
 ## Overrides and time
 
@@ -96,7 +97,21 @@ Error kinds, and when each applies, are in `06-results-and-errors.md`.
 ### Details and traces
 
 - `bucket` and `trace` are off by default and requested per call. Clients that evaluate on untrusted or public paths must not offer them.
-- A trace is a list of steps, in the order the evaluator took them: `capability`, `off`, `prerequisite`, `override`, `rule`, `default`. A rule step lists its conditions with an outcome of `match`, `no_match`, `missing`, `null`, `wrong_type`, `invalid_value` or `not_evaluated`, and, for a rollout, the bucket and the chosen slot as `{ variation, start, end }`.
+- A trace is the list of steps taken for the **evaluated flag**, in order. The steps of its prerequisite flags are not part of it. Every step has a name and an `outcome`:
+
+  | Step | When it is recorded | Outcome | Other fields |
+  | --- | --- | --- | --- |
+  | `capability` | The flag has `requires` | `supported` or `unsupported` | |
+  | `off` | The flag is disabled | `served` | |
+  | `prerequisite` | A prerequisite is checked | `met` or `unmet` | `prerequisitePath`: a list holding the key of the prerequisite that was checked (the list could hold a deeper path; evaluators record the direct prerequisite only) |
+  | `override` | An override exists for the context's kind and key | `applied` or `expired` | `overrideExpiresAt`, when the override has an expiry |
+  | `rule` | An enabled rule is evaluated | `matched` or `not_matched` | `ruleId`; `conditions`; for a rollout that decided: `bucket` and `slot` |
+  | `rule` | A disabled rule is passed | `disabled` | `ruleId` |
+  | `default` | No rule matched | `served` | |
+
+  Checking stops at the first step that decides, so no step is recorded after it.
+- A rule step lists its conditions with a `path` (a JSON Pointer relative to the rule's `match`, such as `/all/1/any/0`), the operator, the attribute or segment and an outcome of `match`, `no_match`, `missing`, `null`, `wrong_type`, `invalid_value` or `not_evaluated`. Conditions that a short-circuiting group skipped are listed as `not_evaluated`, also those nested in a skipped group. A rollout step names the bucket and the interval that contained it as `slot: { variation, start, end }`; the remainder is reported as the interval up to 100,000.
+- Steps recorded before an error stay in the trace of the `ERROR` result.
 - A trace names attributes and outcomes, never context values, so it can be logged without leaking subject data.
 - A fixture compares a trace as a partial match: each listed step and field must appear in order, and extra content is allowed.
 

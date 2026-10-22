@@ -1,0 +1,95 @@
+{
+  "id": "trace/conditions-name-attributes-not-values",
+  "description": "A trace names the attribute and the outcome of each condition and never the value in the context. The expected trace here lists only names; evaluators must not add the values.",
+  "spec": [
+    "03-evaluation.md#details-and-traces"
+  ],
+  "tags": [
+    "trace"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "email",
+                  "op": "ends_with",
+                  "values": [
+                    "@acme.dev"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:d919efa22ecdf479089207f786490aebef41b5149d159548aac19915436c6c26"
+  },
+  "cases": [
+    {
+      "name": "matching address",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "email": "secret.person@acme.dev"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "reason": "RULE"
+      },
+      "options": {
+        "trace": true
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "outcome": "matched",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "ends_with",
+              "attribute": "email",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

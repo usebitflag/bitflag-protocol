@@ -60,6 +60,7 @@ Precedence, highest first: unusable input, absent or mistyped flag, disabled fla
 - A segment contains a subject when, in this order: the subject is in `exclude` (not a member); else the subject is in `include` (member); else the segment's `match` group is true.
 - Include and exclude compare `(kind, key)` exactly. A context without a `key` never matches either list.
 - Segment membership is always computable, so `not_in_segment` is the plain negation of `in_segment`.
+- Membership of a segment is computed at most once per call, because the context does not change within a call. An implementation must not evaluate a segment again each time it is referenced: segments that refer to several segments each would otherwise take exponential time.
 - A segment's conditions may use `in_segment` and `not_in_segment` to refer to other segments. A segment that leads back to itself, directly or through others, is `ERROR / INVALID_CONFIG` when evaluation reaches the cycle.
 
 ## Overrides and time

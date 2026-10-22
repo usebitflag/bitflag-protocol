@@ -57,7 +57,7 @@ An invalid SemVer or date literal in a snapshot condition is a snapshot error, n
 
 - Numbers are IEEE 754 binary64. `20`, `20.0` and `2e1` are the same value, and `-0` equals `0`.
 - A number whose value is an integer with magnitude above 2^53 − 1, however it is written (`9007199254740993`, `9.007199254740992e15`, `1e300`), is outside the safe range. In a context it is `wrong_type` for every numeric operator, including `gt` and `neq`. In a snapshot it is invalid. Values that need more precision are sent as strings, to which no numeric operator applies.
-- NaN and infinities cannot be written in JSON and are rejected if a language can construct them.
+- NaN and infinities cannot be written in JSON and are rejected if a language can construct them. A number literal too large for binary64, such as `1e999`, reads as infinity: in a context it makes the context invalid, and in a snapshot it is rejected with the code `UNSAFE_NUMBER`.
 
 ## Strings
 
@@ -68,6 +68,7 @@ An invalid SemVer or date literal in a snapshot condition is a snapshot error, n
 
 - `MAJOR.MINOR.PATCH` with optional `-prerelease` and `+build`, following SemVer 2.0.0. No leading zeros in numeric identifiers, no `v` prefix, and every numeric identifier, including numeric pre-release identifiers, is at most 2^53 − 1. Identifiers use the ASCII letters, digits and hyphen only. `4.2` and `v4.2.0` are invalid.
 - Precedence follows section 11 of SemVer 2.0.0: numeric identifiers compare as numbers, alphanumeric ones in ASCII order, numeric ones rank below alphanumeric ones, and a longer list of identifiers ranks above its prefix. Build metadata is ignored, so `1.0.0+a` equals `1.0.0`. A pre-release has lower precedence than its release.
+- A SemVer string is at most 256 UTF-8 bytes; a longer string is not a valid SemVer, in a snapshot (`INVALID_VALUE`) and in a context (`invalid_value`).
 - `semver_eq` and `semver_neq` compare by precedence. An attribute that is a string but not a valid SemVer has the outcome `invalid_value`, which is false for every `semver_*` operator, negated or not.
 
 ## Dates

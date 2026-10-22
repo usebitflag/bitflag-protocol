@@ -1,0 +1,13 @@
+{
+  "id": "context/number-too-large-for-binary64",
+  "description": "A number literal too large for binary64 reads as infinity, which JSON cannot hold: the context is invalid, not merely a value of the wrong type.",
+  "spec": ["04-operators.md#numbers"],
+  "tags": ["context", "numbers", "error:INVALID_CONTEXT"],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    { "name": "1e999", "flagKey": "checkout", "type": "boolean", "fallback": false, "context": { "kind": "user", "key": "u_1", "attributes": { "v": 1e999 } }, "evaluatedAt": "2026-10-06T08:00:00Z", "expect": { "value": false, "variationKey": null, "reason": "ERROR", "errorKind": "INVALID_CONTEXT" } },
+    { "name": "-1e999", "flagKey": "checkout", "type": "boolean", "fallback": false, "context": { "kind": "user", "key": "u_1", "attributes": { "v": -1e999 } }, "evaluatedAt": "2026-10-06T08:00:00Z", "expect": { "value": false, "variationKey": null, "reason": "ERROR", "errorKind": "INVALID_CONTEXT" } },
+    { "name": "1e400 in a list", "flagKey": "checkout", "type": "boolean", "fallback": false, "context": { "kind": "user", "key": "u_1", "attributes": { "v": [1e400] } }, "evaluatedAt": "2026-10-06T08:00:00Z", "expect": { "value": false, "variationKey": null, "reason": "ERROR", "errorKind": "INVALID_CONTEXT" } },
+    { "name": "a large but finite number is only the wrong type", "flagKey": "checkout", "type": "boolean", "fallback": false, "context": { "kind": "user", "key": "u_1", "attributes": { "v": 1e300 } }, "evaluatedAt": "2026-10-06T08:00:00Z", "expect": { "value": false, "variationKey": "off", "reason": "DEFAULT", "errorKind": null } }
+  ]
+}

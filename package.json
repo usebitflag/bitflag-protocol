@@ -15,6 +15,8 @@
     "checksum": "node tools/checksum.mjs --write",
     "pack": "node tools/pack.mjs",
     "compare": "node tools/compare-reports.mjs",
+    "fuzz:generate": "node tools/fuzz/generate.mjs",
+    "fuzz:compare": "node tools/fuzz/compare.mjs",
     "manifest:check": "node tools/manifest.mjs --check",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""
   },

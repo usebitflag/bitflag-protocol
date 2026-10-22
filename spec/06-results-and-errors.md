@@ -56,7 +56,7 @@ Codes:
 | `UNKNOWN_FIELD` | An object has a member the schema does not define. | The unknown member |
 | `INVALID_VALUE` | A value of the right type is not allowed: a pattern, enum, range, date or SemVer literal, or a malformed key. | The value, or for a key the member holding it |
 | `LIMIT_EXCEEDED` | A list or group exceeds its limit, or groups nest deeper than 5. | The list, or the group that is too deep |
-| `UNSAFE_NUMBER` | An integer outside ±(2^53 − 1). | The number |
+| `UNSAFE_NUMBER` | An integer outside ±(2^53 − 1), or a number too large for binary64 (`1e999`). | The number |
 | `UNSUPPORTED_VERSION` | `protocolVersion` is not 1. | `/protocolVersion` |
 | `UNSUPPORTED_ALGORITHM` | `algorithmVersion` is not `bucket-sha256-v1`. | `/algorithmVersion` |
 | `WEIGHT_TOTAL_EXCEEDED` | Rollout weights total more than 100,000. | The `slots` array |

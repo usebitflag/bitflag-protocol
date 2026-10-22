@@ -220,6 +220,11 @@
         "expect": {
           "$ref": "#/$defs/evaluationExpect"
         },
+        "expectTraceSteps": {
+          "description": "The exact names of the trace steps, in order: nothing is missing and nothing extra is recorded.",
+          "type": "array",
+          "items": { "enum": ["capability", "off", "prerequisite", "override", "rule", "default"] }
+        },
         "expectTrace": {
           "description": "Partial match: each listed step and field must appear in order; extra trace content is allowed.",
           "type": "array",

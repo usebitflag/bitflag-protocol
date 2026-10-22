@@ -47,6 +47,7 @@ A runner loads every fixture in `fixtures/evaluation/` and `fixtures/snapshot/` 
 - Numbers compare numerically: `20` equals `20.0`.
 - `value` is compared as JSON: objects by members regardless of order, arrays in order.
 - With `throws`, the evaluator must raise the named programming error and return no result.
+- `expectTraceSteps`, when present, lists the exact names of the trace steps in order; unlike `expectTrace` it fails when a step is missing or an extra one is recorded.
 - `expectTrace` is a partial match. Each listed step must appear in the trace in the listed order, and within a step each listed field must be equal; for `conditions` each listed condition is matched by its `path`. Extra steps and fields are allowed, so languages may add detail.
 - A case that sets `options.trace` or `options.details` asks for them; a case that does not must not be given a trace.
 
@@ -85,3 +86,29 @@ To compare evaluators, a runner can write a report. The format is JSON:
 A report lists the **actual** outcome of every case, not only the compared fields. Two reports agree when, for every case, `value`, `variationKey`, `reason`, `ruleId`, `prerequisiteKey`, `errorKind`, `revision`, `generation`, `bucket`, `experimentId` and `allocationId` are equal, and for every snapshot fixture `accepted`, `errorKind`, `path` and `code` are equal. `tools/compare-reports.mjs` compares any number of reports.
 
 The cross-language check (the `cross-language` workflow, started by hand with the evaluator releases to test) runs each evaluator over one checkout of the fixtures, writes its report and compares them. It is run before every release after `alpha.1`.
+
+## Differential fuzzing
+
+Fixtures only cover what someone thought of. The differential fuzz test feeds the same generated inputs to every evaluator and fails when they disagree about anything, whether or not a fixture exists for it.
+
+`tools/fuzz/generate.mjs --seed <n>` writes one input file. The same seed always gives the same file. It holds:
+
+- `parse`: snapshot texts made by mutating a rich valid snapshot (members deleted, types changed, edge values such as `1e999`, `-0`, 2^53 + 1, long strings and unknown members inserted), half of them with a recomputed checksum;
+- `evaluate`: random valid snapshots, each with 25 single evaluations (`cases`) and 3 `evaluateAll` calls (`bulk`) at fixed instants, with and without details and trace.
+
+Each evaluator supplies a harness that reads the input and writes an output file:
+
+```json
+{
+  "evaluator": "bitflag-php",
+  "parse": { "0": { "accepted": true },
+             "1": { "accepted": false, "errorKind": "MALFORMED_SNAPSHOT", "path": "/revision", "code": "INVALID_TYPE" } },
+  "evaluate": { "0": [ "<canonical JSON of the result>", "THROWS FallbackTypeError" ] }
+}
+```
+
+For `evaluate`, the array holds one entry per case and then one per `bulk` item: the result in canonical JSON (RFC 8785, with the trace when one was asked for), or the text `THROWS FallbackTypeError`. A snapshot the evaluator rejects is recorded as `{ "rejected": { "errorKind": …, "path": …, "code": … } }` instead of an array. A harness never lets an exception escape: an unexpected one is recorded as `CRASH` followed by its class name, and counts as a failure.
+
+`tools/fuzz/compare.mjs <input> <output-a> <output-b>` compares two outputs entry by entry and exits 1 on any difference or crash. The `cross-language` workflow runs it for a fixed seed on every run and for a new seed every week.
+
+A difference found by the fuzz test is fixed in the specification or in an evaluator, and the input that exposed it is turned into a fixture.

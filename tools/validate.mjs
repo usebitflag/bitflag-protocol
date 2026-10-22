@@ -87,6 +87,12 @@ for (const file of fixtureFiles) {
 }
 console.log(`${snapshotFiles.length} snapshot(s) and ${fixtureFiles.length} fixture(s) checked.`);
 
+const vectorsFile = join(fixturesDir, 'bucketing', 'bucket-sha256-v1.json');
+if (existsSync(vectorsFile)) check('bucket-vectors', readJson(vectorsFile), relative(root, vectorsFile));
+
+const bucketing = spawnSync(process.execPath, [join(root, 'tools/bucket.mjs'), '--check'], { stdio: 'inherit' });
+if (bucketing.status !== 0) failed = true;
+
 const checksums = spawnSync(process.execPath, [join(root, 'tools/checksum.mjs'), '--check'], { stdio: 'inherit' });
 if (checksums.status !== 0) failed = true;
 

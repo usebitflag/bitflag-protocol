@@ -1,10 +1,14 @@
 {
   "algorithm": "sha256",
-  "checksum": "b9cd73ad28628e8a71acdd5235f827fee2e8f3c13cea5e662acd03fe819efb1f",
+  "checksum": "9cad30c74c78cd422673e502df6316c89b6f8e658e3bc5bc97492af0642ca454",
   "files": [
     {
       "path": "README.md",
-      "sha256": "388bbad542952ebd704f07ea3e586941636d8de867ab11ef865ff0cf10309100"
+      "sha256": "317e511c5e2834050fa3e0ead067999c717a84164870ddcb2b98924dbf400ce4"
+    },
+    {
+      "path": "bucketing/bucket-sha256-v1.json",
+      "sha256": "d74b51509aea9c8a73512e6d3684a7ee28718d6d1f0a4155992cf00603e1ee0e"
     },
     {
       "path": "evaluation/fallback/archived-flag-absent.json",

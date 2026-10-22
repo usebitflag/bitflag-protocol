@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bitflag:protocol:v1:bucket-vectors",
+  "title": "BitFlag protocol v1: bucket-sha256-v1 known-answer vectors",
+  "description": "Every evaluator must compute exactly these buckets. inputHex is the hashed byte string, digestPrefixHex the first 8 bytes of its SHA-256 digest.",
+  "type": "array",
+  "minItems": 200,
+  "items": {
+    "type": "object",
+    "properties": {
+      "salt": { "type": "string", "minLength": 1, "maxLength": 128 },
+      "kind": { "$ref": "urn:bitflag:protocol:v1:common#/$defs/contextKind" },
+      "value": { "type": "string", "minLength": 1, "maxLength": 1024 },
+      "inputHex": { "type": "string", "pattern": "^([0-9a-f]{2})+$" },
+      "digestPrefixHex": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+      "bucket": { "type": "integer", "minimum": 0, "maximum": 99999 }
+    },
+    "required": ["salt", "kind", "value", "inputHex", "digestPrefixHex", "bucket"],
+    "additionalProperties": false
+  }
+}

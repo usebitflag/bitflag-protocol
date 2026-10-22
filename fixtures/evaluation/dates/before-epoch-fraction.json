@@ -1,0 +1,182 @@
+{
+  "id": "dates/before-epoch-fraction",
+  "description": "Fractions truncate by digits also before 1970: .9999 before the epoch is .999.",
+  "spec": [
+    "04-operators.md#dates"
+  ],
+  "tags": [
+    "dates",
+    "fraction",
+    "calendar"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "seenAt",
+                  "op": "before",
+                  "values": [
+                    "1970-01-01T00:00:00Z"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:3ce9b9d20db330bc7891b634b7b53c9ba3b90e28a3a2eb188550fbc6e141f4cc"
+  },
+  "cases": [
+    {
+      "name": ".9999 before the epoch",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "seenAt": "1969-12-31T23:59:59.9999Z"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "before",
+              "attribute": "seenAt",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": ".0009 truncates to .000",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "seenAt": "1969-12-31T23:59:59.0009Z"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "before",
+              "attribute": "seenAt",
+              "outcome": "match"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "epoch with .0009",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1",
+        "attributes": {
+          "seenAt": "1970-01-01T00:00:00.0009Z"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "options": {
+        "trace": true
+      },
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "DEFAULT",
+        "ruleId": null,
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "expectTrace": [
+        {
+          "step": "rule",
+          "ruleId": "r1",
+          "conditions": [
+            {
+              "path": "/all/0",
+              "op": "before",
+              "attribute": "seenAt",
+              "outcome": "no_match"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

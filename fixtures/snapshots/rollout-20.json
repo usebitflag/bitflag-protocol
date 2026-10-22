@@ -1,0 +1,50 @@
+{
+  "protocolVersion": 1,
+  "algorithmVersion": "bucket-sha256-v1",
+  "environment": {
+    "id": "env_1",
+    "key": "production"
+  },
+  "revision": 42,
+  "generation": 1,
+  "projection": "server",
+  "publishedAt": "2026-10-06T07:00:00Z",
+  "requiredCapabilities": [],
+  "flags": {
+    "f": {
+      "type": "boolean",
+      "enabled": true,
+      "variations": {
+        "on": true,
+        "off": false
+      },
+      "offVariation": "off",
+      "defaultVariation": "off",
+      "prerequisites": [],
+      "overrides": [],
+      "rules": [
+        {
+          "id": "r1",
+          "match": {
+            "all": []
+          },
+          "serve": {
+            "rollout": {
+              "bucketBy": "key",
+              "salt": "s_r4",
+              "slots": [
+                {
+                  "variation": "on",
+                  "weight": 20000
+                }
+              ],
+              "remainderVariation": "off"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "segments": {},
+  "checksum": "sha256:d0a87227f2c5a7ee9607f01cd38837a6e0bfc61c77aecab0d3debe20626df0f5"
+}

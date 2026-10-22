@@ -1,0 +1,160 @@
+{
+  "id": "rollouts/remainder-does-not-fall-through",
+  "description": "A rule that matches and carries a rollout decides, including through its remainder variation; later rules are not consulted.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "remainder"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": [
+                {
+                  "attribute": "country",
+                  "op": "eq",
+                  "values": [
+                    "PH"
+                  ]
+                }
+              ]
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r9",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 50000
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          },
+          {
+            "id": "r2",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "variation": "on"
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:8c7f620c753f11feab5836fe608ceda183874d5b69b683534e9646b67faa0e76"
+  },
+  "cases": [
+    {
+      "name": "PH inside the slot",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_107887",
+        "attributes": {
+          "country": "PH"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 20
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "PH in the remainder is off, not served by r2",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_156895",
+        "attributes": {
+          "country": "PH"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 70000
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "non-PH falls to r2",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_156895",
+        "attributes": {
+          "country": "US"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r2",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

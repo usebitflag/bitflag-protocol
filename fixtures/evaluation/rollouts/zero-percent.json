@@ -1,0 +1,159 @@
+{
+  "id": "rollouts/zero-percent",
+  "description": "A rollout whose only slot has weight 0 gives every subject the remainder variation.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "remainder"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r3",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 0
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:00310a0f427f2177642226c5d6a9b4b9ff1af89a605c2d9e1c83df7f8cc3dbee"
+  },
+  "cases": [
+    {
+      "name": "bucket 0",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_148473"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 1",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_32126"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 50000",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_36640"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 50000
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 99999",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_288827"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 99999
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

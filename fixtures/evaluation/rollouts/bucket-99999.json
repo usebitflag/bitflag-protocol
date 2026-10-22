@@ -1,0 +1,167 @@
+{
+  "id": "rollouts/bucket-99999",
+  "description": "Bucket 99,999 is the last bucket: only a slot reaching a total weight of 100,000 contains it.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "boundary"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "full": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r1",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 100000
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "almost": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r1",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 99999
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:c2e2c9c3b2db59292e8ee93cdcdc2b20d3dcb48fdfaaa2d5ecd92dc85e89a79c"
+  },
+  "cases": [
+    {
+      "name": "bucket 99999 at 100%",
+      "flagKey": "full",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_136818"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 99999
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 99999 at 99.999%",
+      "flagKey": "almost",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_136818"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 99999
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 99998 at 99.999%",
+      "flagKey": "almost",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_164984"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 99998
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

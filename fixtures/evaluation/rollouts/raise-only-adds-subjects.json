@@ -1,0 +1,455 @@
+{
+  "id": "rollouts/raise-only-adds-subjects",
+  "description": "Raising a single slot from 20% to 50% keeps every subject already in it and only adds subjects: buckets below 20,000 are on in both, buckets 20,000 to 49,999 turn on, and the rest stay off. The salt and the subject stay the same.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "monotonic"
+  ],
+  "snapshotRef": "snapshots/rollout-20.json",
+  "cases": [
+    {
+      "name": "k_32556 (bucket 0) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_32556"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_32556 (bucket 0) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_32556"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_6 (bucket 15832) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_6"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 15832
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_6 (bucket 15832) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_6"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 15832
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_22769 (bucket 19999) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_22769"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 19999
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_22769 (bucket 19999) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_22769"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 19999
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_188486 (bucket 20000) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_188486"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 20000
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_188486 (bucket 20000) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_188486"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 20000
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_12 (bucket 36567) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_12"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 36567
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_12 (bucket 36567) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_12"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 36567
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_6499 (bucket 49999) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_6499"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 49999
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_6499 (bucket 49999) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_6499"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 49999
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_277206 (bucket 50000) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_277206"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 50000
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_277206 (bucket 50000) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_277206"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 50000
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_0 (bucket 84159) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_0"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 84159
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_0 (bucket 84159) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_0"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 84159
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    },
+    {
+      "name": "k_103495 (bucket 99999) at 20%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_103495"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 99999
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "k_103495 (bucket 99999) at 50%",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_103495"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 43,
+        "generation": 1,
+        "bucket": 99999
+      },
+      "options": {
+        "details": true
+      },
+      "snapshotRef": "snapshots/rollout-50.json"
+    }
+  ]
+}

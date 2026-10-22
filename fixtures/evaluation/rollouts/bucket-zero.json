@@ -1,0 +1,225 @@
+{
+  "id": "rollouts/bucket-zero",
+  "description": "Bucket 0 is the first bucket: it is inside any slot with a weight above 0 and outside a slot of weight 0.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "boundary"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "pct20": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r0",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 20000
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      },
+      "pct0": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r0",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 0
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      },
+      "pct1bucket": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r0",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 1
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:c6cc6085e998f7e46ef5679152f279000be450336604a282352b7a9fbe69b03a"
+  },
+  "cases": [
+    {
+      "name": "bucket 0 in a 20% slot",
+      "flagKey": "pct20",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_36202"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 0 in a one-bucket slot",
+      "flagKey": "pct1bucket",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_36202"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 1 is outside a one-bucket slot",
+      "flagKey": "pct1bucket",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_78653"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "bucket 0 with a zero-weight slot",
+      "flagKey": "pct0",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_36202"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 0
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "id": "rollouts/missing-key-error",
+  "description": "Bucketing by key needs a key: a context without one, or a rollout whose rule does not match, behaves differently from a keyed subject. No random cohort is assigned.",
+  "spec": [
+    "05-bucketing.md#slots"
+  ],
+  "tags": [
+    "rollouts",
+    "error:MISSING_SUBJECT_KEY"
+  ],
+  "snapshot": {
+    "protocolVersion": 1,
+    "algorithmVersion": "bucket-sha256-v1",
+    "environment": {
+      "id": "env_1",
+      "key": "production"
+    },
+    "revision": 42,
+    "generation": 1,
+    "projection": "server",
+    "publishedAt": "2026-10-06T07:00:00Z",
+    "requiredCapabilities": [],
+    "flags": {
+      "f": {
+        "type": "boolean",
+        "enabled": true,
+        "variations": {
+          "on": true,
+          "off": false
+        },
+        "offVariation": "off",
+        "defaultVariation": "off",
+        "prerequisites": [],
+        "overrides": [],
+        "rules": [
+          {
+            "id": "r1",
+            "match": {
+              "all": []
+            },
+            "serve": {
+              "rollout": {
+                "bucketBy": "key",
+                "salt": "s_r7",
+                "slots": [
+                  {
+                    "variation": "on",
+                    "weight": 50000
+                  }
+                ],
+                "remainderVariation": "off"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "segments": {},
+    "checksum": "sha256:7b178bb2f850ce49f154e7183c8e4d357fbb311c83bcb1a6496e1c1197ce018f"
+  },
+  "cases": [
+    {
+      "name": "no key",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "no key with attributes",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": false,
+        "variationKey": null,
+        "reason": "ERROR",
+        "ruleId": null,
+        "errorKind": "MISSING_SUBJECT_KEY",
+        "bucket": null,
+        "revision": 42,
+        "generation": 1
+      },
+      "options": {
+        "details": true
+      }
+    },
+    {
+      "name": "keyed subject for contrast",
+      "flagKey": "f",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "k_103022"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "value": true,
+        "variationKey": "on",
+        "reason": "RULE",
+        "ruleId": "r1",
+        "errorKind": null,
+        "revision": 42,
+        "generation": 1,
+        "bucket": 10
+      },
+      "options": {
+        "details": true
+      }
+    }
+  ]
+}

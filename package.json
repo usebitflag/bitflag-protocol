@@ -11,6 +11,7 @@
     "validate": "node tools/validate.mjs",
     "manifest": "node tools/manifest.mjs",
     "bucket": "node tools/bucket.mjs --write",
+    "canonical": "node tools/canonical.mjs --write",
     "checksum": "node tools/checksum.mjs --write",
     "manifest:check": "node tools/manifest.mjs --check",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""

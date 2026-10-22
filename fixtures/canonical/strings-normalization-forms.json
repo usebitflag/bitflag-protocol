@@ -1,0 +1,5 @@
+{
+  "input": {"é": "nfc", "é": "nfd"},
+  "canonical": "{\"é\":\"nfd\",\"é\":\"nfc\"}",
+  "checksum": "sha256:2571d7f8a735ecac7c10838f25335b0a0a2f665ebc75a5bd3398c77af13efd98"
+}

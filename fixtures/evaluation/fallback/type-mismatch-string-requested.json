@@ -1,0 +1,55 @@
+{
+  "id": "fallback/type-mismatch-string-requested",
+  "description": "Requesting a flag as the wrong type returns the caller fallback.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "fallback",
+    "reason:FALLBACK",
+    "error:TYPE_MISMATCH"
+  ],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    {
+      "name": "boolean flag read as string",
+      "flagKey": "checkout",
+      "type": "string",
+      "fallback": "none",
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": "none",
+        "variationKey": null,
+        "reason": "FALLBACK",
+        "ruleId": null,
+        "errorKind": "TYPE_MISMATCH"
+      }
+    },
+    {
+      "name": "string flag read as boolean",
+      "flagKey": "banner",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": true,
+        "variationKey": null,
+        "reason": "FALLBACK",
+        "ruleId": null,
+        "errorKind": "TYPE_MISMATCH"
+      }
+    }
+  ]
+}

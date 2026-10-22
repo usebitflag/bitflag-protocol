@@ -1,0 +1,54 @@
+{
+  "id": "precedence/off-serves-off-variation",
+  "description": "A disabled flag serves its off variation, even to a subject with an override and even when an enabled rule would match.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "precedence",
+    "reason:OFF"
+  ],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    {
+      "name": "no override",
+      "flagKey": "killed",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_1"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": false,
+        "variationKey": "off",
+        "reason": "OFF",
+        "ruleId": null,
+        "errorKind": null
+      }
+    },
+    {
+      "name": "subject with override",
+      "flagKey": "killed",
+      "type": "boolean",
+      "fallback": true,
+      "context": {
+        "kind": "user",
+        "key": "u_vip"
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": false,
+        "variationKey": "off",
+        "reason": "OFF",
+        "ruleId": null,
+        "errorKind": null
+      }
+    }
+  ]
+}

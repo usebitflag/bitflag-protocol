@@ -1,0 +1,60 @@
+{
+  "id": "precedence/override-beats-rules",
+  "description": "An exact (kind, key) override wins over rules that would match the same subject.",
+  "spec": [
+    "03-evaluation.md#order"
+  ],
+  "tags": [
+    "precedence",
+    "reason:OVERRIDE"
+  ],
+  "snapshotRef": "snapshots/basic-boolean.json",
+  "cases": [
+    {
+      "name": "override beats the plan rule",
+      "flagKey": "checkout",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "user",
+        "key": "u_vip",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": true,
+        "variationKey": "on",
+        "reason": "OVERRIDE",
+        "ruleId": null,
+        "errorKind": null
+      }
+    },
+    {
+      "name": "same key, other kind: override ignored",
+      "flagKey": "checkout",
+      "type": "boolean",
+      "fallback": false,
+      "context": {
+        "kind": "organization",
+        "key": "u_vip",
+        "attributes": {
+          "plan": "pro"
+        }
+      },
+      "evaluatedAt": "2026-10-06T08:00:00Z",
+      "expect": {
+        "revision": 42,
+        "generation": 1,
+        "value": false,
+        "variationKey": "off",
+        "reason": "RULE",
+        "ruleId": "rule_pro",
+        "errorKind": null
+      }
+    }
+  ]
+}

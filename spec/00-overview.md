@@ -9,7 +9,7 @@ This repository defines the contract between the BitFlag service and everything 
 | `spec/` | The written specification. One numbered file per topic. |
 | `schemas/v1/` | JSON Schemas (draft 2020-12) for snapshots, results and events. |
 | `fixtures/` | Known-answer conformance fixtures and their checksummed manifest. |
-| `tools/` | Node tooling that compiles the schemas and maintains the manifest. |
+| `tools/` | Node tooling that compiles the schemas, validates fixtures and maintains checksums and the manifest. |
 
 ## Specification files
 
@@ -39,4 +39,4 @@ Releases are prereleases (`0.x`) until both evaluators pass the same fixtures wi
 
 ## Verification
 
-`npm run validate` compiles every schema and checks that `fixtures/manifest.json` matches the fixture files.
+`npm run validate` compiles every schema, validates every fixture, and checks that snapshot checksums and `fixtures/manifest.json` are current.

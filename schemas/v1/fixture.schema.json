@@ -1,0 +1,375 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:bitflag:protocol:v1:fixture",
+  "title": "BitFlag protocol v1: conformance fixture file",
+  "description": "One scenario file. Evaluation fixtures run cases against a snapshot; snapshot fixtures check that a snapshot is accepted or rejected.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+(/[a-z0-9_-]+)+$"
+    },
+    "kind": {
+      "enum": [
+        "evaluation",
+        "snapshot"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "spec": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "snapshot": {
+      "type": "object"
+    },
+    "snapshotRef": {
+      "$ref": "#/$defs/snapshotRef"
+    },
+    "snapshotRaw": {
+      "type": "string"
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evaluationCase"
+      }
+    },
+    "expect": {
+      "$ref": "#/$defs/snapshotExpect"
+    }
+  },
+  "required": [
+    "id",
+    "description"
+  ],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "description": "Evaluation fixture (the default kind).",
+      "properties": {
+        "kind": {
+          "const": "evaluation"
+        },
+        "cases": {},
+        "snapshot": {},
+        "snapshotRef": {},
+        "snapshotRaw": {},
+        "expect": {}
+      },
+      "required": [
+        "cases"
+      ],
+      "oneOf": [
+        {
+          "properties": {
+            "snapshot": {}
+          },
+          "required": [
+            "snapshot"
+          ]
+        },
+        {
+          "properties": {
+            "snapshotRef": {}
+          },
+          "required": [
+            "snapshotRef"
+          ]
+        }
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "properties": {
+              "snapshotRaw": {}
+            },
+            "required": [
+              "snapshotRaw"
+            ]
+          },
+          {
+            "properties": {
+              "expect": {}
+            },
+            "required": [
+              "expect"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "description": "Snapshot-level fixture: accepted or rejected.",
+      "properties": {
+        "kind": {
+          "const": "snapshot"
+        },
+        "cases": {},
+        "snapshot": {},
+        "snapshotRef": {},
+        "snapshotRaw": {},
+        "expect": {}
+      },
+      "required": [
+        "kind",
+        "expect"
+      ],
+      "oneOf": [
+        {
+          "properties": {
+            "snapshot": {}
+          },
+          "required": [
+            "snapshot"
+          ]
+        },
+        {
+          "properties": {
+            "snapshotRaw": {}
+          },
+          "required": [
+            "snapshotRaw"
+          ]
+        }
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "properties": {
+              "cases": {}
+            },
+            "required": [
+              "cases"
+            ]
+          },
+          {
+            "properties": {
+              "snapshotRef": {}
+            },
+            "required": [
+              "snapshotRef"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "snapshotRef": {
+      "description": "Path relative to fixtures/.",
+      "type": "string",
+      "pattern": "^snapshots/[a-z0-9][a-z0-9_-]*\\.json$"
+    },
+    "evaluationCase": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshotRef": {
+          "$ref": "#/$defs/snapshotRef"
+        },
+        "flagKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "boolean",
+            "string",
+            "number",
+            "json"
+          ]
+        },
+        "fallback": {},
+        "context": {
+          "description": "Deliberately unconstrained: invalid contexts are fixtures too."
+        },
+        "evaluatedAt": {
+          "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc"
+        },
+        "options": {
+          "type": "object",
+          "properties": {
+            "details": {
+              "type": "boolean"
+            },
+            "trace": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "expect": {
+          "$ref": "#/$defs/evaluationExpect"
+        },
+        "expectTrace": {
+          "description": "Partial match: each listed step and field must appear in order; extra trace content is allowed.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "flagKey",
+        "type",
+        "fallback",
+        "context",
+        "evaluatedAt",
+        "expect"
+      ],
+      "additionalProperties": false
+    },
+    "evaluationExpect": {
+      "oneOf": [
+        {
+          "description": "Fields every evaluator must match exactly. Omitted fields are not compared.",
+          "type": "object",
+          "properties": {
+            "value": {},
+            "variationKey": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "reason": {
+              "$ref": "urn:bitflag:protocol:v1:common#/$defs/reason"
+            },
+            "ruleId": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "prerequisiteKey": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "errorKind": {
+              "oneOf": [
+                {
+                  "$ref": "urn:bitflag:protocol:v1:common#/$defs/errorKind"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "revision": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "generation": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "bucket": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "experimentId": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "allocationId": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "evaluatedAt": {
+              "$ref": "urn:bitflag:protocol:v1:common#/$defs/rfc3339Utc"
+            }
+          },
+          "minProperties": 1,
+          "additionalProperties": false
+        },
+        {
+          "description": "A programming error: the evaluator throws instead of returning a result.",
+          "type": "object",
+          "properties": {
+            "throws": {
+              "const": "FALLBACK_TYPE_ERROR"
+            }
+          },
+          "required": [
+            "throws"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "snapshotExpect": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "accept": {
+              "const": true
+            }
+          },
+          "required": [
+            "accept"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "accept": {
+              "const": false
+            },
+            "errorKind": {
+              "enum": [
+                "MALFORMED_SNAPSHOT",
+                "UNSUPPORTED_CAPABILITY"
+              ]
+            },
+            "path": {
+              "type": "string"
+            },
+            "code": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "accept",
+            "errorKind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

@@ -37,4 +37,3 @@ An evaluator may stay on an older release for a while. A snapshot that needs a n
 ### Secrets
 
 The `cross-language` workflow reads the private evaluator repositories with the `EVALUATOR_READ_TOKEN` secret: a fine-grained personal access token with read-only Contents access to `usebitflag/bitflag-php` and `usebitflag/bitflag-js`. Tokens expire; replace the secret when a run fails with `Not Found` while checking out an evaluator.
-

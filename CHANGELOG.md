@@ -4,6 +4,8 @@ All notable changes to the protocol are recorded here.
 
 ## Unreleased
 
+- Documented how to cut a release and how consumers adopt it (README); the lock file example in `spec/10-conformance.md` now shows the real fields.
+
 ## 0.1.0-alpha.1
 
 - Repository skeleton: tooling, shared schema file and an empty fixture manifest.

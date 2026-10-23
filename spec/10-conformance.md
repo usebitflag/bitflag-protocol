@@ -29,13 +29,14 @@ A consumer never reads a floating branch. It records the release in `protocol.lo
 
 ```json
 {
+  "repository": "usebitflag/bitflag-protocol",
   "version": "0.1.0-alpha.1",
-  "url": "https://github.com/usebitflag/bitflag-protocol/releases/download/v0.1.0-alpha.1/bitflag-protocol-0.1.0-alpha.1.tar.gz",
+  "asset": "bitflag-protocol-0.1.0-alpha.1.tar.gz",
   "sha256": "…"
 }
 ```
 
-and fetches it by downloading the archive, verifying `sha256` before extracting anything, and failing the build on a mismatch. Upgrading is a deliberate change of the lock file.
+and fetches it by downloading `asset` from the release `v<version>` of `repository`, verifying `sha256` before extracting anything, and failing the build on a mismatch. Upgrading is a deliberate change of the lock file.
 
 ## What a runner compares
 

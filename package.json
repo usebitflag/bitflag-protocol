@@ -18,7 +18,8 @@
     "fuzz:generate": "node tools/fuzz/generate.mjs",
     "fuzz:compare": "node tools/fuzz/compare.mjs",
     "manifest:check": "node tools/manifest.mjs --check",
-    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\""
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
+    "check": "npm run validate && npm run manifest:check && npm run lint:md"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

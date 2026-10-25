@@ -14,6 +14,8 @@ npm run validate
 npm run lint:md
 ```
 
+Before pushing, run `npm run check`: it runs what the `ci` workflow checks without building the archive (validation, the manifest check and Markdown lint).
+
 ## Releasing
 
 Consumers never read this repository's `main`. They pin a published release, so a release is the only way a change reaches the evaluators and the application. Releases are immutable: a published version is never replaced, a fix is a new version.
